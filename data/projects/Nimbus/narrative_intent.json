@@ -1,0 +1,23 @@
+{
+  "logline": "Nimbus is an open-world RPG set within a hauntingly beautiful yet dystopian post-apocalyptic universe, where a group of rebels has taken arms against a stable yet repressive regime.",
+  "tone_weights": {
+    "tragic": 0.4,
+    "hopeful": 0.3,
+    "humor": 0.2,
+    "mysterious": 0.1,
+    "whimsical": 0.0
+  },
+  "themes": [
+    "responsibility without being the chosen one",
+    "friends vs the world",
+    "the ends do not justify the means",
+    "the power of choice"
+  ],
+  "player_fantasy": "story",
+  "player_agency": "high",
+  "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+  "invariants": [
+    "Environments are not destructible",
+    "Characters can be killed, but some only downed for a short time"
+  ]
+}
