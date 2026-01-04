@@ -320,10 +320,21 @@ def canonicalize_player_agency(value: str) -> str:
 
 
 # Player Agency → Choice Count Ranges
-AGENCY_TO_CHOICE_COUNT: Dict[str, Dict[str, int]] = {
-    "low": {"min": 0, "max": 1},      # 0-1 choices per scene
-    "medium": {"min": 2, "max": 3},   # 2-3 choices per scene
-    "high": {"min": 3, "max": 5},     # 3-5+ choices per scene
+# choices_per_point: number of choices at any given choice point in dialogue
+# choices_per_interaction: total number of choice points in an interaction/scene
+AGENCY_TO_CHOICE_COUNTS: Dict[str, Dict[str, Dict[str, int]]] = {
+    "low": {
+        "choices_per_point": {"min": 0, "max": 0},      # Cutscenes only, no choices
+        "choices_per_interaction": {"min": 0, "max": 0},  # No choice points
+    },
+    "medium": {
+        "choices_per_point": {"min": 2, "max": 3},      # 2-3 options at each choice
+        "choices_per_interaction": {"min": 1, "max": 3},  # 1-3 choice points total
+    },
+    "high": {
+        "choices_per_point": {"min": 2, "max": 5},      # 2-5 options at each choice
+        "choices_per_interaction": {"min": 1, "max": 6},  # 1-6 choice points total
+    },
 }
 
 

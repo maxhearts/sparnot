@@ -43,8 +43,8 @@ class NarrativeIntent(BaseModel):
     setting: str = Field(..., description="Setting description")
     invariants: List[str] = Field(
         default_factory=list,
-        max_length=4,
-        description="0-4 invariant strings (optional)",
+        max_length=5,
+        description="0-5 invariant strings (optional)",
     )
 
     @field_validator("tone_weights", mode="before")

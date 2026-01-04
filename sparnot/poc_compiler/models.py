@@ -17,7 +17,8 @@ class NarrativeIR(BaseModel):
     setting_tokens: List[str] = Field(default_factory=list, description="Setting tokens")
     player_fantasy: str = Field(..., description="Canonical player fantasy")
     player_agency: str = Field(..., description="Canonical player agency")
-    choice_count_range: Dict[str, int] = Field(..., description="Min/max choices per scene based on agency")
+    choices_per_point: Dict[str, int] = Field(..., description="Min/max choices at any given choice point")
+    choices_per_interaction: Dict[str, int] = Field(..., description="Min/max total choices per interaction/scene")
     choice_nature_tokens: List[str] = Field(default_factory=list, description="Choice nature tokens based on fantasy")
 
 

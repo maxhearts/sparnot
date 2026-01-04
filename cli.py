@@ -1,5 +1,6 @@
 """CLI entry point for Sparnot."""
 
+import json
 import click
 import sys
 from pathlib import Path
@@ -73,53 +74,77 @@ def select_or_create_project() -> str:
 
 
 def show_schemas(project: str):
-    """Display all schemas in project."""
+    """Display all schemas in project (raw JSON, no validation)."""
     click.echo(f"\n=== Project: {project} ===\n")
     
-    # Narrative Intent
-    intent = manager.load_narrative_intent(project)
-    if intent:
-        click.echo("NARRATIVE INTENT:")
-        click.echo(f"  Logline: {intent.logline}")
-        click.echo(f"  Setting: {intent.setting}")
-        click.echo(f"  Themes: {', '.join(intent.themes)}")
-        click.echo(f"  Player Fantasy: {intent.player_fantasy.value}")
-        click.echo(f"  Player Agency: {intent.player_agency.value}")
-        click.echo(f"  Tone Weights: {intent.tone_weights}")
-        if intent.invariants:
-            click.echo(f"  Invariants: {', '.join(intent.invariants)}")
-        click.echo()
+    # Narrative Intent - load raw JSON
+    project_path = manager.get_project_path(project)
+    intent_file = project_path / "narrative_intent.json"
+    if intent_file.exists():
+        try:
+            with open(intent_file) as f:
+                data = json.load(f)
+                click.echo("NARRATIVE INTENT:")
+                click.echo(f"  Logline: {data.get('logline', 'N/A')}")
+                click.echo(f"  Setting: {data.get('setting', 'N/A')}")
+                click.echo(f"  Themes: {', '.join(data.get('themes', []))}")
+                click.echo(f"  Player Fantasy: {data.get('player_fantasy', 'N/A')}")
+                click.echo(f"  Player Agency: {data.get('player_agency', 'N/A')}")
+                click.echo(f"  Tone Weights: {data.get('tone_weights', {})}")
+                if data.get('invariants'):
+                    click.echo(f"  Invariants: {', '.join(data.get('invariants', []))}")
+                click.echo()
+        except Exception as e:
+            click.echo(f"NARRATIVE INTENT: Error loading - {e}\n")
     else:
         click.echo("NARRATIVE INTENT: Not created\n")
     
-    # Characters
+    # Characters - load raw JSON
     characters = manager.list_characters(project)
     if characters:
         click.echo(f"CHARACTERS ({len(characters)}):")
         for char_id in characters:
-            char = manager.load_character(project, char_id)
-            if char:
-                click.echo(f"  - {char.name} ({char.id}): {char.role.value}")
-                click.echo(f"    Beliefs: {', '.join(char.beliefs)}")
-                click.echo(f"    Personality: {', '.join(char.personality_tags)}")
+            char_file = project_path / "characters" / f"{char_id}.json"
+            if char_file.exists():
+                try:
+                    with open(char_file) as f:
+                        data = json.load(f)
+                        name = data.get('name', char_id)
+                        role = data.get('role', 'unknown')
+                        beliefs = data.get('beliefs', [])
+                        personality = data.get('personality_tags', [])
+                        click.echo(f"  - {name} ({char_id}): {role}")
+                        if beliefs:
+                            click.echo(f"    Beliefs: {', '.join(beliefs)}")
+                        if personality:
+                            click.echo(f"    Personality: {', '.join(personality)}")
+                except Exception as e:
+                    click.echo(f"  - ⚠ {char_id} (error loading: {e})")
             else:
-                click.echo(f"  - ⚠ {char_id} (invalid schema - needs editing)")
+                click.echo(f"  - ⚠ {char_id} (file not found)")
         click.echo()
     else:
         click.echo("CHARACTERS: None\n")
     
-    # Arc
-    arc = manager.load_arc(project)
-    if arc:
-        click.echo(f"ARC ({len(arc.acts)} acts, {len(arc.scenes)} scenes):")
-        for act in arc.acts:
-            click.echo(f"  Act {act.act_id}: {act.act_purpose}")
-            click.echo(f"    Required scenes: {', '.join(act.required_scenes)}")
-        click.echo()
-        for scene in arc.scenes:
-            click.echo(f"  Scene {scene.scene_id} ({scene.scene_type.value}): {scene.summary}")
-            click.echo(f"    Characters: {', '.join(scene.involved_characters)}")
-        click.echo()
+    # Arc - load raw JSON
+    arc_file = project_path / "arc.json"
+    if arc_file.exists():
+        try:
+            with open(arc_file) as f:
+                data = json.load(f)
+                acts = data.get('acts', [])
+                scenes = data.get('scenes', [])
+                click.echo(f"ARC ({len(acts)} acts, {len(scenes)} scenes):")
+                for act in acts:
+                    click.echo(f"  Act {act.get('act_id', 'N/A')}: {act.get('act_purpose', 'N/A')}")
+                    click.echo(f"    Required scenes: {', '.join(act.get('required_scenes', []))}")
+                click.echo()
+                for scene in scenes:
+                    click.echo(f"  Scene {scene.get('scene_id', 'N/A')} ({scene.get('scene_type', 'N/A')}): {scene.get('summary', 'N/A')}")
+                    click.echo(f"    Characters: {', '.join(scene.get('involved_characters', []))}")
+                click.echo()
+        except Exception as e:
+            click.echo(f"ARC: Error loading - {e}\n")
     else:
         click.echo("ARC: Not created\n")
 
@@ -192,7 +217,7 @@ def edit_schema_menu(project: str):
         
         click.echo("\nCharacters:")
         for i, char_id in enumerate(characters, 1):
-            char = manager.load_character(project, char_id)
+            char = manager.load_character(project, char_id, strict=False)
             if char:
                 click.echo(f"  {i}. {char.name} ({char.id})")
         
@@ -211,7 +236,7 @@ def edit_schema_menu(project: str):
                 click.echo(f"✓ Character '{result.name}' updated!")
     
     elif choice == 3:
-        arc = manager.load_arc(project)
+        arc = manager.load_arc(project, strict=False)
         if not arc:
             click.echo("✗ Arc not found. Use 'Create' first.")
             return
@@ -328,10 +353,18 @@ def main_menu(project: str):
             characters = manager.list_characters(project)
             if characters:
                 click.echo(f"\nCharacters in '{project}':")
+                project_path = manager.get_project_path(project)
                 for char_id in characters:
-                    char = manager.load_character(project, char_id)
-                    if char:
-                        click.echo(f"  - {char.name} ({char.id}): {char.role.value}")
+                    char_file = project_path / "characters" / f"{char_id}.json"
+                    if char_file.exists():
+                        try:
+                            with open(char_file) as f:
+                                data = json.load(f)
+                                name = data.get('name', char_id)
+                                role = data.get('role', 'unknown')
+                                click.echo(f"  - {name} ({char_id}): {role}")
+                        except Exception:
+                            click.echo(f"  - {char_id} (error loading)")
             else:
                 click.echo(f"No characters in '{project}'")
             click.prompt("\nPress Enter to continue...", default="", show_default=False)

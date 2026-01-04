@@ -1,0 +1,19 @@
+{
+  "acts": [
+    {
+      "act_id": "act_1",
+      "act_purpose": "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it.",
+      "required_scenes": [
+        "scene_1"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "scene_type": "inciting_incident",
+      "summary": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels",
+      "involved_characters": ["001", "003"]
+    }
+  ]
+}

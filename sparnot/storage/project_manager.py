@@ -46,17 +46,28 @@ class ProjectManager:
         """Check if project exists."""
         return (self.projects_dir / name).exists()
 
-    def load_narrative_intent(self, project: str) -> Optional[NarrativeIntent]:
-        """Load narrative intent from project."""
+    def load_narrative_intent(self, project: str, strict: bool = False) -> Optional[NarrativeIntent]:
+        """Load narrative intent from project.
+        
+        Args:
+            project: Project name
+            strict: If True, raise ValidationError on invalid data. If False, return None on validation errors.
+        """
         project_path = self.get_project_path(project)
         file_path = project_path / "narrative_intent.json"
         
         if not file_path.exists():
             return None
         
-        with open(file_path) as f:
-            data = json.load(f)
-            return NarrativeIntent(**data)
+        try:
+            with open(file_path) as f:
+                data = json.load(f)
+                return NarrativeIntent(**data)
+        except Exception as e:
+            if strict:
+                raise
+            # For non-strict mode, return None and let caller handle it
+            return None
 
     def save_narrative_intent(self, project: str, intent: NarrativeIntent) -> Path:
         """Save narrative intent to project."""
@@ -81,8 +92,14 @@ class ProjectManager:
             for f in characters_dir.glob("*.json")
         ]
 
-    def load_character(self, project: str, char_id: str) -> Optional[CharacterSchema]:
-        """Load character from project."""
+    def load_character(self, project: str, char_id: str, strict: bool = False) -> Optional[CharacterSchema]:
+        """Load character from project.
+        
+        Args:
+            project: Project name
+            char_id: Character ID
+            strict: If True, raise ValidationError on invalid data. If False, return None on validation errors.
+        """
         project_path = self.get_project_path(project)
         file_path = project_path / "characters" / f"{char_id}.json"
         
@@ -94,8 +111,9 @@ class ProjectManager:
                 data = json.load(f)
                 return CharacterSchema(**data)
         except Exception as e:
-            # If validation fails, return None and let caller handle it
-            # This prevents crashes when loading invalid data
+            if strict:
+                raise
+            # For non-strict mode, return None (caller can handle warning if needed)
             return None
 
     def save_character(self, project: str, character: CharacterSchema) -> Path:
@@ -121,17 +139,28 @@ class ProjectManager:
             return True
         return False
 
-    def load_arc(self, project: str) -> Optional[ArcSkeleton]:
-        """Load arc from project."""
+    def load_arc(self, project: str, strict: bool = False) -> Optional[ArcSkeleton]:
+        """Load arc from project.
+        
+        Args:
+            project: Project name
+            strict: If True, raise ValidationError on invalid data. If False, return None on validation errors.
+        """
         project_path = self.get_project_path(project)
         file_path = project_path / "arc.json"
         
         if not file_path.exists():
             return None
         
-        with open(file_path) as f:
-            data = json.load(f)
-            return ArcSkeleton(**data)
+        try:
+            with open(file_path) as f:
+                data = json.load(f)
+                return ArcSkeleton(**data)
+        except Exception as e:
+            if strict:
+                raise
+            # For non-strict mode, return None and let caller handle it
+            return None
 
     def save_arc(self, project: str, arc: ArcSkeleton) -> Path:
         """Save arc to project."""

@@ -17,7 +17,7 @@
       ],
       "player_fantasy": "story",
       "player_agency": "high",
-      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
       "invariants": [
         "Environments are not destructible",
         "Characters can be killed, but some only downed for a short time"
@@ -99,20 +99,20 @@
         "whimsical"
       ],
       "style_tokens": [
+        "warmth",
+        "unreliable_info",
         "bittersweet",
-        "contrast_tension",
-        "gallows_humor_guardrails",
         "cost_and_consequence",
+        "forward_motion",
+        "foreshadowing",
+        "secrets",
+        "contrast_tension",
+        "high_stakes",
+        "banter_allowed",
+        "gallows_humor_guardrails",
         "restraint",
         "resilience",
-        "warmth",
-        "high_stakes",
-        "forward_motion",
-        "moments_of_relief",
-        "unreliable_info",
-        "foreshadowing",
-        "banter_allowed",
-        "secrets"
+        "moments_of_relief"
       ],
       "constraints": {
         "env_destructible": false,
@@ -126,8 +126,8 @@
       },
       "narrative_obligations": [],
       "setting_tokens": [
-        "class_stratification",
         "open_vistas",
+        "class_stratification",
         "verticality"
       ],
       "player_fantasy": "story",
@@ -152,15 +152,15 @@
         "character_id": "002",
         "role": "supporting",
         "voice_tokens": [
-          "forward",
+          "calm",
           "minimal_excuses",
-          "implicature",
           "measured",
           "focused",
-          "elliptical",
           "low_reactivity",
-          "calm",
-          "withholds_info"
+          "implicature",
+          "forward",
+          "withholds_info",
+          "elliptical"
         ],
         "belief_weights": {
           "I am the only one who can save the world": 0.3333333333333333,
@@ -172,14 +172,14 @@
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "forward",
-          "minimal_excuses",
           "resolute",
-          "direct",
-          "plainspoken",
+          "minimal_excuses",
           "grounded",
-          "focused",
           "action_oriented",
+          "focused",
+          "plainspoken",
+          "direct",
+          "forward",
           "steady"
         ],
         "belief_weights": {
@@ -191,15 +191,15 @@
         "character_id": "003",
         "role": "supporting",
         "voice_tokens": [
-          "blunt",
-          "emotion_forward",
-          "scorekeeping",
-          "fast_escalation",
-          "provocative",
-          "future_oriented",
-          "challenging",
           "assertive",
-          "status_sensitive"
+          "scorekeeping",
+          "provocative",
+          "fast_escalation",
+          "future_oriented",
+          "status_sensitive",
+          "blunt",
+          "challenging",
+          "emotion_forward"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
@@ -237,7 +237,7 @@
     "unknown_invariants": []
   },
   "generation_context": {
-    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
     "act_purposes": [
       "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
     ],
@@ -254,12 +254,12 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "eef3f54380d38a49",
-    "narrative_ir": "ffee7892a3147348",
+    "bundle": "e176af2bf42b81f2",
+    "narrative_ir": "4099d1be4242a3fb",
     "character_irs": {
-      "002": "f949c8ddede12bdd",
-      "001": "8b1aa197234f0158",
-      "003": "3dbb7bd30e8a80cf"
+      "002": "05e65d3acfe8972a",
+      "001": "175e81debcc70872",
+      "003": "28524473b8f603b8"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }

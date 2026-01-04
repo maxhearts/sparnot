@@ -1,0 +1,445 @@
+{
+  "scene_id": "scene_1",
+  "scene_type": "inciting_incident",
+  "location": "Processing Hall A \u2014 lower-tier intake, Cloud 1 slums (packed, under harsh fluorescent rigs; the line of refugees flows toward sealed platforms)",
+  "summary": "At a crowded processing facility the protagonist is separated from their sick friends. Rebels attack. In the chaos the player sees one of their friends taken away with a rebel (Javi). The scene forces an immediate choice: act now, follow, alert authorities, or find another route. Choices shape whether the player chases, learns the rebels' intention, joins them, or loses their friends.",
+  "dialogue_tree": {
+    "root": {
+      "screenplay": "Fluorescent lights buzz. A rattling conveyor shuffles paper tags and bodies toward a sealed platform. Alarms cough to life \u2014 smoke grenades hiss in the rafters. People scream, shove; guards bark. You (underdog) clutch a frayed blanket. Your friends lie pale on a pallet ahead, their skin mottled. From the chaos, a slim figure in a patched coat moves fast \u2014 Javi. He slips a small sealed case into one friend's blanket and nods almost gently before pulling them toward a service lift.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "They'll kill them if they send them through. I can't \u2014 I won't let them.",
+          "exposition": "Thought: Nothing left to go back to; friends are everything. Voice: flat, resolute, ready to act."
+        },
+        {
+          "speaker": "Javi",
+          "text": "You shouldn't be here. Too loud, too soft. Either way, I'm taking what I can. Keep up or step back.",
+          "exposition": "Javi's posture is quick, eyes darting; tone is blunt, provocatively distant. He treats the moment like a calculation."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_1",
+          "text": "Charge forward and grab them \u2014 no more waiting.",
+          "choice_nature": "narrative_choice",
+          "next_node": "node_1",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_2",
+          "text": "Slip into the shadows and follow Javi quietly \u2014 learn where they go first.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_2",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_3",
+          "text": "Shout for the guards \u2014 get official help now.",
+          "choice_nature": "story_consequence",
+          "next_node": "node_3",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_4",
+          "text": "Cut through maintenance \u2014 find an alternative route to intercept the lift.",
+          "choice_nature": "plot_branch",
+          "next_node": "node_2",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_1": {
+      "screenplay": "You shove through the crowd. A guard raises a baton. The pallet bearing your friends is nudged toward an emergency lift as Javi hauls the blanket in. The light above the platform flashes orange. You reach for a friend's arm.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Let go. Now.",
+          "exposition": "Direct, action-first. Heart racing but voice steady; refuses excuses."
+        },
+        {
+          "speaker": "guard",
+          "text": "Hands off \u2014 detainee is processed. Back up or we will open fire.",
+          "exposition": "Gravelly, official. Authority is brittle; stress shows."
+        },
+        {
+          "speaker": "Javi",
+          "text": "You think grabbing changes a system? Fine \u2014 make it worth it. What's your move?",
+          "exposition": "Taunting, testing. He expects a reaction; he's sizing you up."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_1_1",
+          "text": "Physically pull your friend free \u2014 risk injury and being downed.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_1_2",
+          "text": "Confront Javi verbally \u2014 demand an explanation where he's taking them.",
+          "choice_nature": "narrative_choice",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_1_3",
+          "text": "Create a distraction \u2014 knock over a tag rack to draw guards and grab the pallet.",
+          "choice_nature": "plot_branch",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_2": {
+      "screenplay": "You fold into a shadow between crates as alarms strobe. From here you catch Javi's whisper as he kneels beside your friend. He presses the sealed case into the blanket, then his mouth moves fast. There's a soft desperation in the sick friend's eyes.",
+      "dialogue": [
+        {
+          "speaker": "Javi",
+          "text": "We can get them out to a clinic off-Cloud. Not perfect \u2014 dangerous \u2014 but alive. You should know the choice.",
+          "exposition": "He speaks fast; ambition and a desperate kindness mix. It's ambiguous whether it's salvation or manipulation."
+        },
+        {
+          "speaker": "underdog",
+          "text": "Why them? Why this way?",
+          "exposition": "Calm questioning; measuring whether Javi is ally or threat."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_2_1",
+          "text": "Trust him. Let the rebels take them \u2014 come with them to help.",
+          "choice_nature": "plot_branch",
+          "next_node": "node_join_rebels",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_2_2",
+          "text": "Record this \u2014 get proof the rebels are taking people. Use it later.",
+          "choice_nature": "narrative_choice",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_2_3",
+          "text": "Force a rescue now \u2014 step out and try to pull the pallet.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_3": {
+      "screenplay": "You shout at the top of your lungs, calling guards. The processing hall snaps to attention. Guards pivot, batons out. Someone fires a warning round; panic spikes. Under the pressure, the pallet with your friends is hustled into a lift. You see Javi vanish with it into the shaft as tear gas rolls in.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Over here! Stop them!",
+          "exposition": "A shouted plea \u2014 a gamble on authority that feels like an obligation to a system that hasn't protected you."
+        },
+        {
+          "speaker": "guard",
+          "text": "Securing detainees. Step aside, civilian.",
+          "exposition": "Dismissive, efficient; will follow orders over compassion."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_3_1",
+          "text": "Chase the lift \u2014 don't let them get away.",
+          "choice_nature": "story_consequence",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_3_2",
+          "text": "Help the collapsed people near you \u2014 risk losing them but keep others alive.",
+          "choice_nature": "responsibility_without_being_the_chosen_one",
+          "next_node": "node_end_help",
+          "convergence_hint": "diverges"
+        }
+      ]
+    },
+    "node_join_rebels": {
+      "screenplay": "You step from the shadow and approach with your hands empty. Javi gives a sharp nod. The rebels move quick; they don't want witnesses. A van's door opens, the engine already warm. The lift rises and the pallet is loaded into a waiting transport with your friends bundled inside.",
+      "dialogue": [
+        {
+          "speaker": "Javi",
+          "text": "Good. We can use someone who knows this floor and doesn't ask for permission. You come, you help move people. You stay, you choose the system.",
+          "exposition": "Javi's ambition is clear; this is a recruitment framed as moral rescue. He presses urgency over guarantees."
+        },
+        {
+          "speaker": "underdog",
+          "text": "If I come, I come for them \u2014 not for your banner.",
+          "exposition": "Resilience and restraint: will help friends but wary of being used."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_join_1",
+          "text": "Agree and leave with them now \u2014 follow to the clinic.",
+          "choice_nature": "plot_branch",
+          "next_node": "end_join",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_join_2",
+          "text": "Say no \u2014 demand they hand the friend over and go alone if they must.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_4",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_4": {
+      "screenplay": "All paths bleed together here: the lift doors clatter, the transport begins to lift, thrusters whine. Javi stands at the edge, the pallet half inside the van. Your friends look at you \u2014 eyes glassy but aware. Around you, guards tighten a perimeter; rebels form a moving wedge. It's the last instant before they break free from the ground.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "This is it. Decide.",
+          "exposition": "Plainspoken, steady. The moment compresses to a single demand for choice."
+        },
+        {
+          "speaker": "Javi",
+          "text": "You can leap and risk everything, or you can plan a better cut. I won't sugarcoat it \u2014 both cost blood. What's your play?",
+          "exposition": "Blunt and forward: javi frames options as tactical choices with moral cost."
+        }
+      ],
+      "convergence_note": "This node is reached by direct charge, stealth following (if not joining), shouting (if chasing), or maintenance cut-through. Different approaches alter your immediate positioning, but all lead to the same decisive moment: whether to pursue, sabotage, bargain, or stand down.",
+      "converges_from": [
+        "node_1",
+        "node_2",
+        "node_3",
+        "node_join_rebels"
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_4_1",
+          "text": "Leap onto the transport \u2014 risk being caught or killed now to save them.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_jump",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_4_2",
+          "text": "Try to cut the transport tether \u2014 delay them so you can follow safely.",
+          "choice_nature": "plot_branch",
+          "next_node": "node_sabotage",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_4_3",
+          "text": "Bargain with Javi \u2014 trade something (your freedom, a favor) for your friend.",
+          "choice_nature": "character_relationship",
+          "next_node": "node_trade",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_4_4",
+          "text": "Let them go this time \u2014 live to plan a cleaner rescue later.",
+          "choice_nature": "the_power_of_choice",
+          "next_node": "end_plan",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_jump": {
+      "screenplay": "You time the lift's shudder and vault \u2014 boots scraping metal. A guard swings; you take a hard hit and go down \u2014 blood, metallic. The transport jolts free. Inside, Javi braces as the pallet shifts. For a breath you lock eyes with your friend. Either you are hauled in, shoved off, or pinned unconscious.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Hold on. I'm not leaving you.",
+          "exposition": "Action-first, sacrificial. Willing to be downed or die rather than surrender friends."
+        },
+        {
+          "speaker": "Javi",
+          "text": "Fine. Then be useful. Move. Now.",
+          "exposition": "Short, abrasive. He'll use you if you let him \u2014 leadership through pressure."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_jump_1",
+          "text": "Fight your way into the van and take the pallets out \u2014 go for a rescue in motion.",
+          "choice_nature": "plot_branch",
+          "next_node": "end_rescue_attempt",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_jump_2",
+          "text": "Take the hit to draw attention \u2014 let the transport escape so the rest can flee.",
+          "choice_nature": "responsibility_without_being_the_chosen_one",
+          "next_node": "end_sacrifice",
+          "convergence_hint": "diverges"
+        }
+      ],
+      "screenplay_note": "Physical outcomes allowed; death or downing is possible per scene constraints."
+    },
+    "node_sabotage": {
+      "screenplay": "You wrench at a maintenance panel and throw a breaker; sparks stutter. The tether shudders and the transport lurches mid-ascent. Guards shout and aim. Javi curses, slams a hatch closed. The delay is enough for the transport to change vector and flee through a side duct; they still get away but slower.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Not clean. Not gone. But slower.",
+          "exposition": "Cost-aware \u2014 chose a measured harm to buy time instead of a headlong leap."
+        },
+        {
+          "speaker": "Javi",
+          "text": "You made noise. You did what you could. We'll meet again \u2014 maybe on better terms.",
+          "exposition": "A mix of grudging respect and threat. He treats the sabotage as a tactical ripple."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_sabotage_1",
+          "text": "Chase the transport's trail \u2014 follow to Cloud 2 later.",
+          "choice_nature": "story_consequence",
+          "next_node": "end_pursuit_plan",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_sabotage_2",
+          "text": "Stay and help those still in the hall \u2014 you bought time for others.",
+          "choice_nature": "responsibility_without_being_the_chosen_one",
+          "next_node": "end_help_then_plan",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_trade": {
+      "screenplay": "You step forward, voice low. Javi narrows his eyes. A hush pings around the van's edge. He leans close, breath smelling of machine grease.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Take me instead. Take my name, my record. Let them go.",
+          "exposition": "A blunt bargain; voice is steady \u2014 willing to shoulder consequence for friend."
+        },
+        {
+          "speaker": "Javi",
+          "text": "I don't take hostages for free. But I do trade favors. You walk with us for a week. You earn their passage or you don't. No clean credits.",
+          "exposition": "Calculating. He offers a conditional bargain that binds you to his cause for the short term."
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_trade_1",
+          "text": "Accept \u2014 go with them on their terms (short service to the rebels).",
+          "choice_nature": "character_relationship",
+          "next_node": "end_join_temp",
+          "convergence_hint": "diverges"
+        },
+        {
+          "choice_id": "choice_trade_2",
+          "text": "Refuse \u2014 you won't barter your life for a promise.",
+          "choice_nature": "the_ends_do_not_justify_the_means",
+          "next_node": "end_refuse",
+          "convergence_hint": "diverges"
+        }
+      ]
+    },
+    "node_end_help": {
+      "screenplay": "You drop to tend to collapsed people nearby. The lift goes; the hall fills with the smell of tear gas. Guards secure the perimeter. You saved some, lost others. Javi and the transport vanish into the city seam.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "I did what I could here.",
+          "exposition": "Resigned, compassionate. Chooses responsibility to immediate lives over a desperate chase."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_join": {
+      "screenplay": "You climb in the van. The engine hum takes you away from Cloud 1's concrete teeth. The rebels move fast; the trip is dangerous, the clinic unverified. You've chosen immediate rescue and a tentative alliance \u2014 your fate now tied to them.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "I'll watch them. I won't be a banner.",
+          "exposition": "A quiet commitment; joins with conditions."
+        },
+        {
+          "speaker": "Javi",
+          "text": "Good. Keep your head. We'll test you on the way.",
+          "exposition": "Assertive, already planning leverage."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_rescue_attempt": {
+      "screenplay": "You fight inside the transport. Shots ring. Either you tear the pallet free and drag friends into the alley \u2014 bruised, coughing \u2014 or you get pinned as the van splits through the sky. The chance for rescue exists, costly and uncertain. Scene ends on a gritty beat: you either are downed or the friends are saved at great cost.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Hold on. Fight. Don't give up.",
+          "exposition": "All-in, even if it ends badly."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_sacrifice": {
+      "screenplay": "You take the hit and are pinned under falling rigging as the transport breaks free. Guards swarm, you are detained; the rebels get away. You are downed but alive \u2014 a painful trade. The world shifts: Cloud 1 is now even more barred to you.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "Go. Live. That's what matters.",
+          "exposition": "Self-sacrificial, tragic but hopeful."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_pursuit_plan": {
+      "screenplay": "You watch the transport slip away with a wedge of smog. You have the trace: engine signature, heading, crude manifest you recorded. It isn't immediate rescue, but it's a plan \u2014 a path to Cloud 2. Scene closes with you prepping to follow, burning with forward motion and cost.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "I'll follow. Quietly. Carefully.",
+          "exposition": "Determined; chooses long-game responsibility over headlong heroics."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_help_then_plan": {
+      "screenplay": "You steady the hall's survivors, patch wounds, and then slip out with a small scrap of information \u2014 a coded sticker Javi dropped. You didn't chase the van, but you left with a lead. It's a bitter, hopeful compromise.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "We endure. Then we act.",
+          "exposition": "Resilience-focused; seeds a future plotline."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_join_temp": {
+      "screenplay": "You accept the conditional trade. For a week you move with the rebels: courier work, smuggling people to black-market clinics, learning their costs. You saved your friends' immediate lives and traded a piece of your freedom for it. The future is murky; you are no longer purely a bystander.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "One week. Then my terms.",
+          "exposition": "Careful compromise \u2014 will remain watchful of ends vs means."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    },
+    "end_refuse": {
+      "screenplay": "You refuse to barter. The transport leaves with your friends and your refusal burns in your hands. You are left in the hall with choices: pursue them through the open sky or stay and keep a ground line of resistance. The scene ends in grief and resolve.",
+      "dialogue": [
+        {
+          "speaker": "underdog",
+          "text": "I won't be bought for a promise. There has to be another way.",
+          "exposition": "Moral clarity; the ends do not justify the means\u2014at least not this way."
+        }
+      ],
+      "choices": [],
+      "convergence_hint": "diverges"
+    }
+  },
+  "branching_summary": "Root choice (4 options) fans into immediate tactics: direct charge (node_1), stealth/follow or maintenance route (node_2), or alerting guards (node_3). Node_1, Node_2 (except the 'join' option), and Node_3 converge on a single decisive moment (node_4) where the transport begins to lift \u2014 this convergence models different approaches to the same high-stakes outcome. From node_2 the player can also 'join' the rebels immediately (node_join_rebels) \u2014 a divergent path that ends the scene as a recruitment/incitement beat. At node_4 the player has 4 meaningful options (leap, sabotage, bargain, stand down). Each of those leads to divergent endings: a risky onboard rescue (node_jump -> end_rescue_attempt or end_sacrifice), sabotage and measured pursuit (node_sabotage -> end_pursuit_plan or end_help_then_plan), an enforced short-term pact with the rebels (node_trade -> end_join_temp or end_refuse), or letting the transport go to plan a later rescue (end_plan/outcome). Some end nodes also capture moral choices (helping others over chasing) and will affect future acts (e.g., joining rebels vs staying on the ground).",
+  "narrative_notes": "Tone: Primarily tragic with threads of hope. The scene keeps restraint and bittersweet beats: immediate loss and possible salvage. Style tokens are honored \u2014 gallows humor is kept on guard rails (Javi's bluntness acts as dark banter), foreshadowing (transport to Cloud 2, the coded sticker), secrets (Javi's ambiguous offer), and unreliable info (Javi's claim of a clinic may be half-truth). Themes: responsibility without being chosen shows when the player helps others rather than pursuing grand heroics; friends vs the world appears in every rescue-vs-plan choice; the ends-do-not-justify-the-means is foregrounded when bargaining or alerting authorities risks lives; the power of choice is constant \u2014 choices produce both convergent and divergent outcomes. Player fantasy (story) and high agency are supported: major plot branches include joining rebels, chasing immediately, sabotaging, bargaining, or choosing a long-term plan. Every node includes screenplay directions and exposition revealing internal belief and personality: underdog is direct, minimal, resolute; Javi is blunt, provocative, ambitious. Constraints respected: environment is not destructible (sabotage disables but doesn't break set pieces), characters can be downed or killed depending on risky choices. Choice nature tokens are present across options: narrative_choice, plot_branch, character_relationship, and story_consequence. The scene ends with multiple plausible threads to Act 1 outcomes: immediate alliance with rebels, capture/lockout, or a longer pursuit into Cloud 2."
+}

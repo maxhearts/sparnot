@@ -83,11 +83,16 @@ def compile_narrative_intent(narrative_intent: NarrativeIntent, characters=None,
         for theme in narrative_intent.themes:
             theme_weights[theme] = weight_per_theme
     
-    # Map player agency to choice count range
-    choice_count_range = rules_tables.AGENCY_TO_CHOICE_COUNT.get(
+    # Map player agency to choice count ranges
+    agency_choice_counts = rules_tables.AGENCY_TO_CHOICE_COUNTS.get(
         player_agency_canon,
-        {"min": 2, "max": 3}  # Default to medium
+        {
+            "choices_per_point": {"min": 2, "max": 3},
+            "choices_per_interaction": {"min": 1, "max": 3},
+        }  # Default to medium
     )
+    choices_per_point = agency_choice_counts["choices_per_point"]
+    choices_per_interaction = agency_choice_counts["choices_per_interaction"]
     
     # Map player fantasy to choice nature tokens
     choice_nature_tokens = rules_tables.FANTASY_TO_CHOICE_NATURE.get(
@@ -107,7 +112,8 @@ def compile_narrative_intent(narrative_intent: NarrativeIntent, characters=None,
         setting_tokens=setting_tokens,
         player_fantasy=player_fantasy_canon,
         player_agency=player_agency_canon,
-        choice_count_range=choice_count_range,
+        choices_per_point=choices_per_point,
+        choices_per_interaction=choices_per_interaction,
         choice_nature_tokens=choice_nature_tokens,
     )
     

@@ -24,6 +24,12 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
    pip install -r requirements.txt
    ```
 
+4. Set up OpenAI API key (for scene generation):
+   Create a `.env` file in the project root:
+   ```bash
+   OPENAI_API_KEY=your_api_key_here
+   ```
+
 ## Quick Start
 
 1. Run the CLI:
@@ -41,6 +47,11 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
    - Compile schemas to IR
    - Switch projects
    - Exit when done
+
+4. Generate scenes from compiled bundles (optional):
+   ```bash
+   python generate_scene.py data/projects/your_project/compiled_bundle.json
+   ```
 
 ## Interactive CLI
 
@@ -252,6 +263,45 @@ Once your schemas are complete, you can compile them to Intermediate Representat
 - **Canonicalization**: Expansive synonym tables map variations to canonical values
 - **Genre-aware**: Detects setting keywords and applies genre-appropriate tokens
 
+## Scene Generation
+
+After compiling your schemas to IR, you can generate sample scenes using the scene generator:
+
+**Usage:**
+```bash
+# Generate from a project bundle
+python generate_scene.py data/projects/Nimbus/compiled_bundle.json
+
+# Generate from a fixture bundle
+python generate_scene.py sparnot/poc_compiler/fixtures/action_rpg_postapoc_compiled.json
+
+# Specify custom output path
+python generate_scene.py bundle.json output/scene.json
+```
+
+**How it works:**
+1. Loads the compiled IR bundle (from projects or fixtures)
+2. If an arc exists, uses the first scene with its summary and characters
+3. If no arc exists, creates a new scene appropriate for the narrative
+4. Uses all IR attributes:
+   - NarrativeIR: tone, themes, style tokens, constraints, setting tokens
+   - Player fantasy/agency → determines choice count and nature
+   - CharacterIR: voice tokens, beliefs, personality (if characters exist)
+   - Generation context: setting, act purposes, scene summaries, invariants
+5. Generates branching dialogue with player choices that reflect the game type
+6. NOTE: Currently temperature for OpenAI set to 0 for more stable testing results
+
+**Output:**
+The generator creates a JSON file with:
+- Scene metadata (ID, type, location, summary)
+- Dialogue array with speaker, text, and voice notes
+- Player choices with choice nature tokens and consequence hints
+- Narrative notes explaining how IR attributes were used
+
+**Requirements:**
+- OpenAI API key in `.env` file (see Installation)
+- Uses GPT-4o model for generation
+
 ## Validation
 
 All schemas are validated with Pydantic before saving:
@@ -259,6 +309,23 @@ All schemas are validated with Pydantic before saving:
 - Types must match (strings, lists, enums, etc.)
 - Constraints are enforced (e.g., tone_weights must sum to 1.0, themes must be 3-5 items)
 - Validation errors are shown clearly if something is invalid
+
+## Additional Tools
+
+### Compile Fixtures
+
+You can compile fixture JSON files directly:
+
+```bash
+# Compile a fixture (saves to fixtures/{name}_compiled.json)
+python compile_fixture.py action_rpg_postapoc
+
+# Compile with custom output path
+python compile_fixture.py cozy_life_sim /tmp/cozy_bundle.json
+
+# List available fixtures
+python compile_fixture.py
+```
 
 ## Compiler Features
 

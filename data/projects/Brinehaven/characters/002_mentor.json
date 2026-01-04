@@ -1,0 +1,11 @@
+{
+    "id": "002",
+    "name": "Dr. Sato Kline",
+    "role": "mentor",
+    "beliefs": [
+      "Stability is more moral than honesty when resources are scarce.",
+      "People don’t want the truth; they want permission to endure."
+    ],
+    "personality_tags": ["serene", "mysterious", "protective"]
+  }
+  

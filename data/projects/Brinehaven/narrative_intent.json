@@ -1,0 +1,27 @@
+{
+    "logline": "A washed-up climate engineer returns to a floating desalination city to stop a black-market water syndicate, only to discover her own past designs are powering the theft.",
+    "tone_weights": {
+      "tragic": 0.15,
+      "hopeful": 0.30,
+      "humor": 0.10,
+      "mysterious": 0.25,
+      "whimsical": 0.05
+    },
+    "themes": [
+      "scarcity turns kindness into policy",
+      "the cost of redemption",
+      "truth vs stability",
+      "how systems create villains"
+    ],
+    "player_fantasy": "story",
+    "player_agency": "high",
+    "setting": "A near-future floating desalination metropolis called BRINEHAVEN, built around massive intake towers and glittering algae farms. The wealthy live in sunlit upper rings; the working class in the damp lower floodways. Water is rationed, memories are edited by corporate therapists, and every drop is tracked by a ‘trust meter’.",
+    "invariants": [
+      "The city is not fully destructible (no collapsing districts).",
+      "Water is always scarce; there is never a 'magic abundance' ending.",
+      "Deaths are reversible if you reach a clinic within 60 seconds.",
+      "Characters can be killed, but some are only downed temporarily.",
+      "Time travel is possible but only on Tuesdays."
+    ]
+  }
+  
