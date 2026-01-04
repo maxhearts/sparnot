@@ -1,0 +1,19 @@
+{
+  "logline": "A brutal post-apocalyptic action RPG where survivors fight mutated horrors in a wasteland, seeking a rumored safe zone.",
+  "tone_weights": {
+    "tragic": 0.5,
+    "hopeful": 0.3,
+    "humor": 0.1,
+    "mysterious": 0.1,
+    "whimsical": 0.0
+  },
+  "themes": [
+    "survival against all odds",
+    "humanity in crisis",
+    "redemption through action"
+  ],
+  "player_fantasy": "power",
+  "player_agency": "high",
+  "setting": "A desolate wasteland filled with ruins, radiation zones, and mutated creatures. Scattered settlements struggle to survive."
+}
+

@@ -1,0 +1,19 @@
+{
+  "logline": "A challenging dark fantasy action game where players master precise combat against formidable foes in a cursed kingdom.",
+  "tone_weights": {
+    "tragic": 0.6,
+    "hopeful": 0.2,
+    "humor": 0.0,
+    "mysterious": 0.2,
+    "whimsical": 0.0
+  },
+  "themes": [
+    "perseverance through failure",
+    "mastery through repetition",
+    "beauty in darkness"
+  ],
+  "player_fantasy": "mastery",
+  "player_agency": "medium",
+  "setting": "A cursed kingdom with ancient castles, dark magic, and dragons. The land is plagued by undead and cursed beings."
+}
+

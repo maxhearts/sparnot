@@ -1,0 +1,19 @@
+{
+  "logline": "A noir detective story where players investigate dark cases in a rain-soaked city, uncovering hidden motives.",
+  "tone_weights": {
+    "tragic": 0.4,
+    "hopeful": 0.1,
+    "humor": 0.2,
+    "mysterious": 0.3,
+    "whimsical": 0.0
+  },
+  "themes": [
+    "moral ambiguity",
+    "corruption and justice",
+    "the cost of truth"
+  ],
+  "player_fantasy": "mystery",
+  "player_agency": "medium",
+  "setting": "A rain-soaked noir city with dark alleys, detective offices, and suspicious suspects. Every case reveals hidden motives."
+}
+
