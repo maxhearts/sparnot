@@ -1,0 +1,19 @@
+{
+  "logline": "A sci-fi mystery investigation game set on a remote space station where players uncover a conspiracy.",
+  "tone_weights": {
+    "tragic": 0.2,
+    "hopeful": 0.3,
+    "humor": 0.1,
+    "mysterious": 0.4,
+    "whimsical": 0.0
+  },
+  "themes": [
+    "trust and betrayal",
+    "isolation in space",
+    "truth versus comfort"
+  ],
+  "player_fantasy": "mystery",
+  "player_agency": "medium",
+  "setting": "A remote space station with closed ecosystems, AI cores, and a small colony of researchers. Systems depend on careful management."
+}
+

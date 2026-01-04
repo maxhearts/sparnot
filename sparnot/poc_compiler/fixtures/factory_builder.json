@@ -1,0 +1,19 @@
+{
+  "logline": "A factory automation builder where players design efficient production lines and optimize resource flows.",
+  "tone_weights": {
+    "tragic": 0.0,
+    "hopeful": 0.4,
+    "humor": 0.1,
+    "mysterious": 0.0,
+    "whimsical": 0.5
+  },
+  "themes": [
+    "optimization and efficiency",
+    "creative problem solving",
+    "expansion and growth"
+  ],
+  "player_fantasy": "builder",
+  "player_agency": "high",
+  "setting": "An open sandbox world where players build factories, automate production, and create complex crafting systems."
+}
+

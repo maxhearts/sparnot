@@ -252,6 +252,48 @@ def delete_character_menu(project: str):
                 click.echo(f"✗ Failed to delete character '{char_id}'")
 
 
+def compile_project_command(project: str):
+    """Compile project to IR bundle."""
+    try:
+        from sparnot.poc_compiler import compile_project
+        import json
+        
+        click.echo(f"\nCompiling project '{project}'...")
+        bundle = compile_project(project)
+        
+        # Save bundle
+        manager = ProjectManager()
+        project_path = manager.get_project_path(project)
+        bundle_path = project_path / "compiled_bundle.json"
+        
+        with open(bundle_path, "w") as f:
+            json.dump(bundle.model_dump(mode="json"), f, indent=2)
+        
+        click.echo(f"✓ Compiled bundle saved to: {bundle_path}")
+        
+        # Show lint report
+        if bundle.lint.warnings:
+            click.echo(f"\nWarnings ({len(bundle.lint.warnings)}):")
+            for warning in bundle.lint.warnings:
+                click.echo(f"  ⚠ {warning}")
+        
+        if bundle.lint.errors:
+            click.echo(f"\nErrors ({len(bundle.lint.errors)}):")
+            for error in bundle.lint.errors:
+                click.echo(f"  ✗ {error}")
+        
+        if not bundle.lint.warnings and not bundle.lint.errors:
+            click.echo("\n✓ No warnings or errors")
+        
+        # Show hash
+        click.echo(f"\nBundle hash: {bundle.hashes['bundle']}")
+        
+    except Exception as e:
+        click.echo(f"\n✗ Compilation error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
 def main_menu(project: str):
     """Show main menu and handle navigation."""
     while True:
@@ -264,10 +306,11 @@ def main_menu(project: str):
         click.echo("  3. Edit schema")
         click.echo("  4. List characters")
         click.echo("  5. Delete character")
-        click.echo("  6. Switch project")
+        click.echo("  6. Compile to IR")
+        click.echo("  7. Switch project")
         click.echo("  0. Exit")
         
-        choice = click.prompt("\nChoice", type=click.IntRange(0, 6), default=0)
+        choice = click.prompt("\nChoice", type=click.IntRange(0, 7), default=0)
         
         if choice == 0:
             click.echo("\nGoodbye!")
@@ -296,6 +339,9 @@ def main_menu(project: str):
             delete_character_menu(project)
             click.prompt("\nPress Enter to continue...", default="", show_default=False)
         elif choice == 6:
+            compile_project_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 7:
             new_project = select_or_create_project()
             if new_project != project:
                 return new_project  # Return new project to update in main loop

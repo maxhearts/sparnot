@@ -1,0 +1,98 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "A brutal post-apocalyptic action RPG where survivors fight mutated horrors in a wasteland, seeking a rumored safe zone.",
+      "tone_weights": {
+        "tragic": 0.5,
+        "hopeful": 0.3,
+        "humor": 0.1,
+        "mysterious": 0.1,
+        "whimsical": 0.0
+      },
+      "themes": [
+        "survival against all odds",
+        "humanity in crisis",
+        "redemption through action"
+      ],
+      "player_fantasy": "power",
+      "player_agency": "high",
+      "setting": "A desolate wasteland filled with ruins, radiation zones, and mutated creatures. Scattered settlements struggle to survive.",
+      "invariants": []
+    },
+    "characters": [],
+    "arc": null
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "tragic",
+      "secondary_tone": "hopeful",
+      "excluded_tones": [
+        "whimsical"
+      ],
+      "style_tokens": [
+        "secrets",
+        "cost_and_consequence",
+        "resilience",
+        "moments_of_relief",
+        "banter_allowed",
+        "warmth",
+        "restraint",
+        "contrast_tension",
+        "high_stakes",
+        "forward_motion",
+        "foreshadowing",
+        "gallows_humor_guardrails",
+        "bittersweet",
+        "unreliable_info"
+      ],
+      "constraints": {},
+      "theme_weights": {
+        "survival against all odds": 0.3333333333333333,
+        "humanity in crisis": 0.3333333333333333,
+        "redemption through action": 0.3333333333333333
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [
+        "scarcity",
+        "survival_pressure",
+        "dangerous_remnants"
+      ],
+      "player_fantasy": "power",
+      "player_agency": "high",
+      "choice_count_range": {
+        "min": 3,
+        "max": 5
+      },
+      "choice_nature_tokens": [
+        "dominance_choice",
+        "power_expression",
+        "overwhelming_option",
+        "status_display"
+      ]
+    },
+    "character_irs": [],
+    "arc_ir": null
+  },
+  "proposed": {
+    "unknown_player_fantasy": null,
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [],
+    "unknown_invariants": []
+  },
+  "generation_context": {
+    "setting": "A desolate wasteland filled with ruins, radiation zones, and mutated creatures. Scattered settlements struggle to survive.",
+    "act_purposes": [],
+    "scene_summaries": {},
+    "invariants_text": []
+  },
+  "lint": {
+    "warnings": [],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "326e121be7a12fe9",
+    "narrative_ir": "373d9e34fbd38d2b",
+    "character_irs": {},
+    "arc_ir": null
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "logline": "A wholesome life simulation where players build a peaceful farm, befriend neighbors, and create a cozy community.",
+  "tone_weights": {
+    "tragic": 0.0,
+    "hopeful": 0.7,
+    "humor": 0.2,
+    "mysterious": 0.0,
+    "whimsical": 0.1
+  },
+  "themes": [
+    "community and connection",
+    "slow living",
+    "finding joy in simple things"
+  ],
+  "player_fantasy": "cozy",
+  "player_agency": "high",
+  "setting": "A peaceful small town with a farm, bakery, cafe, and friendly neighbors. Life moves at a gentle pace."
+}
+
