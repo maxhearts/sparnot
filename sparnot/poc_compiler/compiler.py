@@ -21,18 +21,18 @@ def compile_project(project_name: str, data_dir: Path = Path("data")) -> Compile
     """Compile project schemas to IR bundle."""
     manager = ProjectManager(data_dir)
     
-    # Load schemas
-    narrative_intent = manager.load_narrative_intent(project_name)
+    # Load schemas with strict validation (compilation requires valid schemas)
+    narrative_intent = manager.load_narrative_intent(project_name, strict=True)
     if not narrative_intent:
-        raise ValueError(f"Narrative intent not found for project '{project_name}'")
+        raise ValueError(f"Narrative intent not found or invalid for project '{project_name}'")
     
     characters = []
     for char_id in manager.list_characters(project_name):
-        char = manager.load_character(project_name, char_id)
+        char = manager.load_character(project_name, char_id, strict=True)
         if char:
             characters.append(char)
     
-    arc = manager.load_arc(project_name)
+    arc = manager.load_arc(project_name, strict=True)
     
     # Compile
     warnings = []
@@ -91,11 +91,16 @@ def compile_project(project_name: str, data_dir: Path = Path("data")) -> Compile
         for theme in narrative_intent.themes:
             theme_weights[theme] = weight_per_theme
     
-    # Map player agency to choice count range
-    choice_count_range = rules_tables.AGENCY_TO_CHOICE_COUNT.get(
+    # Map player agency to choice count ranges
+    agency_choice_counts = rules_tables.AGENCY_TO_CHOICE_COUNTS.get(
         player_agency_canon,
-        {"min": 2, "max": 3}  # Default to medium
+        {
+            "choices_per_point": {"min": 2, "max": 3},
+            "choices_per_interaction": {"min": 1, "max": 3},
+        }  # Default to medium
     )
+    choices_per_point = agency_choice_counts["choices_per_point"]
+    choices_per_interaction = agency_choice_counts["choices_per_interaction"]
     
     # Map player fantasy to choice nature tokens
     choice_nature_tokens = rules_tables.FANTASY_TO_CHOICE_NATURE.get(
@@ -115,7 +120,8 @@ def compile_project(project_name: str, data_dir: Path = Path("data")) -> Compile
         setting_tokens=setting_tokens,
         player_fantasy=player_fantasy_canon,
         player_agency=player_agency_canon,
-        choice_count_range=choice_count_range,
+        choices_per_point=choices_per_point,
+        choices_per_interaction=choices_per_interaction,
         choice_nature_tokens=choice_nature_tokens,
     )
     

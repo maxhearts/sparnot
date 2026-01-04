@@ -1,0 +1,14 @@
+{
+    "id": "005",
+    "name": "Jun Orr",
+    "role": "supporting",
+    "beliefs": [
+      "I remember dying here before.",
+      "If the clinic can bring people back, it can also erase them."
+    ],
+    "personality_tags": ["awkward", "anxious", "optimistic"],
+    "extra_notes": {
+      "secret": "Jun has had their memory edited 14 times."
+    }
+  }
+  
