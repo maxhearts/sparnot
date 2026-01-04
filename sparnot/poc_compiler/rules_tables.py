@@ -16,6 +16,8 @@ PLAYER_FANTASY_CANON = {
     "cozy",
     "social",
     "strategy",
+    "creation",
+    "challenge",
 }
 
 PLAYER_FANTASY_SYNONYMS: Dict[str, str] = {
@@ -74,6 +76,16 @@ PLAYER_FANTASY_SYNONYMS: Dict[str, str] = {
     "management": "strategy",
     "rts": "strategy",
     "deckbuilder": "strategy",
+    # creation
+    "creation": "creation",
+    "creative": "creation",
+    "artistic": "creation",
+    "design": "creation",
+    # challenge
+    "challenge": "challenge",
+    "challenging": "challenge",
+    "difficulty": "challenge",
+    "hard": "challenge",
 }
 
 

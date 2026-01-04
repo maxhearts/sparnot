@@ -14,6 +14,12 @@ class PlayerFantasy(str, Enum):
     SOCIAL = "social"
     CREATION = "creation"
     CHALLENGE = "challenge"
+    SURVIVAL = "survival"
+    MASTERY = "mastery"
+    MYSTERY = "mystery"
+    BUILDER = "builder"
+    COZY = "cozy"
+    STRATEGY = "strategy"
 
 
 class PlayerAgency(str, Enum):

@@ -1,0 +1,102 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "A challenging dark fantasy action game where players master precise combat against formidable foes in a cursed kingdom.",
+      "tone_weights": {
+        "tragic": 0.6,
+        "hopeful": 0.2,
+        "humor": 0.0,
+        "mysterious": 0.2,
+        "whimsical": 0.0
+      },
+      "themes": [
+        "perseverance through failure",
+        "mastery through repetition",
+        "beauty in darkness"
+      ],
+      "player_fantasy": "challenge",
+      "player_agency": "medium",
+      "setting": "A cursed kingdom with ancient castles, dark magic, and dragons. The land is plagued by undead and cursed beings.",
+      "invariants": []
+    },
+    "characters": [],
+    "arc": null
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "tragic",
+      "secondary_tone": "hopeful",
+      "excluded_tones": [
+        "humor",
+        "whimsical"
+      ],
+      "style_tokens": [
+        "cost_and_consequence",
+        "warmth",
+        "withhold_then_payoff",
+        "unreliable_info",
+        "forward_motion",
+        "restraint",
+        "high_stakes",
+        "resilience",
+        "secrets",
+        "foreshadowing",
+        "bittersweet"
+      ],
+      "constraints": {},
+      "theme_weights": {
+        "perseverance through failure": 0.3333333333333333,
+        "mastery through repetition": 0.3333333333333333,
+        "beauty in darkness": 0.3333333333333333
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [
+        "ancient_power",
+        "mythic_scale",
+        "court_intrigue_optional"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "medium",
+      "choices_per_point": {
+        "min": 2,
+        "max": 3
+      },
+      "choices_per_interaction": {
+        "min": 1,
+        "max": 3
+      },
+      "choice_nature_tokens": [
+        "narrative_choice",
+        "plot_branch",
+        "character_relationship",
+        "story_consequence"
+      ]
+    },
+    "character_irs": [],
+    "arc_ir": null
+  },
+  "proposed": {
+    "unknown_player_fantasy": "challenge",
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [],
+    "unknown_invariants": []
+  },
+  "generation_context": {
+    "setting": "A cursed kingdom with ancient castles, dark magic, and dragons. The land is plagued by undead and cursed beings.",
+    "act_purposes": [],
+    "scene_summaries": {},
+    "invariants_text": []
+  },
+  "lint": {
+    "warnings": [
+      "Unknown player_fantasy 'challenge', defaulting to 'story'"
+    ],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "5baee0c4d3eda905",
+    "narrative_ir": "f2dd17d2f35c770e",
+    "character_irs": {},
+    "arc_ir": null
+  }
+}

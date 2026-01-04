@@ -14,7 +14,7 @@
     "the power of choice"
   ],
   "player_fantasy": "story",
-  "player_agency": "high",
+  "player_agency": "low",
   "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
   "invariants": [
     "Environments are not destructible",
