@@ -16,8 +16,8 @@
         "the power of choice"
       ],
       "player_fantasy": "story",
-      "player_agency": "low",
-      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+      "player_agency": "high",
+      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
       "invariants": [
         "Environments are not destructible",
         "Characters can be killed, but some only downed for a short time"
@@ -99,20 +99,20 @@
         "whimsical"
       ],
       "style_tokens": [
+        "gallows_humor_guardrails",
+        "contrast_tension",
+        "high_stakes",
+        "foreshadowing",
         "bittersweet",
-        "restraint",
+        "warmth",
         "forward_motion",
+        "resilience",
         "moments_of_relief",
         "banter_allowed",
-        "cost_and_consequence",
-        "contrast_tension",
-        "warmth",
+        "unreliable_info",
         "secrets",
-        "resilience",
-        "foreshadowing",
-        "gallows_humor_guardrails",
-        "high_stakes",
-        "unreliable_info"
+        "cost_and_consequence",
+        "restraint"
       ],
       "constraints": {
         "env_destructible": false,
@@ -126,19 +126,19 @@
       },
       "narrative_obligations": [],
       "setting_tokens": [
-        "verticality",
         "class_stratification",
+        "verticality",
         "open_vistas"
       ],
       "player_fantasy": "story",
-      "player_agency": "low",
+      "player_agency": "high",
       "choices_per_point": {
-        "min": 0,
-        "max": 0
+        "min": 2,
+        "max": 5
       },
       "choices_per_interaction": {
-        "min": 0,
-        "max": 0
+        "min": 1,
+        "max": 6
       },
       "choice_nature_tokens": [
         "narrative_choice",
@@ -153,14 +153,14 @@
         "role": "supporting",
         "voice_tokens": [
           "implicature",
-          "calm",
-          "measured",
-          "elliptical",
-          "minimal_excuses",
-          "low_reactivity",
           "focused",
+          "forward",
+          "elliptical",
+          "measured",
           "withholds_info",
-          "forward"
+          "calm",
+          "low_reactivity",
+          "minimal_excuses"
         ],
         "belief_weights": {
           "I am the only one who can save the world": 0.3333333333333333,
@@ -172,15 +172,15 @@
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "plainspoken",
-          "steady",
           "direct",
-          "action_oriented",
-          "grounded",
-          "resolute",
-          "minimal_excuses",
           "focused",
-          "forward"
+          "forward",
+          "resolute",
+          "grounded",
+          "action_oriented",
+          "steady",
+          "minimal_excuses",
+          "plainspoken"
         ],
         "belief_weights": {
           "I have nothing to go back to": 0.5,
@@ -192,14 +192,14 @@
         "role": "supporting",
         "voice_tokens": [
           "fast_escalation",
-          "status_sensitive",
-          "blunt",
-          "challenging",
-          "emotion_forward",
-          "assertive",
-          "future_oriented",
           "provocative",
-          "scorekeeping"
+          "blunt",
+          "assertive",
+          "challenging",
+          "scorekeeping",
+          "future_oriented",
+          "status_sensitive",
+          "emotion_forward"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
@@ -237,7 +237,7 @@
     "unknown_invariants": []
   },
   "generation_context": {
-    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
     "act_purposes": [
       "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
     ],
@@ -254,12 +254,12 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "fadbccfcd23a6f2b",
-    "narrative_ir": "efcbdf89b52f37ac",
+    "bundle": "38c300f091cc8835",
+    "narrative_ir": "1d0712955fe52886",
     "character_irs": {
-      "002": "4b6d7948c019c0d1",
-      "001": "7dabd4b0bd6aef70",
-      "003": "6c15ae885ac58977"
+      "002": "330e0e8b6e59eb89",
+      "001": "8140c86bc99288e7",
+      "003": "e929686a8a7f523e"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }

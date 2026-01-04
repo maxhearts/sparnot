@@ -160,8 +160,8 @@ def create_schema_menu(project: str):
     choice = click.prompt("Choice", type=click.IntRange(0, 3), default=0)
     
     if choice == 0:
-        return
-    
+                return
+
     if choice == 1:
         template = narrative_intent_template()
         result = edit_json(template, NarrativeIntent, "narrative intent")
@@ -286,8 +286,13 @@ def compile_project_command(project: str):
         click.echo(f"\nCompiling project '{project}'...")
         bundle = compile_project(project)
         
-        # Save bundle
+        # Save history before overwriting
         manager = ProjectManager()
+        history_path = manager.save_compilation_history(project)
+        if history_path:
+            click.echo(f"✓ Previous compilation saved to: {history_path}")
+        
+        # Save bundle
         project_path = manager.get_project_path(project)
         bundle_path = project_path / "compiled_bundle.json"
         
@@ -319,6 +324,294 @@ def compile_project_command(project: str):
         traceback.print_exc()
 
 
+def lock_content_menu(project: str):
+    """Interactive menu for locking scene content."""
+    try:
+        from sparnot.scene_generation.lock_storage import LockManager
+        from sparnot.scene_generation.lock_models import SceneLocks
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent))
+        from cli_lock_helpers import (
+            find_scene_files,
+            load_scene_data,
+            create_line_lock,
+            create_node_lock,
+            create_branch_lock,
+            get_scene_fingerprint,
+            list_nodes_in_scene,
+            list_lines_in_node,
+        )
+        
+        manager = ProjectManager()
+        project_path = manager.get_project_path(project)
+        
+        # Find all scene files
+        scene_files = find_scene_files(project_path)
+        if not scene_files:
+            click.echo(f"\n✗ No generated scenes found in project '{project}'")
+            click.echo("  Generate a scene first using generate_scene.py")
+            return
+        
+        # Select scene file
+        if len(scene_files) == 1:
+            selected_scene_path = scene_files[0]
+            click.echo(f"\nUsing scene: {selected_scene_path.name}")
+        else:
+            click.echo("\nAvailable scenes:")
+            for i, scene_file in enumerate(scene_files, 1):
+                # Try to load scene to get scene_id for display
+                try:
+                    with open(scene_file) as f:
+                        scene_temp = json.load(f)
+                        scene_id_display = scene_temp.get("scene_id", scene_file.name)
+                        click.echo(f"  {i}. {scene_file.name} (scene_id: {scene_id_display})")
+                except Exception:
+                    click.echo(f"  {i}. {scene_file.name}")
+            
+            choice = click.prompt("\nSelect scene", type=click.IntRange(1, len(scene_files)), default=1)
+            selected_scene_path = scene_files[choice - 1]
+        
+        # Load selected scene data
+        scene_data = load_scene_data(selected_scene_path)
+        if not scene_data:
+            click.echo(f"\n✗ Failed to load scene from {selected_scene_path.name}")
+            return
+        
+        scene_id = scene_data.get("scene_id", "generated_scene_1")
+        lock_manager = LockManager(project)
+        
+        # Show scene info
+        click.echo(f"\nScene: {scene_id}")
+        click.echo(f"File: {selected_scene_path.name}")
+        click.echo(f"Type: {scene_data.get('scene_type', 'unknown')}")
+        
+        # Lock menu
+        while True:
+            click.echo("\nLock Menu:")
+            click.echo("  1. Lock a line")
+            click.echo("  2. Lock a node")
+            click.echo("  3. Lock a branch")
+            click.echo("  4. List locks")
+            click.echo("  5. Remove lock")
+            click.echo("  0. Back to main menu")
+            
+            choice = click.prompt("\nChoice", type=click.IntRange(0, 5), default=0)
+            
+            if choice == 0:
+                break
+            elif choice == 1:
+                # Lock a line
+                nodes = list_nodes_in_scene(scene_data)
+                if not nodes:
+                    click.echo("\n✗ No nodes found in scene")
+                    continue
+                
+                click.echo("\nAvailable nodes:")
+                for i, node_id in enumerate(nodes, 1):
+                    click.echo(f"  {i}. {node_id}")
+                
+                node_choice = click.prompt("\nSelect node", type=click.IntRange(1, len(nodes)), default=1)
+                node_id = nodes[node_choice - 1]
+                
+                lines = list_lines_in_node(scene_data, node_id)
+                if not lines:
+                    click.echo(f"\n✗ No lines found in node {node_id}")
+                    continue
+                
+                click.echo(f"\nLines in {node_id}:")
+                for line_info in lines:
+                    click.echo(f"  {line_info['line_number']}. [{line_info['speaker']}] {line_info['text']}")
+                
+                line_choice = click.prompt("\nSelect line number", type=click.IntRange(1, len(lines)), default=1)
+                notes = click.prompt("Notes (optional)", default="", show_default=False)
+                
+                lock = create_line_lock(scene_data, node_id, line_choice, notes if notes else None)
+                if lock:
+                    # Get or create scene locks
+                    lock_file = lock_manager.load_locks()
+                    if scene_id not in lock_file.scene_locks:
+                        fingerprint = get_scene_fingerprint(scene_data)
+                        lock_file.scene_locks[scene_id] = SceneLocks(
+                            scene_fingerprint=fingerprint, locks=[]
+                        )
+                    
+                    lock_manager.add_lock(scene_id, lock)
+                    click.echo(f"\n✓ Locked line {line_choice} in {node_id} (lock_id: {lock.lock_id})")
+                else:
+                    click.echo("\n✗ Failed to create lock")
+            
+            elif choice == 2:
+                # Lock a node
+                nodes = list_nodes_in_scene(scene_data)
+                if not nodes:
+                    click.echo("\n✗ No nodes found in scene")
+                    continue
+                
+                click.echo("\nAvailable nodes:")
+                for i, node_id in enumerate(nodes, 1):
+                    click.echo(f"  {i}. {node_id}")
+                
+                node_choice = click.prompt("\nSelect node to lock", type=click.IntRange(1, len(nodes)), default=1)
+                node_id = nodes[node_choice - 1]
+                notes = click.prompt("Notes (optional)", default="", show_default=False)
+                
+                lock = create_node_lock(scene_data, node_id, notes if notes else None)
+                if lock:
+                    lock_file = lock_manager.load_locks()
+                    if scene_id not in lock_file.scene_locks:
+                        fingerprint = get_scene_fingerprint(scene_data)
+                        lock_file.scene_locks[scene_id] = SceneLocks(
+                            scene_fingerprint=fingerprint, locks=[]
+                        )
+                    
+                    lock_manager.add_lock(scene_id, lock)
+                    click.echo(f"\n✓ Locked node {node_id} (lock_id: {lock.lock_id})")
+                else:
+                    click.echo("\n✗ Failed to create lock")
+            
+            elif choice == 3:
+                # Lock a branch (simplified for PoC)
+                click.echo("\nBranch locking (simplified):")
+                entry_node = click.prompt("Entry node ID", type=str)
+                choice_ids_str = click.prompt("Choice IDs (comma-separated)", type=str)
+                choice_ids = [cid.strip() for cid in choice_ids_str.split(",")]
+                required_nodes_str = click.prompt("Required nodes (comma-separated)", type=str)
+                required_nodes = [nid.strip() for nid in required_nodes_str.split(",")]
+                summary = click.prompt("Branch summary", type=str)
+                notes = click.prompt("Notes (optional)", default="", show_default=False)
+                
+                lock = create_branch_lock(
+                    scene_data, entry_node, choice_ids, required_nodes, summary, notes if notes else None
+                )
+                if lock:
+                    lock_file = lock_manager.load_locks()
+                    if scene_id not in lock_file.scene_locks:
+                        fingerprint = get_scene_fingerprint(scene_data)
+                        lock_file.scene_locks[scene_id] = SceneLocks(
+                            scene_fingerprint=fingerprint, locks=[]
+                        )
+                    
+                    lock_manager.add_lock(scene_id, lock)
+                    click.echo(f"\n✓ Locked branch (lock_id: {lock.lock_id})")
+                else:
+                    click.echo("\n✗ Failed to create lock")
+            
+            elif choice == 4:
+                # List locks
+                locks = lock_manager.list_locks(scene_id)
+                if locks:
+                    click.echo(f"\nLocks for {scene_id}:")
+                    for lock in locks:
+                        click.echo(f"  - {lock['lock_id']} ({lock['scope']}): {lock['target']}")
+                        if lock.get('notes'):
+                            click.echo(f"    Notes: {lock['notes']}")
+                else:
+                    click.echo(f"\nNo locks found for {scene_id}")
+            
+            elif choice == 5:
+                # Remove lock
+                locks = lock_manager.list_locks(scene_id)
+                if not locks:
+                    click.echo(f"\nNo locks found for {scene_id}")
+                    continue
+                
+                click.echo("\nLocks:")
+                for i, lock in enumerate(locks, 1):
+                    click.echo(f"  {i}. {lock['lock_id']} ({lock['scope']})")
+                
+                lock_choice = click.prompt("\nSelect lock to remove", type=click.IntRange(1, len(locks)), default=1)
+                lock_id = locks[lock_choice - 1]["lock_id"]
+                
+                if lock_manager.remove_lock(scene_id, lock_id):
+                    click.echo(f"\n✓ Removed lock {lock_id}")
+                else:
+                    click.echo(f"\n✗ Failed to remove lock {lock_id}")
+        
+    except Exception as e:
+        click.echo(f"\n✗ Lock menu error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
+def compare_compilations_command(project: str, old_path: Optional[Path] = None, new_path: Optional[Path] = None):
+    """Compare two compilation bundles."""
+    try:
+        from sparnot.poc_compiler.diff import compute_compilation_diff
+        from sparnot.poc_compiler.diff_display import format_full_diff
+        from sparnot.poc_compiler.models import CompiledBundle
+        import json
+        
+        manager = ProjectManager()
+        
+        # Load bundles
+        if old_path is None and new_path is None:
+            # Default: current vs selected from history
+            new_data = manager.load_compilation(project)
+            if not new_data:
+                click.echo(f"\n✗ No current compilation found for project '{project}'")
+                click.echo("  Compile the project first (option 6)")
+                return
+            
+            history_files = manager.list_compilation_history(project)
+            if not history_files:
+                click.echo(f"\n✗ No previous compilation found for project '{project}'")
+                click.echo("  Compile the project at least twice to compare")
+                return
+
+            # Show menu to select historical version
+            click.echo("\nSelect historical compilation to compare:")
+            click.echo("  (comparing with current compiled_bundle.json)")
+            click.echo()
+            for i, hist_file in enumerate(history_files, 1):
+                click.echo(f"  {i}. {hist_file.name}")
+            
+            choice = click.prompt(
+                "\nSelect version (or press Enter for latest)",
+                type=click.IntRange(1, len(history_files)),
+                default=1,
+            )
+            
+            old_path = history_files[choice - 1]
+            old_data = manager.load_compilation(project, old_path)
+            
+            click.echo(f"\nComparing:")
+            click.echo(f"  Old: {old_path.name}")
+            click.echo(f"  New: compiled_bundle.json (current)")
+        else:
+            # Custom paths
+            if old_path is None or new_path is None:
+                click.echo("\n✗ Both old_path and new_path must be provided for custom comparison")
+                return
+            
+            old_data = manager.load_compilation(project, old_path)
+            new_data = manager.load_compilation(project, new_path)
+            
+            if not old_data:
+                click.echo(f"\n✗ Could not load bundle from: {old_path}")
+                return
+            if not new_data:
+                click.echo(f"\n✗ Could not load bundle from: {new_path}")
+                return
+        
+        # Create CompiledBundle objects
+        old_bundle = CompiledBundle(**old_data)
+        new_bundle = CompiledBundle(**new_data)
+        
+        # Compute diff
+        diff = compute_compilation_diff(old_bundle, new_bundle)
+        
+        # Display diff
+        click.echo("\n" + format_full_diff(diff))
+        
+    except Exception as e:
+        click.echo(f"\n✗ Comparison error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+        click.echo(f"\n✗ Compilation error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
 def main_menu(project: str):
     """Show main menu and handle navigation."""
     while True:
@@ -332,10 +625,12 @@ def main_menu(project: str):
         click.echo("  4. List characters")
         click.echo("  5. Delete character")
         click.echo("  6. Compile to IR")
-        click.echo("  7. Switch project")
+        click.echo("  7. Compare compilations")
+        click.echo("  8. Lock scene content")
+        click.echo("  9. Switch project")
         click.echo("  0. Exit")
         
-        choice = click.prompt("\nChoice", type=click.IntRange(0, 7), default=0)
+        choice = click.prompt("\nChoice", type=click.IntRange(0, 9), default=0)
         
         if choice == 0:
             click.echo("\nGoodbye!")
@@ -375,6 +670,12 @@ def main_menu(project: str):
             compile_project_command(project)
             click.prompt("\nPress Enter to continue...", default="", show_default=False)
         elif choice == 7:
+            compare_compilations_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 8:
+            lock_content_menu(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 9:
             new_project = select_or_create_project()
             if new_project != project:
                 return new_project  # Return new project to update in main loop

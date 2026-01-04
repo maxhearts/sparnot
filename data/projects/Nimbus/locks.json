@@ -1,0 +1,26 @@
+{
+  "scene_locks": {
+    "scene_1": {
+      "scene_fingerprint": {
+        "ir_scene_hash": null,
+        "scene_type": "unknown",
+        "scene_id": "scene_1"
+      },
+      "locks": [
+        {
+          "lock_id": "lock_356f778a",
+          "scope": "line",
+          "target": {
+            "node_id": "end_let_go_plan",
+            "line_id": "scene_1:end_let_go_plan:L2"
+          },
+          "must_preserve": {
+            "speaker": "Eli",
+            "text": "You can plan, or you can panic. Either way, you decide."
+          },
+          "notes": null
+        }
+      ]
+    }
+  }
+}

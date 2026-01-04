@@ -16,8 +16,8 @@
         "the power of choice"
       ],
       "player_fantasy": "story",
-      "player_agency": "low",
-      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+      "player_agency": "high",
+      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
       "invariants": [
         "Environments are not destructible",
         "Characters can be killed, but some only downed for a short time"
@@ -99,20 +99,20 @@
         "whimsical"
       ],
       "style_tokens": [
-        "bittersweet",
-        "restraint",
-        "forward_motion",
-        "moments_of_relief",
-        "banter_allowed",
         "cost_and_consequence",
-        "contrast_tension",
-        "warmth",
+        "gallows_humor_guardrails",
+        "moments_of_relief",
+        "forward_motion",
+        "foreshadowing",
+        "unreliable_info",
+        "banter_allowed",
+        "bittersweet",
+        "high_stakes",
         "secrets",
         "resilience",
-        "foreshadowing",
-        "gallows_humor_guardrails",
-        "high_stakes",
-        "unreliable_info"
+        "contrast_tension",
+        "warmth",
+        "restraint"
       ],
       "constraints": {
         "env_destructible": false,
@@ -131,14 +131,14 @@
         "open_vistas"
       ],
       "player_fantasy": "story",
-      "player_agency": "low",
+      "player_agency": "high",
       "choices_per_point": {
-        "min": 0,
-        "max": 0
+        "min": 2,
+        "max": 5
       },
       "choices_per_interaction": {
-        "min": 0,
-        "max": 0
+        "min": 1,
+        "max": 6
       },
       "choice_nature_tokens": [
         "narrative_choice",
@@ -152,14 +152,14 @@
         "character_id": "002",
         "role": "supporting",
         "voice_tokens": [
-          "implicature",
-          "calm",
-          "measured",
-          "elliptical",
-          "minimal_excuses",
           "low_reactivity",
-          "focused",
+          "calm",
           "withholds_info",
+          "elliptical",
+          "implicature",
+          "minimal_excuses",
+          "measured",
+          "focused",
           "forward"
         ],
         "belief_weights": {
@@ -172,14 +172,14 @@
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "plainspoken",
-          "steady",
-          "direct",
-          "action_oriented",
           "grounded",
-          "resolute",
+          "action_oriented",
+          "direct",
           "minimal_excuses",
           "focused",
+          "plainspoken",
+          "steady",
+          "resolute",
           "forward"
         ],
         "belief_weights": {
@@ -191,15 +191,15 @@
         "character_id": "003",
         "role": "supporting",
         "voice_tokens": [
-          "fast_escalation",
           "status_sensitive",
           "blunt",
           "challenging",
           "emotion_forward",
+          "fast_escalation",
+          "scorekeeping",
           "assertive",
-          "future_oriented",
           "provocative",
-          "scorekeeping"
+          "future_oriented"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
@@ -237,7 +237,7 @@
     "unknown_invariants": []
   },
   "generation_context": {
-    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
     "act_purposes": [
       "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
     ],
@@ -254,12 +254,12 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "fadbccfcd23a6f2b",
-    "narrative_ir": "efcbdf89b52f37ac",
+    "bundle": "c4babc9d1c153538",
+    "narrative_ir": "a5eb9bf480a57d3a",
     "character_irs": {
-      "002": "4b6d7948c019c0d1",
-      "001": "7dabd4b0bd6aef70",
-      "003": "6c15ae885ac58977"
+      "002": "2924ac772c5f0f33",
+      "001": "576db486aef8db5e",
+      "003": "c5d94013cba4999d"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }

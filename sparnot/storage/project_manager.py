@@ -171,4 +171,65 @@ class ProjectManager:
             json.dump(arc.model_dump(), f, indent=2)
         
         return file_path
+    
+    def save_compilation_history(self, project: str) -> Optional[Path]:
+        """
+        Save current compiled_bundle.json to history before overwriting.
+        
+        Returns path to saved history file, or None if no current bundle exists.
+        """
+        project_path = self.get_project_path(project)
+        bundle_path = project_path / "compiled_bundle.json"
+        
+        if not bundle_path.exists():
+            return None
+        
+        # Create history directory
+        history_dir = project_path / "history"
+        history_dir.mkdir(exist_ok=True)
+        
+        # Generate timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        history_path = history_dir / f"compiled_bundle_{timestamp}.json"
+        
+        # Move current bundle to history
+        bundle_path.rename(history_path)
+        
+        return history_path
+    
+    def list_compilation_history(self, project: str) -> List[Path]:
+        """List all historical compilation bundles for a project."""
+        project_path = self.get_project_path(project)
+        history_dir = project_path / "history"
+        
+        if not history_dir.exists():
+            return []
+        
+        # Get all compiled_bundle_*.json files, sorted by name (which includes timestamp)
+        history_files = sorted(history_dir.glob("compiled_bundle_*.json"), reverse=True)
+        return list(history_files)
+    
+    def load_compilation(self, project: str, file_path: Optional[Path] = None) -> Optional[dict]:
+        """
+        Load a compilation bundle from project.
+        
+        Args:
+            project: Project name
+            file_path: Path to bundle file. If None, loads current compiled_bundle.json
+        
+        Returns:
+            Bundle data as dict, or None if not found
+        """
+        if file_path is None:
+            project_path = self.get_project_path(project)
+            file_path = project_path / "compiled_bundle.json"
+        
+        if not file_path.exists():
+            return None
+        
+        try:
+            with open(file_path) as f:
+                return json.load(f)
+        except Exception:
+            return None
 

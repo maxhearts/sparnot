@@ -99,20 +99,20 @@
         "whimsical"
       ],
       "style_tokens": [
-        "bittersweet",
-        "contrast_tension",
-        "gallows_humor_guardrails",
-        "cost_and_consequence",
-        "restraint",
-        "resilience",
-        "warmth",
         "high_stakes",
         "forward_motion",
-        "moments_of_relief",
-        "unreliable_info",
+        "warmth",
+        "secrets",
         "foreshadowing",
+        "contrast_tension",
+        "restraint",
+        "bittersweet",
+        "moments_of_relief",
+        "gallows_humor_guardrails",
+        "cost_and_consequence",
+        "resilience",
         "banter_allowed",
-        "secrets"
+        "unreliable_info"
       ],
       "constraints": {
         "env_destructible": false,
@@ -126,8 +126,8 @@
       },
       "narrative_obligations": [],
       "setting_tokens": [
-        "class_stratification",
         "open_vistas",
+        "class_stratification",
         "verticality"
       ],
       "player_fantasy": "story",
@@ -152,15 +152,15 @@
         "character_id": "002",
         "role": "supporting",
         "voice_tokens": [
-          "forward",
-          "minimal_excuses",
-          "implicature",
-          "measured",
-          "focused",
-          "elliptical",
           "low_reactivity",
           "calm",
-          "withholds_info"
+          "minimal_excuses",
+          "measured",
+          "withholds_info",
+          "forward",
+          "focused",
+          "elliptical",
+          "implicature"
         ],
         "belief_weights": {
           "I am the only one who can save the world": 0.3333333333333333,
@@ -172,15 +172,15 @@
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "forward",
-          "minimal_excuses",
-          "resolute",
-          "direct",
-          "plainspoken",
-          "grounded",
-          "focused",
           "action_oriented",
-          "steady"
+          "minimal_excuses",
+          "steady",
+          "direct",
+          "grounded",
+          "resolute",
+          "forward",
+          "focused",
+          "plainspoken"
         ],
         "belief_weights": {
           "I have nothing to go back to": 0.5,
@@ -192,14 +192,14 @@
         "role": "supporting",
         "voice_tokens": [
           "blunt",
+          "assertive",
           "emotion_forward",
           "scorekeeping",
+          "status_sensitive",
           "fast_escalation",
-          "provocative",
-          "future_oriented",
           "challenging",
-          "assertive",
-          "status_sensitive"
+          "provocative",
+          "future_oriented"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
@@ -254,12 +254,12 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "eef3f54380d38a49",
-    "narrative_ir": "ffee7892a3147348",
+    "bundle": "91cc57e8a510e016",
+    "narrative_ir": "b9dc4cee27456b79",
     "character_irs": {
-      "002": "f949c8ddede12bdd",
-      "001": "8b1aa197234f0158",
-      "003": "3dbb7bd30e8a80cf"
+      "002": "5d67f7171b83c056",
+      "001": "40127352760cfa9c",
+      "003": "29e8c453f1c9f23b"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }
