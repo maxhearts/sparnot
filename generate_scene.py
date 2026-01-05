@@ -24,6 +24,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def build_scene_prompt(
     bundle: CompiledBundle,
+    scene_id: Optional[str] = None,
     canon_pack: Optional[Dict[str, Any]] = None,
     forced_participants: Optional[List[str]] = None,
 ) -> str:
@@ -36,11 +37,11 @@ def build_scene_prompt(
     # Determine scene context
     scene_context = ""
     target_characters = []
-    scene_id = None
     
     if arc_ir and arc_ir.get("scene_order"):
-        # Use first scene from arc
-        scene_id = arc_ir["scene_order"][0]
+        # Use provided scene_id, or fall back to first scene from arc
+        if not scene_id:
+            scene_id = arc_ir["scene_order"][0]
         scene_type = arc_ir["scene_types"].get(scene_id, "dialogue")
         scene_participants = arc_ir["scene_participants"].get(scene_id, [])
         
@@ -363,9 +364,9 @@ def generate_scene(
                 # Build canon pack from resolved locks
                 canon_pack = build_canon_pack(matched_scene_id, lock_manager, bundle)
     
-    # Build prompt
+    # Build prompt (pass scene_id to use the correct scene)
     print("Building generation prompt...")
-    prompt = build_scene_prompt(bundle, canon_pack=canon_pack, forced_participants=forced_participants)
+    prompt = build_scene_prompt(bundle, scene_id=scene_id, canon_pack=canon_pack, forced_participants=forced_participants)
     
     # Generate with OpenAI
     print("Generating scene with OpenAI...")
@@ -386,6 +387,10 @@ def generate_scene(
         )
         
         scene_json = json.loads(response.choices[0].message.content)
+        
+        # Ensure scene_id matches what was requested (override LLM output if needed)
+        if scene_id and scene_json.get("scene_id") != scene_id:
+            scene_json["scene_id"] = scene_id
         
         # Post-process: Add line_ids to dialogue lines
         from sparnot.scene_generation.post_process import add_line_ids

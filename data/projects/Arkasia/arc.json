@@ -1,0 +1,44 @@
+{
+  "acts": [
+    {
+      "act_id": "act_1",
+      "act_purpose": "Introduce the characters, establish the societal structure, and set the stakes of the brother and sister's deception.",
+      "required_scenes": [
+        "scene_1",
+        "scene_2",
+        "scene_3"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "scene_type": "first_plot_point",
+      "summary": "Ethan and Maya navigate their grim reality, discussing their plan to assume new identities.",
+      "involved_characters": [
+        "001",
+        "002"
+      ]
+    },
+    {
+      "scene_id": "scene_2",
+      "scene_type": "climax",
+      "summary": "The siblings encounter Liam, who offers support but questions their risky plan.",
+      "involved_characters": [
+        "001",
+        "002",
+        "003"
+      ]
+    },
+    {
+      "scene_id": "scene_3",
+      "scene_type": "climax",
+      "summary": "The android AX-57 begins tracking the siblings, putting their plan in jeopardy.",
+      "involved_characters": [
+        "001",
+        "002",
+        "004"
+      ]
+    }
+  ]
+}

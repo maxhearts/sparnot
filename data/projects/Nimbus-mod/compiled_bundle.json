@@ -1,7 +1,7 @@
 {
   "canonical_schemas": {
     "narrative_intent": {
-      "logline": "Nimbus is an open-world RPG set within a hauntingly beautiful yet dystopian post-apocalyptic universe, where a group of rebels has taken arms against a stable yet repressive regime.",
+      "logline": "During the American Revolution, a diverse group of revolutionaries fights for freedom against British rule, struggling with internal conflicts and moral dilemmas.",
       "tone_weights": {
         "tragic": 0.4,
         "hopeful": 0.3,
@@ -10,14 +10,14 @@
         "whimsical": 0.0
       },
       "themes": [
-        "responsibility without being the chosen one",
-        "friends vs the world",
-        "the ends do not justify the means",
-        "the power of choice"
+        "the struggle for independence",
+        "the cost of freedom",
+        "unity in diversity",
+        "personal sacrifice for a greater cause"
       ],
       "player_fantasy": "story",
-      "player_agency": "low",
-      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+      "player_agency": "high",
+      "setting": "The story unfolds in 18th-century colonial America, where cities are divided and tensions rise over taxation, governance, and liberty.",
       "invariants": [
         "Environments are not destructible",
         "Characters can be killed, but some only downed for a short time"
@@ -25,46 +25,46 @@
     },
     "characters": [
       {
-        "id": "002",
-        "name": "eli",
-        "role": "supporting",
-        "beliefs": [
-          "I am the only one who can save the world",
-          "I am shouldering the dark secrets of this city",
-          "I am not afraid to die for what I believe in"
-        ],
-        "personality_tags": [
-          "serene",
-          "determined",
-          "mysterious"
-        ]
-      },
-      {
         "id": "001",
-        "name": "underdog",
+        "name": "Underdog",
         "role": "protagonist",
         "beliefs": [
-          "I have nothing to go back to",
-          "Without my friends, I am nothing"
+          "Freedom is worth fighting for",
+          "No taxation without representation",
+          "Unity among colonists is crucial"
         ],
         "personality_tags": [
-          "reliable",
           "determined",
-          "brave"
+          "brave",
+          "resilient"
         ]
       },
       {
         "id": "003",
-        "name": "javi",
-        "role": "supporting",
+        "name": "Javi",
+        "role": "foil",
         "beliefs": [
-          "I want to be the face of the revolution",
-          "I cannot trust anyone but myself"
+          "Violence may not be the answer",
+          "Peaceful resolutions should always be sought first"
         ],
         "personality_tags": [
-          "hot-headed",
-          "ambitious",
-          "competitive"
+          "thoughtful",
+          "conflicted",
+          "empathetic"
+        ]
+      },
+      {
+        "id": "002",
+        "name": "Eli",
+        "role": "mentor",
+        "beliefs": [
+          "Strategy and collaboration are key to victory",
+          "Sacrifices must be made for the greater good"
+        ],
+        "personality_tags": [
+          "strategic",
+          "inspiring",
+          "charismatic"
         ]
       }
     ],
@@ -72,9 +72,11 @@
       "acts": [
         {
           "act_id": "act_1",
-          "act_purpose": "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it.",
+          "act_purpose": "Introduction of main conflict and character motivations regarding the revolution",
           "required_scenes": [
-            "scene_1"
+            "scene_1",
+            "scene_2",
+            "scene_3"
           ]
         }
       ],
@@ -82,9 +84,30 @@
         {
           "scene_id": "scene_1",
           "scene_type": "inciting_incident",
-          "summary": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels",
+          "summary": "The characters gather in a secret meeting to discuss their plans against the British forces.",
           "involved_characters": [
             "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "scene_id": "scene_2",
+          "scene_type": "character_development",
+          "summary": "Amidst the tension, the revolutionaries share personal stories, strengthening their resolve.",
+          "involved_characters": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "scene_id": "scene_3",
+          "scene_type": "climax",
+          "summary": "A disagreement arises over their approach to the upcoming battle, revealing differing beliefs.",
+          "involved_characters": [
+            "001",
+            "002",
             "003"
           ]
         }
@@ -99,46 +122,42 @@
         "whimsical"
       ],
       "style_tokens": [
-        "bittersweet",
-        "restraint",
-        "forward_motion",
-        "moments_of_relief",
-        "banter_allowed",
         "cost_and_consequence",
+        "foreshadowing",
+        "unreliable_info",
+        "moments_of_relief",
+        "secrets",
+        "high_stakes",
+        "forward_motion",
+        "gallows_humor_guardrails",
+        "banter_allowed",
+        "resilience",
+        "restraint",
         "contrast_tension",
         "warmth",
-        "secrets",
-        "resilience",
-        "foreshadowing",
-        "gallows_humor_guardrails",
-        "high_stakes",
-        "unreliable_info"
+        "bittersweet"
       ],
       "constraints": {
         "env_destructible": false,
         "death_allowed": true
       },
       "theme_weights": {
-        "responsibility without being the chosen one": 0.25,
-        "friends vs the world": 0.25,
-        "the ends do not justify the means": 0.25,
-        "the power of choice": 0.25
+        "the struggle for independence": 0.25,
+        "the cost of freedom": 0.25,
+        "unity in diversity": 0.25,
+        "personal sacrifice for a greater cause": 0.25
       },
       "narrative_obligations": [],
-      "setting_tokens": [
-        "verticality",
-        "class_stratification",
-        "open_vistas"
-      ],
+      "setting_tokens": [],
       "player_fantasy": "story",
-      "player_agency": "low",
+      "player_agency": "high",
       "choices_per_point": {
-        "min": 0,
-        "max": 0
+        "min": 2,
+        "max": 5
       },
       "choices_per_interaction": {
-        "min": 0,
-        "max": 0
+        "min": 1,
+        "max": 6
       },
       "choice_nature_tokens": [
         "narrative_choice",
@@ -149,74 +168,66 @@
     },
     "character_irs": [
       {
-        "character_id": "002",
-        "role": "supporting",
-        "voice_tokens": [
-          "implicature",
-          "calm",
-          "measured",
-          "elliptical",
-          "minimal_excuses",
-          "low_reactivity",
-          "focused",
-          "withholds_info",
-          "forward"
-        ],
-        "belief_weights": {
-          "I am the only one who can save the world": 0.3333333333333333,
-          "I am shouldering the dark secrets of this city": 0.3333333333333333,
-          "I am not afraid to die for what I believe in": 0.3333333333333333
-        }
-      },
-      {
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "plainspoken",
-          "steady",
-          "direct",
-          "action_oriented",
-          "grounded",
+          "forward",
           "resolute",
           "minimal_excuses",
+          "action_oriented",
           "focused",
-          "forward"
+          "direct"
         ],
         "belief_weights": {
-          "I have nothing to go back to": 0.5,
-          "Without my friends, I am nothing": 0.5
+          "Freedom is worth fighting for": 0.3333333333333333,
+          "No taxation without representation": 0.3333333333333333,
+          "Unity among colonists is crucial": 0.3333333333333333
         }
       },
       {
         "character_id": "003",
-        "role": "supporting",
-        "voice_tokens": [
-          "fast_escalation",
-          "status_sensitive",
-          "blunt",
-          "challenging",
-          "emotion_forward",
-          "assertive",
-          "future_oriented",
-          "provocative",
-          "scorekeeping"
-        ],
+        "role": "foil",
+        "voice_tokens": [],
         "belief_weights": {
-          "I want to be the face of the revolution": 0.5,
-          "I cannot trust anyone but myself": 0.5
+          "Violence may not be the answer": 0.5,
+          "Peaceful resolutions should always be sought first": 0.5
+        }
+      },
+      {
+        "character_id": "002",
+        "role": "mentor",
+        "voice_tokens": [],
+        "belief_weights": {
+          "Strategy and collaboration are key to victory": 0.5,
+          "Sacrifices must be made for the greater good": 0.5
         }
       }
     ],
     "arc_ir": {
       "scene_order": [
-        "scene_1"
+        "scene_1",
+        "scene_2",
+        "scene_3"
       ],
       "scene_types": {
-        "scene_1": "inciting_incident"
+        "scene_1": "inciting_incident",
+        "scene_2": "dialogue",
+        "scene_3": "climax"
       },
       "scene_participants": {
         "scene_1": [
           "001",
+          "002",
+          "003"
+        ],
+        "scene_2": [
+          "001",
+          "002",
+          "003"
+        ],
+        "scene_3": [
+          "001",
+          "002",
           "003"
         ]
       },
@@ -224,7 +235,9 @@
         {
           "act_id": "act_1",
           "required_scenes": [
-            "scene_1"
+            "scene_1",
+            "scene_2",
+            "scene_3"
           ]
         }
       ]
@@ -232,17 +245,29 @@
   },
   "proposed": {
     "unknown_player_fantasy": null,
-    "unknown_scene_types": [],
-    "unknown_personality_tags": [],
+    "unknown_scene_types": [
+      "scene_2:character_development"
+    ],
+    "unknown_personality_tags": [
+      "resilient",
+      "thoughtful",
+      "conflicted",
+      "empathetic",
+      "strategic",
+      "inspiring",
+      "charismatic"
+    ],
     "unknown_invariants": []
   },
   "generation_context": {
-    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments. The player has a mysterious power where they can sense how radiated people are and how to help them are and can exert psionic control over them proportionally to how radiated they are. The player has to use this power at crucial moments.",
+    "setting": "The story unfolds in 18th-century colonial America, where cities are divided and tensions rise over taxation, governance, and liberty.",
     "act_purposes": [
-      "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
+      "Introduction of main conflict and character motivations regarding the revolution"
     ],
     "scene_summaries": {
-      "scene_1": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels"
+      "scene_1": "The characters gather in a secret meeting to discuss their plans against the British forces.",
+      "scene_2": "Amidst the tension, the revolutionaries share personal stories, strengthening their resolve.",
+      "scene_3": "A disagreement arises over their approach to the upcoming battle, revealing differing beliefs."
     },
     "invariants_text": [
       "Environments are not destructible",
@@ -250,17 +275,22 @@
     ]
   },
   "lint": {
-    "warnings": [],
+    "warnings": [
+      "Unknown personality tags for 001: ['resilient']",
+      "Unknown personality tags for 003: ['thoughtful', 'conflicted', 'empathetic']",
+      "Unknown personality tags for 002: ['strategic', 'inspiring', 'charismatic']",
+      "Unknown scene types: ['scene_2:character_development']"
+    ],
     "errors": []
   },
   "hashes": {
-    "bundle": "fadbccfcd23a6f2b",
-    "narrative_ir": "efcbdf89b52f37ac",
+    "bundle": "b7185700e3ffb4d4",
+    "narrative_ir": "dca50aaa4c4057f8",
     "character_irs": {
-      "002": "4b6d7948c019c0d1",
-      "001": "7dabd4b0bd6aef70",
-      "003": "6c15ae885ac58977"
+      "001": "65f0fe4c123b815c",
+      "003": "8afbe2a52babca17",
+      "002": "c5d139236ed2a5e8"
     },
-    "arc_ir": "4ef96ea2ead5fedc"
+    "arc_ir": "12686e2a153a8053"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "scene_locks": {
+    "scene_1": {
+      "scene_fingerprint": {
+        "ir_scene_hash": null,
+        "scene_type": "unknown",
+        "scene_id": "scene_1"
+      },
+      "locks": [
+        {
+          "lock_id": "lock_44401fc1",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L2"
+          },
+          "must_preserve": {
+            "speaker": "Maya",
+            "text": "So we become someone else. Not just fake names \u2014 a full pair: elite couple, estate, credit lineage. They trust money. The machines worship paper and privilege."
+          },
+          "notes": null
+        }
+      ]
+    }
+  }
+}

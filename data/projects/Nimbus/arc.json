@@ -13,7 +13,10 @@
       "scene_id": "scene_1",
       "scene_type": "inciting_incident",
       "summary": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels",
-      "involved_characters": ["001", "003"]
+      "involved_characters": [
+        "001",
+        "003"
+      ]
     }
   ]
 }

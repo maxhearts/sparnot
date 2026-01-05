@@ -3,10 +3,10 @@
     "narrative_intent": {
       "logline": "Nimbus is an open-world RPG set within a hauntingly beautiful yet dystopian post-apocalyptic universe, where a group of rebels has taken arms against a stable yet repressive regime.",
       "tone_weights": {
-        "tragic": 0.4,
-        "hopeful": 0.3,
-        "humor": 0.2,
-        "mysterious": 0.1,
+        "tragic": 0.28571428571428575,
+        "hopeful": 0.5,
+        "humor": 0.14285714285714288,
+        "mysterious": 0.07142857142857144,
         "whimsical": 0.0
       },
       "themes": [
@@ -15,8 +15,8 @@
         "the ends do not justify the means",
         "the power of choice"
       ],
-      "player_fantasy": "story",
-      "player_agency": "high",
+      "player_fantasy": "survival",
+      "player_agency": "medium",
       "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
       "invariants": [
         "Environments are not destructible",
@@ -24,6 +24,21 @@
       ]
     },
     "characters": [
+      {
+        "id": "002",
+        "name": "eli",
+        "role": "supporting",
+        "beliefs": [
+          "I am the only one who can save the world",
+          "I am shouldering the dark secrets of this city",
+          "I am not afraid to die for what I believe in"
+        ],
+        "personality_tags": [
+          "serene",
+          "determined",
+          "mysterious"
+        ]
+      },
       {
         "id": "001",
         "name": "underdog",
@@ -51,21 +66,6 @@
           "ambitious",
           "competitive"
         ]
-      },
-      {
-        "id": "002",
-        "name": "eli",
-        "role": "supporting",
-        "beliefs": [
-          "I am the only one who can save the world",
-          "I am shouldering the dark secrets of this city",
-          "I am not afraid to die for what I believe in"
-        ],
-        "personality_tags": [
-          "serene",
-          "determined",
-          "mysterious"
-        ]
       }
     ],
     "arc": {
@@ -85,7 +85,7 @@
           "summary": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels",
           "involved_characters": [
             "001",
-            "003"
+            "002"
           ]
         }
       ]
@@ -93,26 +93,25 @@
   },
   "ir": {
     "narrative_ir": {
-      "dominant_tone": "tragic",
-      "secondary_tone": "hopeful",
+      "dominant_tone": "hopeful",
+      "secondary_tone": "tragic",
       "excluded_tones": [
         "whimsical"
       ],
       "style_tokens": [
+        "high_stakes",
+        "banter_allowed",
+        "bittersweet",
         "contrast_tension",
-        "gallows_humor_guardrails",
         "secrets",
+        "restraint",
+        "foreshadowing",
+        "forward_motion",
         "warmth",
         "resilience",
-        "foreshadowing",
-        "bittersweet",
-        "cost_and_consequence",
         "moments_of_relief",
-        "unreliable_info",
-        "forward_motion",
-        "banter_allowed",
-        "high_stakes",
-        "restraint"
+        "cost_and_consequence",
+        "unreliable_info"
       ],
       "constraints": {
         "env_destructible": false,
@@ -126,41 +125,61 @@
       },
       "narrative_obligations": [],
       "setting_tokens": [
-        "open_vistas",
         "class_stratification",
+        "open_vistas",
         "verticality"
       ],
-      "player_fantasy": "story",
-      "player_agency": "high",
+      "player_fantasy": "survival",
+      "player_agency": "medium",
       "choices_per_point": {
         "min": 2,
-        "max": 5
+        "max": 3
       },
       "choices_per_interaction": {
         "min": 1,
-        "max": 6
+        "max": 3
       },
       "choice_nature_tokens": [
-        "narrative_choice",
-        "plot_branch",
-        "character_relationship",
-        "story_consequence"
+        "resource_tradeoff",
+        "risk_reward",
+        "survival_priority",
+        "hard_choice"
       ]
     },
     "character_irs": [
+      {
+        "character_id": "002",
+        "role": "supporting",
+        "voice_tokens": [
+          "measured",
+          "forward",
+          "focused",
+          "elliptical",
+          "implicature",
+          "minimal_excuses",
+          "low_reactivity",
+          "withholds_info",
+          "calm"
+        ],
+        "belief_weights": {
+          "I am the only one who can save the world": 0.3333333333333333,
+          "I am shouldering the dark secrets of this city": 0.3333333333333333,
+          "I am not afraid to die for what I believe in": 0.3333333333333333
+        }
+      },
       {
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
           "action_oriented",
-          "focused",
           "forward",
-          "grounded",
-          "steady",
-          "plainspoken",
-          "minimal_excuses",
           "direct",
-          "resolute"
+          "plainspoken",
+          "focused",
+          "minimal_excuses",
+          "steady",
+          "resolute",
+          "grounded"
         ],
         "belief_weights": {
           "I have nothing to go back to": 0.5,
@@ -171,39 +190,19 @@
         "character_id": "003",
         "role": "supporting",
         "voice_tokens": [
-          "blunt",
-          "challenging",
+          "fast_escalation",
+          "status_sensitive",
           "provocative",
-          "assertive",
+          "blunt",
+          "future_oriented",
+          "challenging",
           "scorekeeping",
           "emotion_forward",
-          "fast_escalation",
-          "future_oriented",
-          "status_sensitive"
+          "assertive"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
           "I cannot trust anyone but myself": 0.5
-        }
-      },
-      {
-        "character_id": "002",
-        "role": "supporting",
-        "voice_tokens": [
-          "withholds_info",
-          "focused",
-          "forward",
-          "measured",
-          "calm",
-          "elliptical",
-          "implicature",
-          "low_reactivity",
-          "minimal_excuses"
-        ],
-        "belief_weights": {
-          "I am the only one who can save the world": 0.3333333333333333,
-          "I am shouldering the dark secrets of this city": 0.3333333333333333,
-          "I am not afraid to die for what I believe in": 0.3333333333333333
         }
       }
     ],
@@ -217,7 +216,7 @@
       "scene_participants": {
         "scene_1": [
           "001",
-          "003"
+          "002"
         ]
       },
       "act_structure": [
@@ -254,13 +253,13 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "8c2293112079998e",
-    "narrative_ir": "ea560bcf5bcb5a47",
+    "bundle": "96b824bff6fb280f",
+    "narrative_ir": "59d10423734f051e",
     "character_irs": {
-      "001": "7bd2e0057aa5954f",
-      "003": "4a5e0857e0e8bf13",
-      "002": "dca4c9f66f7c5e0a"
+      "002": "173c133fa851b82d",
+      "001": "1fa7456d982df2af",
+      "003": "4847b0f3ee3b2825"
     },
-    "arc_ir": "4ef96ea2ead5fedc"
+    "arc_ir": "6131a757d0122c1c"
   }
 }

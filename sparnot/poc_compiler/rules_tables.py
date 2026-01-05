@@ -167,12 +167,41 @@ SCENE_TYPE_SYNONYMS: Dict[str, str] = {
     "fail": "setback",
     "defeat": "setback",
     "retreat": "setback",
+    # first_test
+    "first_test": "first_test",
+    "test": "first_test",
+    # twist
+    "twist": "twist",
+    "plot_twist": "twist",
+    # betrayal
+    "betrayal": "betrayal",
+    "betray": "betrayal",
     # bonding
     "bond": "bonding",
     "bonding": "bonding",
     "campfire": "bonding",
     "downtime": "bonding",
     "hangout": "bonding",
+    # midpoint
+    "midpoint": "midpoint",
+    # dark_night
+    "dark_night": "dark_night",
+    "darkest_hour": "dark_night",
+    "crisis": "dark_night",
+    # climax
+    "climax": "climax",
+    "final_battle": "climax",
+    "showdown": "climax",
+    # resolution
+    "resolution": "resolution",
+    "ending": "resolution",
+    "conclusion": "resolution",
+    # first_plot_point
+    "first_plot_point": "first_plot_point",
+    "plot_point_1": "first_plot_point",
+    # second_plot_point
+    "second_plot_point": "second_plot_point",
+    "plot_point_2": "second_plot_point",
     # puzzle
     "puzzle": "puzzle",
     "riddle": "puzzle",
@@ -203,6 +232,13 @@ SCENE_TYPE_SYNONYMS: Dict[str, str] = {
     "infiltration": "stealth",
     "sneak": "stealth",
     "heist": "stealth",
+    # travel
+    "travel": "travel",
+    "journey": "travel",
+    "exploration": "travel",
+    # tutorial
+    "tutorial": "tutorial",
+    "tutorial_scene": "tutorial",
     # dialogue (default fallback)
     "dialogue": "dialogue",
 }

@@ -18,12 +18,20 @@ from sparnot.scene_generation.lock_models import (
 def find_scene_files(project_path: Path) -> List[Path]:
     """Find all generated scene files in project directory."""
     scene_files = []
-    # Look for generated_scene.json and generated_scene_*.json
+    
+    # Look in generated_scenes subdirectory first (new location)
+    scenes_dir = project_path / "generated_scenes"
+    if scenes_dir.exists():
+        # Look for all generated scene files in the subdirectory
+        for scene_file in scenes_dir.glob("generated_scene*.json"):
+            scene_files.append(scene_file)
+    
+    # Also check project root for legacy files (backward compatibility)
     default_scene = project_path / "generated_scene.json"
     if default_scene.exists():
         scene_files.append(default_scene)
     
-    # Also look for other scene files
+    # Look for generated_scene_{scene_id}.json files in project root (legacy)
     for scene_file in project_path.glob("generated_scene_*.json"):
         if scene_file != default_scene:
             scene_files.append(scene_file)
