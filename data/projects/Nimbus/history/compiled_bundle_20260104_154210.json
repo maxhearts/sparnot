@@ -25,6 +25,21 @@
     },
     "characters": [
       {
+        "id": "002",
+        "name": "eli",
+        "role": "supporting",
+        "beliefs": [
+          "I am the only one who can save the world",
+          "I am shouldering the dark secrets of this city",
+          "I am not afraid to die for what I believe in"
+        ],
+        "personality_tags": [
+          "serene",
+          "determined",
+          "mysterious"
+        ]
+      },
+      {
         "id": "001",
         "name": "underdog",
         "role": "protagonist",
@@ -50,21 +65,6 @@
           "hot-headed",
           "ambitious",
           "competitive"
-        ]
-      },
-      {
-        "id": "002",
-        "name": "eli",
-        "role": "supporting",
-        "beliefs": [
-          "I am the only one who can save the world",
-          "I am shouldering the dark secrets of this city",
-          "I am not afraid to die for what I believe in"
-        ],
-        "personality_tags": [
-          "serene",
-          "determined",
-          "mysterious"
         ]
       }
     ],
@@ -99,20 +99,20 @@
         "whimsical"
       ],
       "style_tokens": [
-        "contrast_tension",
-        "gallows_humor_guardrails",
-        "secrets",
-        "warmth",
-        "resilience",
-        "foreshadowing",
-        "bittersweet",
-        "cost_and_consequence",
-        "moments_of_relief",
-        "unreliable_info",
-        "forward_motion",
-        "banter_allowed",
         "high_stakes",
-        "restraint"
+        "forward_motion",
+        "warmth",
+        "secrets",
+        "foreshadowing",
+        "contrast_tension",
+        "restraint",
+        "bittersweet",
+        "moments_of_relief",
+        "gallows_humor_guardrails",
+        "cost_and_consequence",
+        "resilience",
+        "banter_allowed",
+        "unreliable_info"
       ],
       "constraints": {
         "env_destructible": false,
@@ -149,18 +149,38 @@
     },
     "character_irs": [
       {
+        "character_id": "002",
+        "role": "supporting",
+        "voice_tokens": [
+          "low_reactivity",
+          "calm",
+          "minimal_excuses",
+          "measured",
+          "withholds_info",
+          "forward",
+          "focused",
+          "elliptical",
+          "implicature"
+        ],
+        "belief_weights": {
+          "I am the only one who can save the world": 0.3333333333333333,
+          "I am shouldering the dark secrets of this city": 0.3333333333333333,
+          "I am not afraid to die for what I believe in": 0.3333333333333333
+        }
+      },
+      {
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
           "action_oriented",
-          "focused",
-          "forward",
-          "grounded",
-          "steady",
-          "plainspoken",
           "minimal_excuses",
+          "steady",
           "direct",
-          "resolute"
+          "grounded",
+          "resolute",
+          "forward",
+          "focused",
+          "plainspoken"
         ],
         "belief_weights": {
           "I have nothing to go back to": 0.5,
@@ -172,38 +192,18 @@
         "role": "supporting",
         "voice_tokens": [
           "blunt",
+          "assertive",
+          "emotion_forward",
+          "scorekeeping",
+          "status_sensitive",
+          "fast_escalation",
           "challenging",
           "provocative",
-          "assertive",
-          "scorekeeping",
-          "emotion_forward",
-          "fast_escalation",
-          "future_oriented",
-          "status_sensitive"
+          "future_oriented"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
           "I cannot trust anyone but myself": 0.5
-        }
-      },
-      {
-        "character_id": "002",
-        "role": "supporting",
-        "voice_tokens": [
-          "withholds_info",
-          "focused",
-          "forward",
-          "measured",
-          "calm",
-          "elliptical",
-          "implicature",
-          "low_reactivity",
-          "minimal_excuses"
-        ],
-        "belief_weights": {
-          "I am the only one who can save the world": 0.3333333333333333,
-          "I am shouldering the dark secrets of this city": 0.3333333333333333,
-          "I am not afraid to die for what I believe in": 0.3333333333333333
         }
       }
     ],
@@ -254,12 +254,12 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "8c2293112079998e",
-    "narrative_ir": "ea560bcf5bcb5a47",
+    "bundle": "91cc57e8a510e016",
+    "narrative_ir": "b9dc4cee27456b79",
     "character_irs": {
-      "001": "7bd2e0057aa5954f",
-      "003": "4a5e0857e0e8bf13",
-      "002": "dca4c9f66f7c5e0a"
+      "002": "5d67f7171b83c056",
+      "001": "40127352760cfa9c",
+      "003": "29e8c453f1c9f23b"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }

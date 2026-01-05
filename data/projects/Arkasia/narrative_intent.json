@@ -1,0 +1,34 @@
+{
+  "logline": "In a dystopian world, a brother and sister disguise themselves as a wealthy couple to evade an investigating android, uncovering secrets about their society along the way.",
+  "themes": [
+    "identity",
+    "survival",
+    "deception",
+    "trust"
+  ],
+  "player_fantasy": "strategy",
+  "player_agency": "medium",
+  "setting": "A technologically advanced but socially fragmented city, where wealth and power are starkly divided.",
+  "invariants": [
+    "Technology controls society, and dissent is met with severe punishment."
+  ],
+  "tones": [
+    "dark",
+    "tense",
+    "suspenseful"
+  ],
+  "tone_weights": [
+    {
+      "tone": "dark",
+      "weight": 0.5
+    },
+    {
+      "tone": "tense",
+      "weight": 0.3
+    },
+    {
+      "tone": "suspenseful",
+      "weight": 0.2
+    }
+  ]
+}

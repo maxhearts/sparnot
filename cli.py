@@ -102,7 +102,7 @@ def show_schemas(project: str):
     # Characters - load raw JSON
     characters = manager.list_characters(project)
     if characters:
-        click.echo(f"CHARACTERS ({len(characters)}):")
+        click.echo("CHARACTERS:")
         for char_id in characters:
             char_file = project_path / "characters" / f"{char_id}.json"
             if char_file.exists():
@@ -111,17 +111,9 @@ def show_schemas(project: str):
                         data = json.load(f)
                         name = data.get('name', char_id)
                         role = data.get('role', 'unknown')
-                        beliefs = data.get('beliefs', [])
-                        personality = data.get('personality_tags', [])
                         click.echo(f"  - {name} ({char_id}): {role}")
-                        if beliefs:
-                            click.echo(f"    Beliefs: {', '.join(beliefs)}")
-                        if personality:
-                            click.echo(f"    Personality: {', '.join(personality)}")
-                except Exception as e:
-                    click.echo(f"  - ⚠ {char_id} (error loading: {e})")
-            else:
-                click.echo(f"  - ⚠ {char_id} (file not found)")
+                except Exception:
+                    click.echo(f"  - {char_id} (error loading)")
         click.echo()
     else:
         click.echo("CHARACTERS: None\n")
@@ -132,16 +124,9 @@ def show_schemas(project: str):
         try:
             with open(arc_file) as f:
                 data = json.load(f)
-                acts = data.get('acts', [])
-                scenes = data.get('scenes', [])
-                click.echo(f"ARC ({len(acts)} acts, {len(scenes)} scenes):")
-                for act in acts:
-                    click.echo(f"  Act {act.get('act_id', 'N/A')}: {act.get('act_purpose', 'N/A')}")
-                    click.echo(f"    Required scenes: {', '.join(act.get('required_scenes', []))}")
-                click.echo()
-                for scene in scenes:
-                    click.echo(f"  Scene {scene.get('scene_id', 'N/A')} ({scene.get('scene_type', 'N/A')}): {scene.get('summary', 'N/A')}")
-                    click.echo(f"    Characters: {', '.join(scene.get('involved_characters', []))}")
+                click.echo("ARC:")
+                click.echo(f"  Acts: {len(data.get('acts', []))}")
+                click.echo(f"  Scenes: {len(data.get('scenes', []))}")
                 click.echo()
         except Exception as e:
             click.echo(f"ARC: Error loading - {e}\n")
@@ -150,7 +135,7 @@ def show_schemas(project: str):
 
 
 def create_schema_menu(project: str):
-    """Show menu for creating schemas."""
+    """Menu for creating schemas."""
     click.echo("\nWhat would you like to create?")
     click.echo("  1. Narrative Intent")
     click.echo("  2. Character")
@@ -185,7 +170,7 @@ def create_schema_menu(project: str):
 
 
 def edit_schema_menu(project: str):
-    """Show menu for editing schemas."""
+    """Menu for editing schemas."""
     click.echo("\nWhat would you like to edit?")
     click.echo("  1. Narrative Intent")
     click.echo("  2. Character")
@@ -200,81 +185,94 @@ def edit_schema_menu(project: str):
     if choice == 1:
         intent = manager.load_narrative_intent(project)
         if not intent:
-            click.echo("✗ Narrative intent not found. Use 'Create' first.")
+            click.echo("✗ Narrative intent not found. Create it first.")
             return
         
-        data = intent.model_dump()
-        result = edit_json(data, NarrativeIntent, "narrative intent")
-        if result:
-            manager.save_narrative_intent(project, result)
+        updated = edit_json(intent.model_dump(), NarrativeIntent, "narrative intent")
+        if updated:
+            manager.save_narrative_intent(project, updated)
             click.echo("✓ Narrative intent updated!")
     
     elif choice == 2:
         characters = manager.list_characters(project)
         if not characters:
-            click.echo("✗ No characters found. Use 'Create' first.")
+            click.echo("✗ No characters found. Create one first.")
             return
         
-        click.echo("\nCharacters:")
+        click.echo("\nSelect character to edit:")
         for i, char_id in enumerate(characters, 1):
-            char = manager.load_character(project, char_id, strict=False)
-            if char:
-                click.echo(f"  {i}. {char.name} ({char.id})")
+            char_file = manager.get_project_path(project) / "characters" / f"{char_id}.json"
+            if char_file.exists():
+                try:
+                    with open(char_file) as f:
+                        data = json.load(f)
+                        name = data.get('name', char_id)
+                        click.echo(f"  {i}. {name} ({char_id})")
+                except Exception:
+                    click.echo(f"  {i}. {char_id}")
         
         char_choice = click.prompt(
-            "Select character",
+            "\nSelect character",
             type=click.IntRange(1, len(characters)),
+            default=1,
         )
         char_id = characters[char_choice - 1]
         
-        char = manager.load_character(project, char_id)
-        if char:
-            data = char.model_dump()
-            result = edit_json(data, CharacterSchema, f"character '{char_id}'")
-            if result:
-                manager.save_character(project, result)
-                click.echo(f"✓ Character '{result.name}' updated!")
+        char = manager.load_character(project, char_id, strict=False)
+        if not char:
+            click.echo(f"✗ Could not load character '{char_id}'")
+            return
+        
+        updated = edit_json(char.model_dump(), CharacterSchema, "character")
+        if updated:
+            manager.save_character(project, updated)
+            click.echo(f"✓ Character '{updated.name}' updated!")
     
     elif choice == 3:
         arc = manager.load_arc(project, strict=False)
         if not arc:
-            click.echo("✗ Arc not found. Use 'Create' first.")
+            click.echo("✗ Arc not found. Create it first.")
             return
         
-        data = arc.model_dump()
-        result = edit_json(data, ArcSkeleton, "arc")
-        if result:
-            manager.save_arc(project, result)
+        updated = edit_json(arc.model_dump(), ArcSkeleton, "arc")
+        if updated:
+            manager.save_arc(project, updated)
             click.echo("✓ Arc updated!")
 
 
 def delete_character_menu(project: str):
-    """Show menu for deleting characters."""
+    """Menu for deleting characters."""
     characters = manager.list_characters(project)
     if not characters:
-        click.echo("✗ No characters found.")
+        click.echo("\n✗ No characters found")
         return
     
-    click.echo("\nCharacters:")
+    click.echo("\nSelect character to delete:")
     for i, char_id in enumerate(characters, 1):
-        char = manager.load_character(project, char_id)
-        if char:
-            click.echo(f"  {i}. {char.name} ({char.id})")
+        char_file = manager.get_project_path(project) / "characters" / f"{char_id}.json"
+        if char_file.exists():
+            try:
+                with open(char_file) as f:
+                    data = json.load(f)
+                    name = data.get('name', char_id)
+                    click.echo(f"  {i}. {name} ({char_id})")
+            except Exception:
+                click.echo(f"  {i}. {char_id}")
     
     char_choice = click.prompt(
-        "Select character to delete",
+        "\nSelect character",
         type=click.IntRange(1, len(characters)),
+        default=1,
     )
     char_id = characters[char_choice - 1]
     
-    char = manager.load_character(project, char_id)
-    if char:
-        confirm = click.confirm(f"Delete character '{char.name}'?", default=False)
-        if confirm:
-            if manager.delete_character(project, char_id):
-                click.echo(f"✓ Character '{char.name}' deleted!")
-            else:
-                click.echo(f"✗ Failed to delete character '{char_id}'")
+    # Confirm deletion
+    confirm = click.confirm(f"\nDelete character '{char_id}'?", default=False)
+    if confirm:
+        if manager.delete_character(project, char_id):
+            click.echo(f"✓ Character '{char_id}' deleted!")
+        else:
+            click.echo(f"✗ Failed to delete character '{char_id}'")
 
 
 def compile_project_command(project: str):
@@ -318,8 +316,226 @@ def compile_project_command(project: str):
         # Show hash
         click.echo(f"\nBundle hash: {bundle.hashes['bundle']}")
         
+    except ValueError as e:
+        # Compilation error - offer assistant
+        click.echo(f"\n✗ Compilation error: {e}", err=True)
+        click.echo("\nWould you like to:")
+        click.echo("  1. Try fixing manually")
+        click.echo("  2. Use elicitation assistant")
+        click.echo("  3. Continue")
+        
+        choice = click.prompt("\nChoice", type=click.IntRange(1, 3), default=2)
+        
+        if choice == 2:
+            elicitation_assistant_command(project)
     except Exception as e:
         click.echo(f"\n✗ Compilation error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
+def elicitation_assistant_command(project: str):
+    """Run elicitation assistant for schema refinement."""
+    try:
+        from sparnot.elicitation.assistant import ElicitationAssistant
+        
+        assistant = ElicitationAssistant()
+        assistant.run_assistant_session(project)
+    except Exception as e:
+        click.echo(f"\n✗ Error in elicitation assistant: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
+def compare_compilations_command(project: str, old_path: Optional[Path] = None, new_path: Optional[Path] = None):
+    """Compare two compilation bundles."""
+    try:
+        from sparnot.poc_compiler.diff import compute_compilation_diff
+        from sparnot.poc_compiler.diff_display import format_full_diff
+        from sparnot.poc_compiler.models import CompiledBundle
+        import json
+        
+        manager = ProjectManager()
+        
+        # Load bundles
+        if old_path is None and new_path is None:
+            # Default: current vs selected from history
+            new_data = manager.load_compilation(project)
+            if not new_data:
+                click.echo(f"\n✗ No current compilation found for project '{project}'")
+                click.echo("  Compile the project first (option 6)")
+                return
+            
+            history_files = manager.list_compilation_history(project)
+            if not history_files:
+                click.echo(f"\n✗ No previous compilation found for project '{project}'")
+                click.echo("  Compile the project at least twice to compare")
+                return
+
+            # Limit to latest 10
+            history_files = history_files[:10]
+            
+            # Show menu to select historical version
+            click.echo("\nSelect historical compilation to compare:")
+            click.echo("  (comparing with current compiled_bundle.json)")
+            if len(manager.list_compilation_history(project)) > 10:
+                click.echo(f"  (showing latest 10 of {len(manager.list_compilation_history(project))} total)")
+            click.echo()
+            for i, hist_file in enumerate(history_files, 1):
+                click.echo(f"  {i}. {hist_file.name}")
+            
+            choice = click.prompt(
+                "\nSelect version (or press Enter for latest)",
+                type=click.IntRange(1, len(history_files)),
+                default=1,
+            )
+            
+            old_path = history_files[choice - 1]
+            old_data = manager.load_compilation(project, old_path)
+            
+            click.echo(f"\nComparing:")
+            click.echo(f"  Old: {old_path.name}")
+            click.echo(f"  New: compiled_bundle.json (current)")
+        else:
+            # Custom paths
+            if old_path is None or new_path is None:
+                click.echo("\n✗ Both old_path and new_path must be provided for custom comparison")
+                return
+
+            old_data = manager.load_compilation(project, old_path)
+            new_data = manager.load_compilation(project, new_path)
+            
+            if not old_data:
+                click.echo(f"\n✗ Could not load bundle from: {old_path}")
+                return
+            if not new_data:
+                click.echo(f"\n✗ Could not load bundle from: {new_path}")
+                return
+
+        # Create CompiledBundle objects
+        old_bundle = CompiledBundle(**old_data)
+        new_bundle = CompiledBundle(**new_data)
+        
+        # Compute diff
+        diff = compute_compilation_diff(old_bundle, new_bundle)
+        
+        # Display diff
+        click.echo("\n" + format_full_diff(diff))
+        
+    except Exception as e:
+        click.echo(f"\n✗ Comparison error: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
+def revert_to_compilation_command(project: str):
+    """Revert schemas to a prior compilation's canonical schemas."""
+    try:
+        from sparnot.poc_compiler.models import CompiledBundle
+        import json
+        
+        manager = ProjectManager()
+        
+        # Get historical compilations
+        history_files = manager.list_compilation_history(project)
+        if not history_files:
+            click.echo(f"\n✗ No previous compilation found for project '{project}'")
+            click.echo("  Compile the project at least once to have a history")
+            return
+
+        # Limit to latest 10
+        history_files = history_files[:10]
+        
+        # Show menu to select historical version
+        click.echo("\nSelect compilation to revert to:")
+        click.echo("  (This will restore schemas from that compilation)")
+        if len(manager.list_compilation_history(project)) > 10:
+            click.echo(f"  (showing latest 10 of {len(manager.list_compilation_history(project))} total)")
+        click.echo()
+        for i, hist_file in enumerate(history_files, 1):
+            click.echo(f"  {i}. {hist_file.name}")
+        
+        choice = click.prompt(
+            "\nSelect version",
+            type=click.IntRange(1, len(history_files)),
+            default=1,
+        )
+        
+        selected_path = history_files[choice - 1]
+        bundle_data = manager.load_compilation(project, selected_path)
+        
+        if not bundle_data:
+            click.echo(f"\n✗ Could not load bundle from: {selected_path}")
+            return
+        
+        bundle = CompiledBundle(**bundle_data)
+        canonical_schemas = bundle.canonical_schemas
+        
+        # Confirm revert
+        click.echo(f"\nThis will overwrite current schemas with schemas from:")
+        click.echo(f"  {selected_path.name}")
+        click.echo("\nCurrent schemas will be lost!")
+        confirm = click.confirm("\nProceed with revert?", default=False)
+        
+        if not confirm:
+            click.echo("Revert cancelled.")
+            return
+        
+        # Restore schemas
+        project_path = manager.get_project_path(project)
+        restored_count = 0
+        
+        # Restore narrative_intent
+        if canonical_schemas.get("narrative_intent"):
+            intent_file = project_path / "narrative_intent.json"
+            with open(intent_file, "w") as f:
+                json.dump(canonical_schemas["narrative_intent"], f, indent=2)
+            restored_count += 1
+            click.echo("  ✓ Restored narrative_intent.json")
+        
+        # Restore arc
+        if canonical_schemas.get("arc"):
+            arc_file = project_path / "arc.json"
+            with open(arc_file, "w") as f:
+                json.dump(canonical_schemas["arc"], f, indent=2)
+            restored_count += 1
+            click.echo("  ✓ Restored arc.json")
+        
+        # Restore characters
+        if canonical_schemas.get("characters"):
+            chars_dir = project_path / "characters"
+            chars_dir.mkdir(exist_ok=True)
+            
+            # Remove existing characters not in the bundle
+            existing_chars = set(manager.list_characters(project))
+            bundle_char_ids = {char.get("id") for char in canonical_schemas["characters"] if char.get("id")}
+            
+            for char_id in existing_chars - bundle_char_ids:
+                char_file = chars_dir / f"{char_id}.json"
+                if char_file.exists():
+                    char_file.unlink()
+            
+            # Restore characters from bundle
+            for char_data in canonical_schemas["characters"]:
+                char_id = char_data.get("id")
+                if char_id:
+                    char_file = chars_dir / f"{char_id}.json"
+                    with open(char_file, "w") as f:
+                        json.dump(char_data, f, indent=2)
+                    restored_count += 1
+            
+            if canonical_schemas["characters"]:
+                click.echo(f"  ✓ Restored {len(canonical_schemas['characters'])} character(s)")
+        
+        click.echo(f"\n✓ Reverted {restored_count} schema file(s) from {selected_path.name}")
+        
+        # Ask if user wants to recompile
+        recompile = click.confirm("\nRecompile with restored schemas?", default=True)
+        if recompile:
+            compile_project_command(project)
+        
+    except Exception as e:
+        click.echo(f"\n✗ Revert error: {e}", err=True)
         import traceback
         traceback.print_exc()
 
@@ -345,44 +561,41 @@ def lock_content_menu(project: str):
         manager = ProjectManager()
         project_path = manager.get_project_path(project)
         
-        # Find all scene files
+        # Find all generated scene files
         scene_files = find_scene_files(project_path)
         if not scene_files:
             click.echo(f"\n✗ No generated scenes found in project '{project}'")
             click.echo("  Generate a scene first using generate_scene.py")
             return
         
-        # Select scene file
+        selected_scene_path: Path
         if len(scene_files) == 1:
             selected_scene_path = scene_files[0]
-            click.echo(f"\nUsing scene: {selected_scene_path.name}")
+            click.echo(f"\nAutomatically selected scene: {selected_scene_path.name}")
         else:
             click.echo("\nAvailable scenes:")
             for i, scene_file in enumerate(scene_files, 1):
-                # Try to load scene to get scene_id for display
-                try:
-                    with open(scene_file) as f:
-                        scene_temp = json.load(f)
-                        scene_id_display = scene_temp.get("scene_id", scene_file.name)
-                        click.echo(f"  {i}. {scene_file.name} (scene_id: {scene_id_display})")
-                except Exception:
-                    click.echo(f"  {i}. {scene_file.name}")
+                # Try to load scene_id for display
+                temp_scene_data = load_scene_data(scene_file)
+                scene_display_name = temp_scene_data.get("scene_id", scene_file.name) if temp_scene_data else scene_file.name
+                click.echo(f"  {i}. {scene_display_name} ({scene_file.name})")
             
-            choice = click.prompt("\nSelect scene", type=click.IntRange(1, len(scene_files)), default=1)
+            choice = click.prompt(
+                "\nSelect scene to lock content for",
+                type=click.IntRange(1, len(scene_files)),
+                default=1,
+            )
             selected_scene_path = scene_files[choice - 1]
         
-        # Load selected scene data
         scene_data = load_scene_data(selected_scene_path)
         if not scene_data:
-            click.echo(f"\n✗ Failed to load scene from {selected_scene_path.name}")
+            click.echo(f"\n✗ Failed to load scene data from {selected_scene_path.name}")
             return
         
-        scene_id = scene_data.get("scene_id", "generated_scene_1")
+        scene_id = scene_data.get("scene_id", selected_scene_path.stem)
         lock_manager = LockManager(project)
         
-        # Show scene info
-        click.echo(f"\nScene: {scene_id}")
-        click.echo(f"File: {selected_scene_path.name}")
+        click.echo(f"\n=== Working with Scene: {scene_id} ({selected_scene_path.name}) ===")
         click.echo(f"Type: {scene_data.get('scene_type', 'unknown')}")
         
         # Lock menu
@@ -427,14 +640,12 @@ def lock_content_menu(project: str):
                 
                 lock = create_line_lock(scene_data, node_id, line_choice, notes if notes else None)
                 if lock:
-                    # Get or create scene locks
                     lock_file = lock_manager.load_locks()
                     if scene_id not in lock_file.scene_locks:
                         fingerprint = get_scene_fingerprint(scene_data)
                         lock_file.scene_locks[scene_id] = SceneLocks(
                             scene_fingerprint=fingerprint, locks=[]
                         )
-                    
                     lock_manager.add_lock(scene_id, lock)
                     click.echo(f"\n✓ Locked line {line_choice} in {node_id} (lock_id: {lock.lock_id})")
                 else:
@@ -463,7 +674,6 @@ def lock_content_menu(project: str):
                         lock_file.scene_locks[scene_id] = SceneLocks(
                             scene_fingerprint=fingerprint, locks=[]
                         )
-                    
                     lock_manager.add_lock(scene_id, lock)
                     click.echo(f"\n✓ Locked node {node_id} (lock_id: {lock.lock_id})")
                 else:
@@ -490,7 +700,6 @@ def lock_content_menu(project: str):
                         lock_file.scene_locks[scene_id] = SceneLocks(
                             scene_fingerprint=fingerprint, locks=[]
                         )
-                    
                     lock_manager.add_lock(scene_id, lock)
                     click.echo(f"\n✓ Locked branch (lock_id: {lock.lock_id})")
                 else:
@@ -519,95 +728,19 @@ def lock_content_menu(project: str):
                 for i, lock in enumerate(locks, 1):
                     click.echo(f"  {i}. {lock['lock_id']} ({lock['scope']})")
                 
-                lock_choice = click.prompt("\nSelect lock to remove", type=click.IntRange(1, len(locks)), default=1)
-                lock_id = locks[lock_choice - 1]["lock_id"]
-                
-                if lock_manager.remove_lock(scene_id, lock_id):
-                    click.echo(f"\n✓ Removed lock {lock_id}")
-                else:
-                    click.echo(f"\n✗ Failed to remove lock {lock_id}")
-        
+                lock_choice = click.prompt(
+                    "\nSelect lock to remove",
+                    type=click.IntRange(1, len(locks)),
+                    default=1,
+                )
+                lock_to_remove = locks[lock_choice - 1]
+                lock_manager.remove_lock(scene_id, lock_to_remove["lock_id"])
+                click.echo(f"\n✓ Removed lock {lock_to_remove['lock_id']}")
+            
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+
     except Exception as e:
-        click.echo(f"\n✗ Lock menu error: {e}", err=True)
-        import traceback
-        traceback.print_exc()
-
-
-def compare_compilations_command(project: str, old_path: Optional[Path] = None, new_path: Optional[Path] = None):
-    """Compare two compilation bundles."""
-    try:
-        from sparnot.poc_compiler.diff import compute_compilation_diff
-        from sparnot.poc_compiler.diff_display import format_full_diff
-        from sparnot.poc_compiler.models import CompiledBundle
-        import json
-        
-        manager = ProjectManager()
-        
-        # Load bundles
-        if old_path is None and new_path is None:
-            # Default: current vs selected from history
-            new_data = manager.load_compilation(project)
-            if not new_data:
-                click.echo(f"\n✗ No current compilation found for project '{project}'")
-                click.echo("  Compile the project first (option 6)")
-                return
-            
-            history_files = manager.list_compilation_history(project)
-            if not history_files:
-                click.echo(f"\n✗ No previous compilation found for project '{project}'")
-                click.echo("  Compile the project at least twice to compare")
-                return
-
-            # Show menu to select historical version
-            click.echo("\nSelect historical compilation to compare:")
-            click.echo("  (comparing with current compiled_bundle.json)")
-            click.echo()
-            for i, hist_file in enumerate(history_files, 1):
-                click.echo(f"  {i}. {hist_file.name}")
-            
-            choice = click.prompt(
-                "\nSelect version (or press Enter for latest)",
-                type=click.IntRange(1, len(history_files)),
-                default=1,
-            )
-            
-            old_path = history_files[choice - 1]
-            old_data = manager.load_compilation(project, old_path)
-            
-            click.echo(f"\nComparing:")
-            click.echo(f"  Old: {old_path.name}")
-            click.echo(f"  New: compiled_bundle.json (current)")
-        else:
-            # Custom paths
-            if old_path is None or new_path is None:
-                click.echo("\n✗ Both old_path and new_path must be provided for custom comparison")
-                return
-            
-            old_data = manager.load_compilation(project, old_path)
-            new_data = manager.load_compilation(project, new_path)
-            
-            if not old_data:
-                click.echo(f"\n✗ Could not load bundle from: {old_path}")
-                return
-            if not new_data:
-                click.echo(f"\n✗ Could not load bundle from: {new_path}")
-                return
-        
-        # Create CompiledBundle objects
-        old_bundle = CompiledBundle(**old_data)
-        new_bundle = CompiledBundle(**new_data)
-        
-        # Compute diff
-        diff = compute_compilation_diff(old_bundle, new_bundle)
-        
-        # Display diff
-        click.echo("\n" + format_full_diff(diff))
-        
-    except Exception as e:
-        click.echo(f"\n✗ Comparison error: {e}", err=True)
-        import traceback
-        traceback.print_exc()
-        click.echo(f"\n✗ Compilation error: {e}", err=True)
+        click.echo(f"\n✗ Error in lock content menu: {e}", err=True)
         import traceback
         traceback.print_exc()
 
@@ -627,10 +760,14 @@ def main_menu(project: str):
         click.echo("  6. Compile to IR")
         click.echo("  7. Compare compilations")
         click.echo("  8. Lock scene content")
-        click.echo("  9. Switch project")
+        click.echo("  9. Elicitation Assistant")
+        click.echo("  10. Revert to prior compilation")
+        click.echo("  11. Generate scene")
+        click.echo("  12. Play scene")
+        click.echo("  13. Switch project")
         click.echo("  0. Exit")
         
-        choice = click.prompt("\nChoice", type=click.IntRange(0, 9), default=0)
+        choice = click.prompt("\nChoice", type=click.IntRange(0, 13), default=0)
         
         if choice == 0:
             click.echo("\nGoodbye!")
@@ -676,6 +813,18 @@ def main_menu(project: str):
             lock_content_menu(project)
             click.prompt("\nPress Enter to continue...", default="", show_default=False)
         elif choice == 9:
+            elicitation_assistant_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 10:
+            revert_to_compilation_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 11:
+            generate_scene_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 12:
+            play_scene_command(project)
+            click.prompt("\nPress Enter to continue...", default="", show_default=False)
+        elif choice == 13:
             new_project = select_or_create_project()
             if new_project != project:
                 return new_project  # Return new project to update in main loop
@@ -683,6 +832,159 @@ def main_menu(project: str):
             click.echo("Invalid choice")
     
     return None  # Exit signal
+
+
+def generate_scene_command(project: str):
+    """Generate a scene from compiled bundle."""
+    project_path = manager.get_project_path(project)
+    bundle_path = project_path / "compiled_bundle.json"
+    
+    if not bundle_path.exists():
+        click.echo(f"\n✗ No compiled bundle found for project '{project}'")
+        click.echo("Please compile the project first (option 6)")
+        return
+    
+    try:
+        from sparnot.scene_generation.lock_storage import LockManager
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent))
+        from generate_scene import generate_scene
+        
+        # Initialize lock manager
+        lock_manager = LockManager(project, data_dir=manager.data_dir)
+        
+        # Load arc to show available scenes
+        arc = manager.load_arc(project, strict=False)
+        
+        scene_id = None
+        if arc and arc.scenes:
+            # Build a map of scenes to acts
+            scene_to_act = {}
+            if arc.acts:
+                for act in arc.acts:
+                    for scene_id_ref in act.required_scenes:
+                        scene_to_act[scene_id_ref] = act.act_id
+            
+            # Show available scenes grouped by act
+            click.echo(f"\nAvailable scenes in '{project}':")
+            scenes_by_act = {}
+            for scene in arc.scenes:
+                act_id = scene_to_act.get(scene.scene_id, "unassigned")
+                if act_id not in scenes_by_act:
+                    scenes_by_act[act_id] = []
+                scenes_by_act[act_id].append(scene)
+            
+            # Display scenes grouped by act
+            all_scenes = []
+            for act_id in sorted(scenes_by_act.keys()):
+                scenes = scenes_by_act[act_id]
+                click.echo(f"\n  Act: {act_id}")
+                for scene in scenes:
+                    scene_idx = len(all_scenes) + 1
+                    all_scenes.append(scene)
+                    click.echo(f"    {scene_idx}. {scene.scene_id} ({scene.scene_type}) - {scene.summary[:60]}...")
+            
+            if not all_scenes:
+                click.echo("  No scenes found")
+                return
+            
+            # Let user select
+            choice = click.prompt(f"\nSelect scene to generate (1-{len(all_scenes)})", type=click.IntRange(1, len(all_scenes)))
+            selected_scene = all_scenes[choice - 1]
+            scene_id = selected_scene.scene_id
+            
+            click.echo(f"\nGenerating scene: {scene_id} ({selected_scene.scene_type})")
+        else:
+            # No arc, can still generate a generic scene
+            click.echo(f"\nNo arc structure found. Generating a generic scene...")
+        
+        # Generate scene
+        scene_data = generate_scene(
+            bundle_path=bundle_path,
+            scene_id=scene_id,
+            lock_manager=lock_manager
+        )
+        
+        # Determine output filename based on scene_id
+        if scene_id:
+            # Use scene_id in filename: generated_scene_{scene_id}.json
+            safe_scene_id = scene_id.replace("/", "_").replace("\\", "_")
+            output_filename = f"generated_scene_{safe_scene_id}.json"
+        else:
+            # Fallback for generic scenes
+            output_filename = "generated_scene.json"
+        
+        # Save to generated_scenes subdirectory
+        scenes_dir = project_path / "generated_scenes"
+        scenes_dir.mkdir(exist_ok=True)
+        output_path = scenes_dir / output_filename
+        
+        # Check if file already exists and warn
+        if output_path.exists():
+            overwrite = click.confirm(f"\n⚠ File {output_filename} already exists. Overwrite?", default=False)
+            if not overwrite:
+                click.echo("Generation cancelled.")
+                return
+        
+        # Save to generated_scenes directory
+        with open(output_path, 'w') as f:
+            json.dump(scene_data, f, indent=2)
+        
+        click.echo(f"\n✓ Scene generated successfully!")
+        click.echo(f"Saved to: {output_path}")
+        
+    except Exception as e:
+        click.echo(f"\n✗ Error generating scene: {e}", err=True)
+        import traceback
+        traceback.print_exc()
+
+
+def play_scene_command(project: str):
+    """Play a generated scene interactively."""
+    project_path = manager.get_project_path(project)
+    
+    # Find all scene files
+    from cli_lock_helpers import find_scene_files, load_scene_data
+    
+    scene_files = find_scene_files(project_path)
+    
+    if not scene_files:
+        click.echo(f"\n✗ No generated scenes found in project '{project}'")
+        click.echo("Please generate a scene first (option 11)")
+        return
+
+    # Always show selection menu, even if only one scene
+    click.echo(f"\nAvailable generated scenes in '{project}':")
+    for i, scene_file in enumerate(scene_files, 1):
+        scene_data = load_scene_data(scene_file)
+        if scene_data:
+            scene_id = scene_data.get("scene_id", scene_file.stem)
+            scene_type = scene_data.get("scene_type", "unknown")
+            summary = scene_data.get("summary", "")[:60]
+            click.echo(f"  {i}. {scene_file.name}")
+            click.echo(f"     Scene ID: {scene_id} | Type: {scene_type}")
+            if summary:
+                click.echo(f"     Summary: {summary}...")
+        else:
+            click.echo(f"  {i}. {scene_file.name} (error loading)")
+    
+    choice = click.prompt(f"\nSelect scene to play (1-{len(scene_files)})", type=click.IntRange(1, len(scene_files)))
+    selected_scene = scene_files[choice - 1]
+    
+    try:
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent))
+        from play_scene import play_scene
+        
+        scene_data = load_scene_data(selected_scene)
+        scene_id = scene_data.get("scene_id", selected_scene.stem) if scene_data else selected_scene.stem
+        click.echo(f"\nPlaying scene: {scene_id} ({selected_scene.name})")
+        play_scene(selected_scene)
+        
+    except Exception as e:
+        click.echo(f"\n✗ Error playing scene: {e}", err=True)
+        import traceback
+        traceback.print_exc()
 
 
 @click.command()
@@ -702,4 +1004,3 @@ def cli():
 
 if __name__ == "__main__":
     cli()
-

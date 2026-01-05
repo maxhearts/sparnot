@@ -1,0 +1,197 @@
+{
+  "scene_id": "scene_1",
+  "scene_type": "first_plot_point",
+  "location": "derelict service balcony overlooking the glittering financial spires \u2014 rain-slick metal, neon haze, distant sentinel drones sweeping the avenues",
+  "summary": "Ethan and Maya finalize their plan to assume the identities of a wealthy couple to evade an investigating android. They weigh methods, resources, and the cost of deception under a society where technology enforces privilege and punishes dissent.",
+  "dialogue_tree": {
+    "root": {
+      "screenplay": "Ethan props a cracked holo-tablet on a crate. Maya leans against the railing, watching a patrol-droid streak past. The city hums; a soft alarm chirps from the tablet when a data ping flutters through. Rain beads on Maya's jacket. Both move with practiced hush.",
+      "dialogue": [
+        {
+          "speaker": "Maya",
+          "text": "We don't just take names. We become a package \u2014 a matched pair with estate, lineage credits, the whole credit-thread. They bow to assets; the machines read paper and privilege like scripture.",
+          "exposition": "sharp, forward \u2014 Maya reduces the plan to its cold mechanics; she sees social currency as code to be cracked",
+          "line_id": "scene_1:root:L1"
+        },
+        {
+          "speaker": "Ethan",
+          "text": "If we do this, I shield you. No solo runs. The android's circling records: any slip and dissent gets stamped and burned. We need a route that keeps us off its trail.",
+          "exposition": "resourceful and protective; Ethan's primary concern is Maya's safety",
+          "line_id": "scene_1:root:L2"
+        },
+        {
+          "speaker": "Maya",
+          "text": "Good. Strategy then: slow, clean, or fast and messy. Slow is fake lineage \u2014 deep forgeries. Clean is a broker who sells a story. Fast is slipping into a gala with live IDs and forcing the script.",
+          "exposition": "banter-ready, focused \u2014 presents options without sentiment",
+          "line_id": "scene_1:root:L3"
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_1",
+          "text": "Forge a full credit-lineage and identity from scratch (slow, costly in time and skills)",
+          "choice_nature": "resource_management",
+          "next_node": "node_forge",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_2",
+          "text": "Pay a mid-level data-broker to buy a prebuilt elite identity (faster, costs credits and loyalty)",
+          "choice_nature": "tactical_choice",
+          "next_node": "node_bribe",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_3",
+          "text": "Crash an exclusive gala tonight and assume identities on the spot (immediate, high risk of detection)",
+          "choice_nature": "systemic_decision",
+          "next_node": "node_gala",
+          "convergence_hint": "diverges"
+        }
+      ]
+    },
+    "node_forge": {
+      "screenplay": "Inside a cramped maintenance closet repurposed as a forge, spools of counterfeit credit-chips and a hacked registrar patch hum. Ethan wipes grease from his hands while Maya taps lines of fake inheritance into a cracked console. A low city siren rolls by.",
+      "dialogue": [
+        {
+          "speaker": "Ethan",
+          "text": "We can splice a family ledger from three collapsed accounts and route it through shell trusts. It buys time \u2014 months \u2014 but we need clean microcredits to keep the profile alive.",
+          "exposition": "calculating, aware of resource limits; maps costs and timelines",
+          "line_id": "scene_1:node_forge:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "Good. I can ghost the public records and craft their social arcs \u2014 charities, art donations, the kind of useless philanthropy the elite love. The machines won't question a well-fed paper trail.",
+          "exposition": "hands-on, clever; treats identity as narrative to be authored",
+          "line_id": "scene_1:node_forge:L2"
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_1a",
+          "text": "Plant a decoy digital trail to mislead the android's pattern recognition (create false provenance)",
+          "choice_nature": "tactical_choice",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_1b",
+          "text": "Commit pooled credits to buy temporary data-feed cloaks (pay to keep signals masked for weeks)",
+          "choice_nature": "resource_management",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_1c",
+          "text": "Rewrite the registry entries themselves \u2014 an invasive, long-term change that could erase our marker permanently",
+          "choice_nature": "long_term_planning",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_bribe": {
+      "screenplay": "A dim transit lounge. A broker's contact waits with a cigarette-smoke holo. Ethan and Maya trade sharp looks; Maya fingers a small stack of stolen credits. The broker's tablet pings with verification samples of elite profiles.",
+      "dialogue": [
+        {
+          "speaker": "Broker",
+          "text": "I can slot you into a dormant credit lineage. No questions asked. But the price isn't just credits \u2014 favours, traded access. Machines check for anomalies; people check for debts.",
+          "exposition": "smooth, opportunistic \u2014 represents the city's corrupt middle that feeds on privilege",
+          "line_id": "scene_1:node_bribe:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "We buy the mask, not the leash. If your price includes strings, name them. We survive on our terms.",
+          "exposition": "compassionate to Ethan's cause but ruthless in negotiation; unwilling to be owned",
+          "line_id": "scene_1:node_bribe:L2"
+        },
+        {
+          "speaker": "Ethan",
+          "text": "If we hand over control to a broker, we get immediate cover but lose a safety valve. The android's logs could still trace transactions back through that broker's ledger if they blink.",
+          "exposition": "protective pragmatism; weighs immediate gain vs future vulnerability",
+          "line_id": "scene_1:node_bribe:L3"
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_2a",
+          "text": "Ask the broker to plant a decoy trail alongside the purchase (misdirection)",
+          "choice_nature": "tactical_choice",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_2b",
+          "text": "Increase payment to include temporary cloaking on surveillance feeds (buy time)",
+          "choice_nature": "resource_management",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        },
+        {
+          "choice_id": "choice_2c",
+          "text": "Insist the broker performs a registry rewrite as part of the sale (permanent but risky)",
+          "choice_nature": "long_term_planning",
+          "next_node": "node_after_prep",
+          "convergence_hint": "converges"
+        }
+      ]
+    },
+    "node_gala": {
+      "screenplay": "A montage: black-tie masks, biometric checkpoints, a velvet rope. Ethan and Maya slip through the lower service entrance during a comms blackout. The gala is opulent, hostile \u2014 drones hover, human guests scan imports of status. A hush conversation stops when a patrol android swivels its head.",
+      "dialogue": [
+        {
+          "speaker": "Maya",
+          "text": "Tonight, we flood the room with a new narrative. We take two faces, two manners, and let their shadow swallow us. Fast is dangerous \u2014 but we can force the system to respond on our terms.",
+          "exposition": "adrenaline-forward; believes improv and courage can beat slow bureaucracy",
+          "line_id": "scene_1:node_gala:L1"
+        },
+        {
+          "speaker": "Ethan",
+          "text": "If that android locks onto us in the crowd, we don't get a second chance. I'll cover exits. You sell the story. If it goes south, run to the service access under the east wing.",
+          "exposition": "brave and tactical \u2014 plans escape routes and carries the weight of responsibility",
+          "line_id": "scene_1:node_gala:L2"
+        },
+        {
+          "speaker": "Narration",
+          "text": "They step into the hall. A camera lens focuses like an eye. The scene tightens on the siblings as a soft chime indicates an incoming investigation ping \u2014 the android has been redirected toward their quadrant.",
+          "exposition": "tense, immediate consequence \u2014 the choice's risk becomes apparent",
+          "line_id": "scene_1:node_gala:L3"
+        }
+      ],
+      "choices": [],
+      "converges_from": [],
+      "convergence_note": "This path diverges: choosing the gala leads to immediate infiltration with no further planning choices in this scene; consequences unfold and the scene ends here."
+    },
+    "node_after_prep": {
+      "screenplay": "Hours later, in the same damp hideout, rain streaking down the windows. Ethan and Maya watch feeds rearrange as their chosen defenses take hold. Small victories and new alarms flicker across screens. A distant siren hints at deeper consequences.",
+      "dialogue": [
+        {
+          "speaker": "Ethan",
+          "text": "Whatever we did \u2014 cloak, trail, or rewrite \u2014 it bought us something. Time, maybe. But time is a ledger too; it adds up, and the machines audit everything.",
+          "exposition": "reflective; acknowledges temporary nature of safety",
+          "line_id": "scene_1:node_after_prep:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "We signed a new history. We moved our faces into an old story and told the city to read it differently. Now we survive in someone else's light \u2014 and we pay close attention to the shadows.",
+          "exposition": "resolute; accepts the moral cost of deception for survival",
+          "line_id": "scene_1:node_after_prep:L2"
+        },
+        {
+          "speaker": "Narration",
+          "text": "On a distant feed, the investigating android recalibrates. Unknown discrepancies ripple through its logs. The siblings exchange a look: they've dodged the first sweep, but the system is only just beginning to notice anomalies in privilege-coded data.",
+          "exposition": "ominous, ties back to societal control by technology and punishment for dissent",
+          "line_id": "scene_1:node_after_prep:L3"
+        }
+      ],
+      "choices": [],
+      "converges_from": [
+        "node_forge",
+        "node_bribe"
+      ],
+      "convergence_note": "Paths from forging identities and buying one both lead here because, regardless of method, the siblings must choose how to solidify and protect that new identity; the chosen tactical/resource/long-term action results in a shared immediate aftermath."
+    }
+  },
+  "branching_summary": "The root choice offers three strategic methods to assume elite identities: forging lineage (slow), buying a prebuilt identity (fast), or risking a gala infiltration (immediate danger). The forge and broker options converge into a second layer of tactical decisions (planting decoys, buying cloaks, or rewriting registries) \u2014 both result in the same immediate aftermath node showing temporary safety and the android's escalating attention. The gala choice diverges: it leads to an immediate infiltration sequence with no further planning choices in this scene, emphasizing the high-risk, irreversible nature of that path.",
+  "narrative_notes": "Tone is dark and tense: rain, neon, and patrol drones create an oppressive atmosphere. Themes are balanced per weights: identity (parsing and crafting social narratives), survival (buying time and planning escapes), deception (forgery, bought identities, or impersonation), and trust (negotiations with brokers and choosing whom to risk). Dialogue reflects character beliefs and voices: Ethan's protective resourcefulness and Maya's sharp, forward pragmatism appear in exposition and lines. The invariant that technology controls society and punishes dissent is explicit: android investigation and audits create stakes. Choices align with tokens: tactical_choice (decoy trails, misdirection), resource_management (buying cloaks, pooling credits), long_term_planning (registry rewrites), and systemic_decision (opting to infiltrate the gala). The structure includes both convergent and divergent branches to provide medium agency and meaningful strategic outcomes."
+}

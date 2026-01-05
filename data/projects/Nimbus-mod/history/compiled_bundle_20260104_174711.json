@@ -1,29 +1,41 @@
 {
   "canonical_schemas": {
     "narrative_intent": {
-      "logline": "Nimbus is an open-world RPG set within a hauntingly beautiful yet dystopian post-apocalyptic universe, where a group of rebels has taken arms against a stable yet repressive regime.",
+      "logline": "In a hauntingly beautiful post-apocalyptic sky, a band of rebels must navigate their complex friendships and moral dilemmas while challenging a repressive regime.",
       "tone_weights": {
-        "tragic": 0.4,
-        "hopeful": 0.3,
-        "humor": 0.2,
-        "mysterious": 0.1,
-        "whimsical": 0.0
+        "tragic": 0.3,
+        "hopeful": 0.2,
+        "humor": 0.1,
+        "mysterious": 0.2,
+        "whimsical": 0.2
       },
       "themes": [
-        "responsibility without being the chosen one",
-        "friends vs the world",
-        "the ends do not justify the means",
-        "the power of choice"
+        "Responsibility without being the chosen one",
+        "Friends vs. the world",
+        "The ends do not justify the means",
+        "The power of choice"
       ],
       "player_fantasy": "story",
       "player_agency": "high",
-      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
-      "invariants": [
-        "Environments are not destructible",
-        "Characters can be killed, but some only downed for a short time"
-      ]
+      "setting": "The world consists of nine distinct floating sky cities, each representing a different cultural narrative and survival strategy.",
+      "invariants": []
     },
     "characters": [
+      {
+        "id": "002",
+        "name": "eli",
+        "role": "supporting",
+        "beliefs": [
+          "I am the only one who can save the world",
+          "I am shouldering the dark secrets of this city",
+          "I am not afraid to die for what I believe in"
+        ],
+        "personality_tags": [
+          "serene",
+          "determined",
+          "mysterious"
+        ]
+      },
       {
         "id": "001",
         "name": "underdog",
@@ -53,18 +65,18 @@
         ]
       },
       {
-        "id": "002",
-        "name": "eli",
+        "id": "004",
+        "name": "Sarina",
         "role": "supporting",
         "beliefs": [
-          "I am the only one who can save the world",
-          "I am shouldering the dark secrets of this city",
-          "I am not afraid to die for what I believe in"
+          "Sometimes, the hardest choices are the ones that lead us to become who we truly are.",
+          "True strength comes from vulnerability."
         ],
         "personality_tags": [
-          "serene",
-          "determined",
-          "mysterious"
+          "Compassionate",
+          "Wise",
+          "Cautious",
+          "Diplomatic"
         ]
       }
     ],
@@ -95,40 +107,38 @@
     "narrative_ir": {
       "dominant_tone": "tragic",
       "secondary_tone": "hopeful",
-      "excluded_tones": [
-        "whimsical"
-      ],
+      "excluded_tones": [],
       "style_tokens": [
-        "contrast_tension",
-        "gallows_humor_guardrails",
-        "secrets",
-        "warmth",
-        "resilience",
-        "foreshadowing",
-        "bittersweet",
-        "cost_and_consequence",
-        "moments_of_relief",
-        "unreliable_info",
-        "forward_motion",
-        "banter_allowed",
+        "playful",
+        "surreal_edges",
+        "lightness",
         "high_stakes",
-        "restraint"
+        "contrast_tension",
+        "bittersweet",
+        "restraint",
+        "resilience",
+        "banter_allowed",
+        "secrets",
+        "foreshadowing",
+        "cost_and_consequence",
+        "withhold_then_payoff",
+        "forward_motion",
+        "unreliable_info",
+        "warmth",
+        "moments_of_relief"
       ],
-      "constraints": {
-        "env_destructible": false,
-        "death_allowed": true
-      },
+      "constraints": {},
       "theme_weights": {
-        "responsibility without being the chosen one": 0.25,
-        "friends vs the world": 0.25,
-        "the ends do not justify the means": 0.25,
-        "the power of choice": 0.25
+        "Responsibility without being the chosen one": 0.25,
+        "Friends vs. the world": 0.25,
+        "The ends do not justify the means": 0.25,
+        "The power of choice": 0.25
       },
       "narrative_obligations": [],
       "setting_tokens": [
         "open_vistas",
-        "class_stratification",
-        "verticality"
+        "verticality",
+        "class_stratification"
       ],
       "player_fantasy": "story",
       "player_agency": "high",
@@ -149,18 +159,38 @@
     },
     "character_irs": [
       {
+        "character_id": "002",
+        "role": "supporting",
+        "voice_tokens": [
+          "calm",
+          "elliptical",
+          "implicature",
+          "withholds_info",
+          "low_reactivity",
+          "measured",
+          "forward",
+          "focused",
+          "minimal_excuses"
+        ],
+        "belief_weights": {
+          "I am the only one who can save the world": 0.3333333333333333,
+          "I am shouldering the dark secrets of this city": 0.3333333333333333,
+          "I am not afraid to die for what I believe in": 0.3333333333333333
+        }
+      },
+      {
         "character_id": "001",
         "role": "protagonist",
         "voice_tokens": [
-          "action_oriented",
-          "focused",
-          "forward",
-          "grounded",
-          "steady",
-          "plainspoken",
-          "minimal_excuses",
           "direct",
-          "resolute"
+          "plainspoken",
+          "steady",
+          "resolute",
+          "action_oriented",
+          "grounded",
+          "forward",
+          "focused",
+          "minimal_excuses"
         ],
         "belief_weights": {
           "I have nothing to go back to": 0.5,
@@ -171,15 +201,15 @@
         "character_id": "003",
         "role": "supporting",
         "voice_tokens": [
-          "blunt",
-          "challenging",
           "provocative",
-          "assertive",
-          "scorekeeping",
-          "emotion_forward",
+          "status_sensitive",
           "fast_escalation",
+          "challenging",
           "future_oriented",
-          "status_sensitive"
+          "blunt",
+          "emotion_forward",
+          "scorekeeping",
+          "assertive"
         ],
         "belief_weights": {
           "I want to be the face of the revolution": 0.5,
@@ -187,23 +217,16 @@
         }
       },
       {
-        "character_id": "002",
+        "character_id": "004",
         "role": "supporting",
         "voice_tokens": [
-          "withholds_info",
-          "focused",
-          "forward",
-          "measured",
-          "calm",
-          "elliptical",
-          "implicature",
-          "low_reactivity",
-          "minimal_excuses"
+          "hedges",
+          "risk_aware",
+          "asks_questions"
         ],
         "belief_weights": {
-          "I am the only one who can save the world": 0.3333333333333333,
-          "I am shouldering the dark secrets of this city": 0.3333333333333333,
-          "I am not afraid to die for what I believe in": 0.3333333333333333
+          "Sometimes, the hardest choices are the ones that lead us to become who we truly are.": 0.5,
+          "True strength comes from vulnerability.": 0.5
         }
       }
     ],
@@ -233,33 +256,37 @@
   "proposed": {
     "unknown_player_fantasy": null,
     "unknown_scene_types": [],
-    "unknown_personality_tags": [],
+    "unknown_personality_tags": [
+      "Compassionate",
+      "Wise",
+      "Diplomatic"
+    ],
     "unknown_invariants": []
   },
   "generation_context": {
-    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+    "setting": "The world consists of nine distinct floating sky cities, each representing a different cultural narrative and survival strategy.",
     "act_purposes": [
       "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
     ],
     "scene_summaries": {
       "scene_1": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels"
     },
-    "invariants_text": [
-      "Environments are not destructible",
-      "Characters can be killed, but some only downed for a short time"
-    ]
+    "invariants_text": []
   },
   "lint": {
-    "warnings": [],
+    "warnings": [
+      "Unknown personality tags for 004: ['Compassionate', 'Wise', 'Diplomatic']"
+    ],
     "errors": []
   },
   "hashes": {
-    "bundle": "8c2293112079998e",
-    "narrative_ir": "ea560bcf5bcb5a47",
+    "bundle": "2ad488d4f73eb388",
+    "narrative_ir": "3077b4ecc346b82f",
     "character_irs": {
-      "001": "7bd2e0057aa5954f",
-      "003": "4a5e0857e0e8bf13",
-      "002": "dca4c9f66f7c5e0a"
+      "002": "f1e2d8651eb10767",
+      "001": "d959cc414595920e",
+      "003": "e452ba53e6409d5b",
+      "004": "ad8814c5adffa253"
     },
     "arc_ir": "4ef96ea2ead5fedc"
   }

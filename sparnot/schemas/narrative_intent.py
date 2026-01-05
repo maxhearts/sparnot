@@ -55,14 +55,37 @@ class NarrativeIntent(BaseModel):
 
     @field_validator("tone_weights", mode="before")
     @classmethod
-    def normalize_tone_weights(cls, v: Dict[str, float]) -> Dict[str, float]:
-        """Normalize tone weights to sum to 1.0."""
+    def normalize_tone_weights(cls, v) -> Dict[str, float]:
+        """Normalize tone weights to sum to 1.0.
+        
+        Accepts either:
+        - Dict[str, float]: {'tragic': 0.3, 'hopeful': 0.5, ...}
+        - List[Dict]: [{'tone': 'tragic', 'weight': 0.3}, ...]
+        """
         if not v:
             raise ValueError("tone_weights cannot be empty")
+        
+        # Convert list format to dict if needed
+        if isinstance(v, list):
+            weights_dict = {}
+            for item in v:
+                if isinstance(item, dict):
+                    tone = item.get('tone') or item.get('name')
+                    weight = item.get('weight') or item.get('value')
+                    if tone and weight is not None:
+                        weights_dict[tone] = float(weight)
+                else:
+                    raise ValueError(f"tone_weights list items must be dicts with 'tone' and 'weight', got {type(item)}")
+            v = weights_dict
+        
+        # Now v should be a dict
+        if not isinstance(v, dict):
+            raise ValueError(f"tone_weights must be dict or list of dicts, got {type(v)}")
+        
         total = sum(v.values())
         if total == 0:
             raise ValueError("tone_weights cannot all be zero")
-        return {k: v / total for k, v in v.items()}
+        return {k: v_val / total for k, v_val in v.items()}
 
     @field_validator("themes")
     @classmethod

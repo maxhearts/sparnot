@@ -46,6 +46,8 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
    - Manage characters
    - Compile schemas to IR
    - Compare compilations (diff and propagation)
+   - Lock scene content
+   - Use the Elicitation Assistant (AI-powered schema refinement)
    - Switch projects
    - Exit when done
 
@@ -103,7 +105,17 @@ Main Menu:
 
 **7. Compare compilations** - Compare two compilations to see schema changes, IR changes, and propagation (see Compilation Diff section)
 
-**8. Switch project** - Returns to project selection menu to choose a different project
+**8. Lock scene content** - Lock specific dialogue lines, nodes, or branches in generated scenes to preserve them across regenerations (see Content Locking section)
+
+**9. Elicitation Assistant** - AI-powered assistant that helps refine schemas toward compilable JSONs (see Elicitation Assistant section)
+
+**10. Revert to prior compilation** - Restore project schemas from a previous compilation state
+
+**11. Generate scene** - Generate a scene from the compiled bundle, with selection menu to choose which scene from the arc to generate
+
+**12. Play scene** - Interactively play through a generated scene, with selection menu to choose which scene to play
+
+**13. Switch project** - Returns to project selection menu to choose a different project
 
 **0. Exit** - Exits the CLI
 
@@ -159,6 +171,14 @@ data/
       history/  (historical compilations)
         compiled_bundle_20240101_120000.json
         compiled_bundle_20240102_140000.json
+      generated_scenes/  (generated scene files)
+        generated_scene_scene_1.json
+        generated_scene_scene_2.json
+      locks.json  (content locks for generated scenes)
+      .assistant_workspace/  (temporary workspace for elicitation assistant)
+        narrative_intent.json
+        arc.json
+        characters/
   .current_project  (stores currently selected project)
 ```
 
@@ -349,9 +369,14 @@ Propagation:
 
 ## Scene Generation
 
-After compiling your schemas to IR, you can generate sample scenes using the scene generator:
+After compiling your schemas to IR, you can generate sample scenes using the scene generator.
 
-**Usage:**
+**In the CLI menu:**
+- Select option **11. Generate scene**
+- Choose which scene from your arc to generate (scenes are grouped by act)
+- The scene will be generated and saved to `generated_scenes/generated_scene_{scene_id}.json`
+
+**Command-line usage:**
 ```bash
 # Generate from a project bundle
 python generate_scene.py data/projects/Nimbus/compiled_bundle.json
@@ -365,26 +390,138 @@ python generate_scene.py bundle.json output/scene.json
 
 **How it works:**
 1. Loads the compiled IR bundle (from projects or fixtures)
-2. If an arc exists, uses the first scene with its summary and characters
+2. If an arc exists, uses the selected scene with its summary, type, and characters
 3. If no arc exists, creates a new scene appropriate for the narrative
 4. Uses all IR attributes:
    - NarrativeIR: tone, themes, style tokens, constraints, setting tokens
-   - Player fantasy/agency → determines choice count and nature
+   - Player fantasy/agency → determines choice count and nature (low: cutscenes, medium: 2-3 options with 1-3 decisions, high: 2-5 options with 1-6 decisions)
    - CharacterIR: voice tokens, beliefs, personality (if characters exist)
    - Generation context: setting, act purposes, scene summaries, invariants
 5. Generates branching dialogue with player choices that reflect the game type
-6. NOTE: Currently temperature for OpenAI set to 0 for more stable testing results
+6. Includes screenplay (stage directions) and exposition (character internal thoughts)
+7. Respects locked content if locks exist for the scene
 
 **Output:**
 The generator creates a JSON file with:
 - Scene metadata (ID, type, location, summary)
-- Dialogue array with speaker, text, and voice notes
-- Player choices with choice nature tokens and consequence hints
-- Narrative notes explaining how IR attributes were used
+- Dialogue tree with nodes containing:
+  - Screenplay (stage directions)
+  - Dialogue lines with speaker, text, exposition, and stable line_ids
+  - Player choices with convergence hints and branching summaries
+- Branching summary and narrative notes explaining how IR attributes were used
+
+**File organization:**
+- All generated scenes are saved to `generated_scenes/` subdirectory
+- Files are named `generated_scene_{scene_id}.json` to avoid overwriting
+- Legacy scenes in project root are still supported
 
 **Requirements:**
 - OpenAI API key in `.env` file (see Installation)
-- Uses GPT-4o model for generation
+- Uses GPT-5-mini model for generation
+
+## Scene Playback
+
+You can interactively play through generated scenes to experience the branching dialogue.
+
+**In the CLI menu:**
+- Select option **12. Play scene**
+- Choose which generated scene to play from the selection menu
+- Navigate through dialogue and make choices
+- See branching summaries and narrative notes at the end
+
+**Command-line usage:**
+```bash
+python play_scene.py data/projects/Nimbus/generated_scenes/generated_scene_scene_1.json
+```
+
+**Features:**
+- Interactive dialogue tree navigation
+- Choice selection with numbered options
+- Screenplay and exposition displayed in italics
+- Branching summaries shown at the end
+- Supports both new dialogue tree format and legacy format
+
+## Content Locking
+
+The content locking system allows you to "lock" specific parts of generated scenes so they persist across regenerations. This is useful for preserving favorite dialogue lines, important character moments, or key narrative beats.
+
+**In the CLI menu:**
+- Select option **8. Lock scene content**
+- Choose which generated scene to work with
+- Select what to lock:
+  - **Lock a line**: Preserve a specific dialogue line
+  - **Lock a node**: Preserve an entire dialogue node (screenplay + dialogue + choices)
+  - **Lock a branch**: Preserve a specific branching path
+  - **List locks**: View all locks for the scene
+
+**How it works:**
+1. Locks are stored in `locks.json` with stable IDs
+2. When regenerating a scene, locked content is included in the "canon pack" sent to the LLM
+3. The LLM is instructed to semantically preserve locked content (it can appear anywhere, but must be included)
+4. Conflict detection checks for missing characters before generation
+5. Scene matching uses scene_id primarily, with fallback to (scene_type + act_id + involved_characters)
+
+**Lock types:**
+- **Line locks**: Preserve specific dialogue lines with stable `line_id` format: `{scene_id}:{node_id}:L{n}`
+- **Node locks**: Preserve entire dialogue nodes
+- **Branch locks**: Preserve branching paths with entry nodes and choice IDs
+
+**Features:**
+- Semantic preservation (content must appear, but structure can change)
+- Conflict detection (warns if locked content requires characters not in scene)
+- Conflict resolution (force participant or orphan lock)
+- Stable IDs that survive regeneration
+
+## Elicitation Assistant
+
+The Elicitation Assistant is an AI-powered tool that helps you refine your schemas toward compilable JSONs. It uses a working copy model to make changes safely, runs deterministic diagnostics, and provides streaming LLM-powered conversation.
+
+### Entry Points
+
+1. **CLI Menu**: Select option **9. Elicitation Assistant** from the main menu
+2. **Compilation Errors**: When compilation fails, the CLI will offer to use the assistant
+
+### How It Works
+
+1. **Working Copy**: The assistant maintains your schemas in `.assistant_workspace/` - changes are isolated until you commit them
+2. **Deterministic Diagnostics**: Runs dry compilation to identify all errors before LLM interaction
+3. **AI Conversation**: Uses OpenAI to:
+   - Restate understanding of your narrative
+   - Suggest improvements for narrative strength
+   - Flag compilation concerns in user-understandable terms
+   - Propose schema updates as structured JSON
+4. **Focus Shift**: Early turns focus on narrative, later turns shift to compliance
+5. **Commit Flow**: At session end, review changes and choose to commit, discard, or keep workspace for later
+
+### Workflow
+
+1. Assistant initializes workspace (copies existing schemas or creates empty workspace)
+2. Runs diagnostics to identify compilation issues
+3. LLM provides opening statement summarizing your project
+4. Interactive conversation loop:
+   - You provide input
+   - Assistant runs diagnostics (deterministic check)
+   - LLM responds with suggestions and can propose JSON updates
+   - Updates are applied to working copies automatically
+   - Diagnostics re-run to show progress
+5. End session: Review all changes, then commit to canonical schemas or discard
+
+### Features
+
+- **Safe Editing**: All changes in working copy until explicit commit
+- **Deterministic Validation**: Real compilation checks, not just LLM guessing
+- **Streaming Responses**: See LLM responses as they're generated
+- **JSON Updates**: Assistant can propose schema changes as structured JSON
+- **Context-Aware**: Understands CLI navigation, file structure, and schema requirements
+- **Consistency Checking**: Performs semantic checks between narrative_intent, characters, and arc schemas
+- **Empty Project Support**: Welcomes users with new projects and guides them through initial setup
+- **In-Chat Commands**: Use `/status`, `/diff`, and `/help` during conversation
+- **Strict Schema Enforcement**: Enforces exact enum values and field formats to prevent validation errors
+
+### Requirements
+
+- OpenAI API key in `.env` file (same as scene generation)
+- Uses GPT-4o-mini model for cost-effective assistance
 
 ## Validation
 
@@ -437,7 +574,7 @@ Unknown inputs are captured in `proposed`:
 - Unknown personality tags → added to proposed
 - Unmatched invariants → added to proposed + kept in generation_context
 
-## License
+## Architecture
 
-[Add your license here]
+For a detailed overview of the system architecture, design decisions, and technical implementation, see [ARCHITECTURE.md](./ARCHITECTURE.md).
 
