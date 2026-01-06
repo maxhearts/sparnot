@@ -216,15 +216,22 @@ GENERATION REQUIREMENTS:
    {f"- Each choice point must have {choices_per_point['min']}-{choices_per_point['max']} options. NO MORE than {choices_per_point['max']} options per choice point." if choices_per_point['max'] > 0 else ""}
    - You may have additional nodes WITHOUT choices (end nodes, intermediate dialogue-only nodes), but count only nodes WITH choices toward the limit.
    - DO NOT exceed these maximums. If you need to create more narrative beats, use dialogue-only nodes or combine choices.
-3. Include screenplay/stage directions in each node describing actions, expressions, and environment
-4. Use exposition in dialogue to reveal character personality, internal thoughts, and actions naturally
-5. The dialogue should reflect the characters' beliefs, personality, and voice tokens
-6. The scene should fit the setting, tone, and themes
-7. Choices should reflect the choice nature tokens: {', '.join(choice_nature)}
-8. Choices should branch meaningfully based on the player fantasy ({narrative_ir['player_fantasy']})
-9. Respect all style tokens and constraints
-10. The scene should feel authentic to the narrative intent
-11. Use the scene summary and act purpose if provided
+3. DIALOGUE COMPENSATION FOR LOW AGENCY:
+   {f"- Since player agency is LOW, you MUST compensate for the lack of player choices by generating SIGNIFICANTLY MORE dialogue content:" if narrative_ir['player_agency'] == 'low' else ""}
+   {f"  * Include MORE dialogue lines per node (aim for 4-8 lines per node instead of 2-4)" if narrative_ir['player_agency'] == 'low' else ""}
+   {f"  * Create MORE dialogue-only nodes to develop the narrative (aim for 6-10+ nodes total)" if narrative_ir['player_agency'] == 'low' else ""}
+   {f"  * Include RICHER exposition in dialogue to reveal character depth, internal thoughts, and motivations" if narrative_ir['player_agency'] == 'low' else ""}
+   {f"  * Add MORE detailed screenplay/stage directions to create visual richness and atmosphere" if narrative_ir['player_agency'] == 'low' else ""}
+   {f"  * The scene should feel substantial and engaging despite having no player choices - use dialogue and narrative detail to maintain player interest" if narrative_ir['player_agency'] == 'low' else ""}
+4. Include screenplay/stage directions in each node describing actions, expressions, and environment
+5. Use exposition in dialogue to reveal character personality, internal thoughts, and actions naturally
+6. The dialogue should reflect the characters' beliefs, personality, and voice tokens
+7. The scene should fit the setting, tone, and themes
+8. Choices should reflect the choice nature tokens: {', '.join(choice_nature)}
+9. Choices should branch meaningfully based on the player fantasy ({narrative_ir['player_fantasy']})
+10. Respect all style tokens and constraints
+11. The scene should feel authentic to the narrative intent
+12. Use the scene summary and act purpose if provided
 
 BRANCHING DIALOGUE INTELLIGENCE:
 - Some choices should CONVERGE: Different initial choices lead to the same choice point later (e.g., different approaches to a problem that all lead to the same decision)
@@ -302,6 +309,7 @@ IMPORTANT FORMATTING:
 CRITICAL CONSTRAINTS:
 {f"- For LOW agency: Create a cutscene with NO player choices (dialogue-only nodes only)" if choices_per_interaction['max'] == 0 else f"- MAXIMUM {choices_per_interaction['max']} nodes with player choices. Count only nodes that have a 'choices' array with at least 1 option."}
 {f"- MAXIMUM {choices_per_point['max']} options per choice point. Each choice point should have {choices_per_point['min']}-{choices_per_point['max']} options." if choices_per_point['max'] > 0 else ""}
+{f"- For LOW agency: You MUST create a substantial scene with 6-10+ dialogue-only nodes, each with 4-8+ dialogue lines, rich exposition, and detailed screenplay to compensate for lack of player agency" if narrative_ir['player_agency'] == 'low' else ""}
 - You may include additional nodes without choices (end nodes, intermediate dialogue-only nodes) as needed for narrative flow
 - Show convergence by having multiple nodes point to the same "next_node" or use "converges_from" field
 - Show divergence by having choices lead to completely separate node paths that don't reconnect

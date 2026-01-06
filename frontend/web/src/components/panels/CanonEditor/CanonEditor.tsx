@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./CanonEditor.css";
 import DiagnosticOutput from "./DiagnosticOutput";
-import { schemasApi, compileApi } from "../../../services/api";
+import { schemasApi, compileApi, assistantApi } from "../../../services/api";
 import type { AllSchemas, DiagnosticsReport } from "../../../types/models";
 
 interface CanonEditorProps {
@@ -10,31 +10,49 @@ interface CanonEditorProps {
   onStatusChange: () => void;
 }
 
+interface TabInfo {
+  id: string;
+  label: string;
+  isDraft: boolean;
+  schemaType: string;
+  schemaId?: string;
+}
+
 export default function CanonEditor({ project, onCompile, onStatusChange }: CanonEditorProps) {
   const [schemas, setSchemas] = useState<AllSchemas | null>(null);
+  const [draftSchemas, setDraftSchemas] = useState<AllSchemas | null>(null);
   const [activeTab, setActiveTab] = useState<string>("narrative_intent");
   const [editorContent, setEditorContent] = useState<string>("");
   const [diagnostics, setDiagnostics] = useState<DiagnosticsReport | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasWorkspace, setHasWorkspace] = useState(false);
 
   useEffect(() => {
     if (project) {
       loadSchemas();
+      loadDraftSchemas();
       runDiagnostics();
+      // Periodically check for draft updates
+      const interval = setInterval(() => {
+        loadDraftSchemas();
+      }, 5000);
+      return () => clearInterval(interval);
     } else {
       // Reset state when project is cleared
       setSchemas(null);
+      setDraftSchemas(null);
       setEditorContent("");
       setDiagnostics(null);
       setActiveTab("narrative_intent");
+      setHasWorkspace(false);
     }
   }, [project]);
 
   useEffect(() => {
-    if (schemas && activeTab) {
+    if ((schemas || draftSchemas) && activeTab) {
       updateEditorContent();
     }
-  }, [schemas, activeTab]);
+  }, [schemas, draftSchemas, activeTab]);
 
   const loadSchemas = async () => {
     if (!project) return;
@@ -49,17 +67,35 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
     }
   };
 
+  const loadDraftSchemas = async () => {
+    if (!project) return;
+    try {
+      const data = await assistantApi.getWorkspaceSchemas(project);
+      const hasDrafts = !!(data.narrative_intent || data.arc || Object.keys(data.characters || {}).length > 0);
+      setHasWorkspace(hasDrafts);
+      setDraftSchemas(data);
+    } catch (error) {
+      // Workspace might not exist yet, that's okay
+      setHasWorkspace(false);
+      setDraftSchemas(null);
+    }
+  };
+
   const updateEditorContent = () => {
-    if (!schemas) return;
+    const isDraft = activeTab.startsWith("draft_");
+    const tabId = isDraft ? activeTab.replace("draft_", "") : activeTab;
+    const source = isDraft ? draftSchemas : schemas;
+    
+    if (!source) return;
 
     let content = "";
-    if (activeTab === "narrative_intent" && schemas.narrative_intent) {
-      content = JSON.stringify(schemas.narrative_intent, null, 2);
-    } else if (activeTab === "arc" && schemas.arc) {
-      content = JSON.stringify(schemas.arc, null, 2);
-    } else if (activeTab.startsWith("character_")) {
-      const charId = activeTab.replace("character_", "");
-      const char = schemas.characters[charId];
+    if (tabId === "narrative_intent" && source.narrative_intent) {
+      content = JSON.stringify(source.narrative_intent, null, 2);
+    } else if (tabId === "arc" && source.arc) {
+      content = JSON.stringify(source.arc, null, 2);
+    } else if (tabId.startsWith("character_")) {
+      const charId = tabId.replace("character_", "");
+      const char = source.characters?.[charId];
       if (char) {
         content = JSON.stringify(char, null, 2);
       }
@@ -90,16 +126,33 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
         return;
       }
 
-      if (activeTab === "narrative_intent") {
-        await schemasApi.save(project, "narrative_intent", data);
-      } else if (activeTab === "arc") {
-        await schemasApi.save(project, "arc", data);
-      } else if (activeTab.startsWith("character_")) {
-        const charId = activeTab.replace("character_", "");
-        await schemasApi.save(project, "character", data, charId);
+      const isDraft = activeTab.startsWith("draft_");
+      const tabId = isDraft ? activeTab.replace("draft_", "") : activeTab;
+
+      if (isDraft) {
+        // Save to workspace
+        if (tabId === "narrative_intent") {
+          await assistantApi.saveWorkspaceSchema(project, "narrative_intent", data);
+        } else if (tabId === "arc") {
+          await assistantApi.saveWorkspaceSchema(project, "arc", data);
+        } else if (tabId.startsWith("character_")) {
+          const charId = tabId.replace("character_", "");
+          await assistantApi.saveWorkspaceSchema(project, "character", data, charId);
+        }
+        await loadDraftSchemas();
+      } else {
+        // Save to canonical
+        if (tabId === "narrative_intent") {
+          await schemasApi.save(project, "narrative_intent", data);
+        } else if (tabId === "arc") {
+          await schemasApi.save(project, "arc", data);
+        } else if (tabId.startsWith("character_")) {
+          const charId = tabId.replace("character_", "");
+          await schemasApi.save(project, "character", data, charId);
+        }
+        await loadSchemas();
       }
 
-      await loadSchemas();
       await runDiagnostics();
       onStatusChange();
     } catch (error) {
@@ -113,14 +166,34 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
     await runDiagnostics();
   };
 
-  const tabs = [
-    { id: "narrative_intent", label: "narrative_intent.json" },
-    { id: "arc", label: "arc.json" },
-    ...Object.keys(schemas?.characters || {}).map((id) => ({
-      id: `character_${id}`,
-      label: `characters/${id}.json`,
-    })),
-  ];
+  // Build tabs: canonical first, then drafts
+  const tabs: TabInfo[] = [];
+  
+  // Canonical tabs
+  if (schemas) {
+    if (schemas.narrative_intent) {
+      tabs.push({ id: "narrative_intent", label: "narrative_intent.json", isDraft: false, schemaType: "narrative_intent" });
+    }
+    if (schemas.arc) {
+      tabs.push({ id: "arc", label: "arc.json", isDraft: false, schemaType: "arc" });
+    }
+    Object.keys(schemas.characters || {}).forEach((id) => {
+      tabs.push({ id: `character_${id}`, label: `characters/${id}.json`, isDraft: false, schemaType: "character", schemaId: id });
+    });
+  }
+  
+  // Draft tabs (clearly marked)
+  if (draftSchemas) {
+    if (draftSchemas.narrative_intent) {
+      tabs.push({ id: "draft_narrative_intent", label: "📝 narrative_intent.json (DRAFT)", isDraft: true, schemaType: "narrative_intent" });
+    }
+    if (draftSchemas.arc) {
+      tabs.push({ id: "draft_arc", label: "📝 arc.json (DRAFT)", isDraft: true, schemaType: "arc" });
+    }
+    Object.keys(draftSchemas.characters || {}).forEach((id) => {
+      tabs.push({ id: `draft_character_${id}`, label: `📝 characters/${id}.json (DRAFT)`, isDraft: true, schemaType: "character", schemaId: id });
+    });
+  }
 
   return (
     <div className="canon-editor">
@@ -129,7 +202,7 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`tab ${activeTab === tab.id ? "active" : ""}`}
+              className={`tab ${activeTab === tab.id ? "active" : ""} ${tab.isDraft ? "draft-tab" : ""}`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
@@ -138,10 +211,15 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
         </div>
         <div className="editor-actions">
           <button className="action-btn" onClick={handleSave}>
-            Save
+            {activeTab.startsWith("draft_") ? "Save Draft" : "Save"}
           </button>
         </div>
       </div>
+      {activeTab.startsWith("draft_") && (
+        <div className="draft-banner">
+          ⚠️ You are editing a DRAFT file. Changes are saved to the workspace and will not affect canonical schemas until committed via the Assistant panel.
+        </div>
+      )}
       <div className="editor-content">
         <textarea
           className="code-editor"
@@ -154,4 +232,3 @@ export default function CanonEditor({ project, onCompile, onStatusChange }: Cano
     </div>
   );
 }
-

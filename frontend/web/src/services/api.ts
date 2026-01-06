@@ -9,13 +9,29 @@ async function apiRequest<T>(
   options: RequestInit = {}
 ): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
-  });
+  
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    });
+  } catch (error) {
+    // Network error (server not reachable, CORS, etc.)
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+      throw new Error(
+        `Failed to connect to backend server at ${API_BASE}.\n\n` +
+        `Please ensure:\n` +
+        `- The FastAPI backend is running on ${API_BASE}\n` +
+        `- CORS is properly configured\n` +
+        `- There are no network connectivity issues`
+      );
+    }
+    throw error;
+  }
 
   if (!response.ok) {
     let errorMessage = response.statusText;
@@ -181,5 +197,27 @@ export const assistantApi = {
     apiRequest<{ status: string }>(`/api/projects/${project}/assistant/discard`, {
       method: "POST",
     }),
+  getWorkspaceFile: (project: string, schemaType: string, schemaId?: string) => {
+    const endpoint = schemaId
+      ? `/api/projects/${project}/assistant/workspace/file?schema_type=${schemaType}&schema_id=${schemaId}`
+      : `/api/projects/${project}/assistant/workspace/file?schema_type=${schemaType}`;
+    return apiRequest<{ schema_type: string; schema_id?: string; content: any }>(endpoint);
+  },
+  commitSelective: (project: string, approvedFiles: Array<{ schema_type: string; schema_id?: string }>) =>
+    apiRequest<{ status: string; committed: number }>(`/api/projects/${project}/assistant/commit-selective`, {
+      method: "POST",
+      body: JSON.stringify({ approved_files: approvedFiles }),
+    }),
+  getWorkspaceSchemas: (project: string) =>
+    apiRequest<import("../types/models").AllSchemas>(`/api/projects/${project}/assistant/workspace/schemas`),
+  saveWorkspaceSchema: (project: string, schemaType: string, data: any, schemaId?: string) => {
+    const endpoint = schemaId
+      ? `/api/projects/${project}/assistant/workspace/schemas/${schemaType}?schema_id=${schemaId}`
+      : `/api/projects/${project}/assistant/workspace/schemas/${schemaType}`;
+    return apiRequest<{ status: string }>(endpoint, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  },
 };
 
