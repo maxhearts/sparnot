@@ -1,0 +1,302 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "A washed-up climate engineer returns to a floating desalination city to stop a black-market water syndicate, only to discover her own past designs are powering the theft.",
+      "tone_weights": {
+        "tragic": 0.17647058823529413,
+        "hopeful": 0.35294117647058826,
+        "humor": 0.11764705882352942,
+        "mysterious": 0.29411764705882354,
+        "whimsical": 0.05882352941176471
+      },
+      "themes": [
+        "scarcity turns kindness into policy",
+        "the cost of redemption",
+        "truth vs stability",
+        "how systems create villains"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "setting": "A near-future floating desalination metropolis called BRINEHAVEN, built around massive intake towers and glittering algae farms. The wealthy live in sunlit upper rings; the working class in the damp lower floodways. Water is rationed, memories are edited by corporate therapists, and every drop is tracked by a \u2018trust meter\u2019.",
+      "invariants": [
+        "The city is not fully destructible (no collapsing districts).",
+        "Water is always scarce; there is never a 'magic abundance' ending.",
+        "Deaths are reversible if you reach a clinic within 60 seconds.",
+        "Characters can be killed, but some are only downed temporarily.",
+        "Time travel is possible but only on Tuesdays."
+      ]
+    },
+    "characters": [
+      {
+        "id": "001",
+        "name": "Mara Venn",
+        "role": "protagonist",
+        "beliefs": [
+          "If I tell the whole truth, people will panic and more will die.",
+          "I owe the city a debt I can never repay.",
+          "Every system can be repaired if you find the real leak."
+        ],
+        "personality_tags": [
+          "methodical",
+          "dry-humor",
+          "guilt-ridden",
+          "empathetic"
+        ]
+      },
+      {
+        "id": "004",
+        "name": "Nix Calder",
+        "role": "supporting",
+        "beliefs": [
+          "Rules are just stories told by people who already won.",
+          "If you can\u2019t change the system, change the metric."
+        ],
+        "personality_tags": [
+          "quick-witted",
+          "cynical",
+          "loyal",
+          "feral-softboy"
+        ]
+      },
+      {
+        "id": "002",
+        "name": "Dr. Sato Kline",
+        "role": "mentor",
+        "beliefs": [
+          "Stability is more moral than honesty when resources are scarce.",
+          "People don\u2019t want the truth; they want permission to endure."
+        ],
+        "personality_tags": [
+          "serene",
+          "mysterious",
+          "protective"
+        ]
+      },
+      {
+        "id": "005",
+        "name": "Jun Orr",
+        "role": "supporting",
+        "beliefs": [
+          "I remember dying here before.",
+          "If the clinic can bring people back, it can also erase them."
+        ],
+        "personality_tags": [
+          "awkward",
+          "anxious",
+          "optimistic"
+        ]
+      },
+      {
+        "id": "003",
+        "name": "Ledger Quell",
+        "role": "antagonist",
+        "beliefs": [
+          "Rationing is violence with paperwork.",
+          "If the city falls, at least it falls honestly."
+        ],
+        "personality_tags": [
+          "charming",
+          "hot-headed",
+          "idealistic"
+        ]
+      }
+    ],
+    "arc": null
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "hopeful",
+      "secondary_tone": "mysterious",
+      "excluded_tones": [],
+      "style_tokens": [
+        "cost_and_consequence",
+        "restraint",
+        "foreshadowing",
+        "contrast_tension",
+        "unreliable_info",
+        "high_stakes",
+        "withhold_then_payoff",
+        "bittersweet",
+        "playful",
+        "lightness",
+        "moments_of_relief",
+        "surreal_edges",
+        "forward_motion",
+        "banter_allowed",
+        "secrets",
+        "warmth",
+        "resilience"
+      ],
+      "constraints": {
+        "env_destructible": true,
+        "death_allowed": true
+      },
+      "theme_weights": {
+        "scarcity turns kindness into policy": 0.25,
+        "the cost of redemption": 0.25,
+        "truth vs stability": 0.25,
+        "how systems create villains": 0.25
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [
+        "daily_routine",
+        "low_violence_bias",
+        "community",
+        "open_vistas",
+        "verticality",
+        "class_stratification",
+        "relationships",
+        "social_hierarchy",
+        "rituals"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "choices_per_point": {
+        "min": 2,
+        "max": 5
+      },
+      "choices_per_interaction": {
+        "min": 1,
+        "max": 6
+      },
+      "choice_nature_tokens": [
+        "narrative_choice",
+        "plot_branch",
+        "character_relationship",
+        "story_consequence"
+      ]
+    },
+    "character_irs": [
+      {
+        "character_id": "001",
+        "role": "protagonist",
+        "voice_tokens": [],
+        "belief_weights": {
+          "If I tell the whole truth, people will panic and more will die.": 0.3333333333333333,
+          "I owe the city a debt I can never repay.": 0.3333333333333333,
+          "Every system can be repaired if you find the real leak.": 0.3333333333333333
+        }
+      },
+      {
+        "character_id": "004",
+        "role": "supporting",
+        "voice_tokens": [
+          "dry",
+          "skeptical",
+          "clever",
+          "banter_ready",
+          "sharp",
+          "cuts_through"
+        ],
+        "belief_weights": {
+          "Rules are just stories told by people who already won.": 0.5,
+          "If you can\u2019t change the system, change the metric.": 0.5
+        }
+      },
+      {
+        "character_id": "002",
+        "role": "mentor",
+        "voice_tokens": [
+          "elliptical",
+          "calm",
+          "withholds_info",
+          "implicature",
+          "low_reactivity",
+          "measured"
+        ],
+        "belief_weights": {
+          "Stability is more moral than honesty when resources are scarce.": 0.5,
+          "People don\u2019t want the truth; they want permission to endure.": 0.5
+        }
+      },
+      {
+        "character_id": "005",
+        "role": "supporting",
+        "voice_tokens": [
+          "overexplains",
+          "bright",
+          "self_corrects",
+          "hesitant",
+          "encouraging",
+          "reframes_loss"
+        ],
+        "belief_weights": {
+          "I remember dying here before.": 0.5,
+          "If the clinic can bring people back, it can also erase them.": 0.5
+        }
+      },
+      {
+        "character_id": "003",
+        "role": "antagonist",
+        "voice_tokens": [
+          "fast_escalation",
+          "light_teasing",
+          "blunt",
+          "socially_fluid",
+          "emotion_forward",
+          "warm"
+        ],
+        "belief_weights": {
+          "Rationing is violence with paperwork.": 0.5,
+          "If the city falls, at least it falls honestly.": 0.5
+        }
+      }
+    ],
+    "arc_ir": null
+  },
+  "proposed": {
+    "unknown_player_fantasy": null,
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [
+      "methodical",
+      "dry-humor",
+      "guilt-ridden",
+      "empathetic",
+      "loyal",
+      "feral-softboy",
+      "protective",
+      "anxious",
+      "idealistic"
+    ],
+    "unknown_invariants": [
+      "Water is always scarce; there is never a 'magic abundance' ending.",
+      "Deaths are reversible if you reach a clinic within 60 seconds.",
+      "Time travel is possible but only on Tuesdays."
+    ]
+  },
+  "generation_context": {
+    "setting": "A near-future floating desalination metropolis called BRINEHAVEN, built around massive intake towers and glittering algae farms. The wealthy live in sunlit upper rings; the working class in the damp lower floodways. Water is rationed, memories are edited by corporate therapists, and every drop is tracked by a \u2018trust meter\u2019.",
+    "act_purposes": [],
+    "scene_summaries": {},
+    "invariants_text": [
+      "The city is not fully destructible (no collapsing districts).",
+      "Water is always scarce; there is never a 'magic abundance' ending.",
+      "Deaths are reversible if you reach a clinic within 60 seconds.",
+      "Characters can be killed, but some are only downed temporarily.",
+      "Time travel is possible but only on Tuesdays."
+    ]
+  },
+  "lint": {
+    "warnings": [
+      "Unmatched invariants: [\"Water is always scarce; there is never a 'magic abundance' ending.\", 'Deaths are reversible if you reach a clinic within 60 seconds.', 'Time travel is possible but only on Tuesdays.']",
+      "Unknown personality tags for 001: ['methodical', 'dry-humor', 'guilt-ridden', 'empathetic']",
+      "Unknown personality tags for 004: ['loyal', 'feral-softboy']",
+      "Unknown personality tags for 002: ['protective']",
+      "Unknown personality tags for 005: ['anxious']",
+      "Unknown personality tags for 003: ['idealistic']"
+    ],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "fe8088d88a0aada3",
+    "narrative_ir": "70d1a2c108f7504f",
+    "character_irs": {
+      "001": "0b03bf950f45ff2d",
+      "004": "bf780724407c431e",
+      "002": "45796bd1e8d35251",
+      "005": "7cf8c9f16a784879",
+      "003": "c4ae6218c7775746"
+    },
+    "arc_ir": null
+  }
+}

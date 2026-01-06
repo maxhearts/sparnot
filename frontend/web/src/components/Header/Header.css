@@ -1,0 +1,139 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #252525;
+  border-bottom: 1px solid #333;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.run-id {
+  font-size: 0.875rem;
+  color: #888;
+  font-family: monospace;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.project-selector {
+  position: relative;
+}
+
+.project-button {
+  padding: 0.5rem 1rem;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.project-button:hover {
+  background: #3a3a3a;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.25rem;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  min-width: 200px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+  background: #333;
+}
+
+.dropdown-item-new {
+  border-top: 1px solid #444;
+  color: #4a9eff;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-indicator {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-ok {
+  background: #2d5a2d;
+  color: #7fff7f;
+}
+
+.status-error {
+  background: #5a2d2d;
+  color: #ff7f7f;
+}
+
+.status-warning {
+  background: #5a5a2d;
+  color: #ffff7f;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  background: #4a9eff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.action-button:hover:not(:disabled) {
+  background: #5aaeff;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dropdown-container {
+  position: relative;
+}
+

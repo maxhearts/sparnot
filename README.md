@@ -32,6 +32,8 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
 
 ## Quick Start
 
+### CLI
+
 1. Run the CLI:
    ```bash
    python cli.py
@@ -48,13 +50,26 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
    - Compare compilations (diff and propagation)
    - Lock scene content
    - Use the Elicitation Assistant (AI-powered schema refinement)
+   - Generate and play scenes
    - Switch projects
    - Exit when done
 
-4. Generate scenes from compiled bundles (optional):
+### Web UI
+
+A FastAPI backend and React frontend are available for visual editing and scene playback:
+
+1. Start the backend:
    ```bash
-   python generate_scene.py data/projects/your_project/compiled_bundle.json
+   uvicorn frontend.api.main:app --reload --port 8000
    ```
+
+2. Start the frontend (in `frontend/web/`):
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+3. Open `http://localhost:3001` in your browser
 
 ## Interactive CLI
 
@@ -429,6 +444,11 @@ You can interactively play through generated scenes to experience the branching 
 - Navigate through dialogue and make choices
 - See branching summaries and narrative notes at the end
 
+**In the Web UI:**
+- Click "Play Scene" in the header and select a scene
+- Interactive modal player with automatic text delays and clickable choices
+- Scene viewer panel remains available for static viewing
+
 **Command-line usage:**
 ```bash
 python play_scene.py data/projects/Nimbus/generated_scenes/generated_scene_scene_1.json
@@ -436,7 +456,7 @@ python play_scene.py data/projects/Nimbus/generated_scenes/generated_scene_scene
 
 **Features:**
 - Interactive dialogue tree navigation
-- Choice selection with numbered options
+- Choice selection (numbered in CLI, clickable in web UI)
 - Screenplay and exposition displayed in italics
 - Branching summaries shown at the end
 - Supports both new dialogue tree format and legacy format

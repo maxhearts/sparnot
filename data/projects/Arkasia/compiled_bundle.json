@@ -23,7 +23,7 @@
     "characters": [
       {
         "id": "001",
-        "name": "Ethan",
+        "name": "Evan",
         "role": "protagonist",
         "beliefs": [
           "I must protect my sister",
@@ -37,7 +37,7 @@
       },
       {
         "id": "003",
-        "name": "Liam",
+        "name": "Leo",
         "role": "supporting",
         "beliefs": [
           "Trust is everything",
@@ -45,8 +45,7 @@
         ],
         "personality_tags": [
           "optimistic",
-          "caring",
-          "intelligent"
+          "caring"
         ]
       },
       {
@@ -61,6 +60,21 @@
           "determined",
           "quick-witted",
           "compassionate"
+        ]
+      },
+      {
+        "id": "005",
+        "name": "Detective Sam",
+        "role": "supporting",
+        "beliefs": [
+          "Justice must be served",
+          "Humans are superior to machines",
+          "The truth is worth fighting for"
+        ],
+        "personality_tags": [
+          "determined",
+          "observant",
+          "empathetic"
         ]
       },
       {
@@ -113,11 +127,12 @@
         {
           "scene_id": "scene_3",
           "scene_type": "climax",
-          "summary": "The android AX-57 begins tracking the siblings, putting their plan in jeopardy.",
+          "summary": "The android confronts Evan and Maya, but Detective Sam intervenes, revealing information that tilts the balance.",
           "involved_characters": [
             "001",
             "002",
-            "004"
+            "004",
+            "005"
           ]
         }
       ]
@@ -169,9 +184,9 @@
         "character_id": "003",
         "role": "supporting",
         "voice_tokens": [
-          "reframes_loss",
           "bright",
-          "encouraging"
+          "encouraging",
+          "reframes_loss"
         ],
         "belief_weights": {
           "Trust is everything": 0.5,
@@ -182,16 +197,30 @@
         "character_id": "002",
         "role": "protagonist",
         "voice_tokens": [
-          "sharp",
-          "forward",
-          "clever",
-          "focused",
           "banter_ready",
-          "minimal_excuses"
+          "forward",
+          "sharp",
+          "minimal_excuses",
+          "clever",
+          "focused"
         ],
         "belief_weights": {
           "Identity is worth more than money": 0.5,
           "I will do anything to survive": 0.5
+        }
+      },
+      {
+        "character_id": "005",
+        "role": "supporting",
+        "voice_tokens": [
+          "minimal_excuses",
+          "focused",
+          "forward"
+        ],
+        "belief_weights": {
+          "Justice must be served": 0.3333333333333333,
+          "Humans are superior to machines": 0.3333333333333333,
+          "The truth is worth fighting for": 0.3333333333333333
         }
       },
       {
@@ -228,7 +257,8 @@
         "scene_3": [
           "001",
           "002",
-          "004"
+          "004",
+          "005"
         ]
       },
       "act_structure": [
@@ -251,8 +281,9 @@
       "loyal",
       "courageous",
       "caring",
-      "intelligent",
       "compassionate",
+      "observant",
+      "empathetic",
       "cold",
       "calculating",
       "efficient"
@@ -269,7 +300,7 @@
     "scene_summaries": {
       "scene_1": "Ethan and Maya navigate their grim reality, discussing their plan to assume new identities.",
       "scene_2": "The siblings encounter Liam, who offers support but questions their risky plan.",
-      "scene_3": "The android AX-57 begins tracking the siblings, putting their plan in jeopardy."
+      "scene_3": "The android confronts Evan and Maya, but Detective Sam intervenes, revealing information that tilts the balance."
     },
     "invariants_text": [
       "Technology controls society, and dissent is met with severe punishment."
@@ -279,21 +310,23 @@
     "warnings": [
       "Unmatched invariants: ['Technology controls society, and dissent is met with severe punishment.']",
       "Unknown personality tags for 001: ['resourceful', 'loyal', 'courageous']",
-      "Unknown personality tags for 003: ['caring', 'intelligent']",
+      "Unknown personality tags for 003: ['caring']",
       "Unknown personality tags for 002: ['compassionate']",
+      "Unknown personality tags for 005: ['observant', 'empathetic']",
       "Unknown personality tags for 004: ['cold', 'calculating', 'efficient']"
     ],
     "errors": []
   },
   "hashes": {
-    "bundle": "59973b334d509424",
+    "bundle": "ca92b46d8176e756",
     "narrative_ir": "0f1bb5c3eb06ab19",
     "character_irs": {
       "001": "770c1dfcd9cbab06",
-      "003": "1876323a199308ea",
-      "002": "f0698da679b4d546",
+      "003": "371367cca830d0b3",
+      "002": "b9c1e10b8347aac5",
+      "005": "020baebf93815578",
       "004": "ba40abb5ccac3256"
     },
-    "arc_ir": "b1bdf7216734fd50"
+    "arc_ir": "743a2d28d1e96651"
   }
 }

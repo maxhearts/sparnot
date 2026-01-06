@@ -1,0 +1,45 @@
+{
+  "acts": [
+    {
+      "act_id": "act_1",
+      "act_purpose": "Introduction of main conflict and character motivations regarding the revolution",
+      "required_scenes": [
+        "scene_1",
+        "scene_2",
+        "scene_3"
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "scene_type": "inciting_incident",
+      "summary": "The characters gather in a secret meeting to discuss their plans against the British forces.",
+      "involved_characters": [
+        "001",
+        "002",
+        "003"
+      ]
+    },
+    {
+      "scene_id": "scene_2",
+      "scene_type": "character_development",
+      "summary": "Amidst the tension, the revolutionaries share personal stories, strengthening their resolve.",
+      "involved_characters": [
+        "001",
+        "002",
+        "003"
+      ]
+    },
+    {
+      "scene_id": "scene_3",
+      "scene_type": "climax",
+      "summary": "A disagreement arises over their approach to the upcoming battle, revealing differing beliefs.",
+      "involved_characters": [
+        "001",
+        "002",
+        "003"
+      ]
+    }
+  ]
+}

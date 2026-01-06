@@ -1,0 +1,266 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "Nimbus is an open-world RPG set within a hauntingly beautiful yet dystopian post-apocalyptic universe, where a group of rebels has taken arms against a stable yet repressive regime.",
+      "tone_weights": {
+        "tragic": 0.4,
+        "hopeful": 0.3,
+        "humor": 0.2,
+        "mysterious": 0.1,
+        "whimsical": 0.0
+      },
+      "themes": [
+        "responsibility without being the chosen one",
+        "friends vs the world",
+        "the ends do not justify the means",
+        "the power of choice"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+      "invariants": [
+        "Environments are not destructible",
+        "Characters can be killed, but some only downed for a short time"
+      ]
+    },
+    "characters": [
+      {
+        "id": "002",
+        "name": "eli",
+        "role": "supporting",
+        "beliefs": [
+          "I am the only one who can save the world",
+          "I am shouldering the dark secrets of this city",
+          "I am not afraid to die for what I believe in"
+        ],
+        "personality_tags": [
+          "serene",
+          "determined",
+          "mysterious"
+        ]
+      },
+      {
+        "id": "001",
+        "name": "underdog",
+        "role": "protagonist",
+        "beliefs": [
+          "I have nothing to go back to",
+          "Without my friends, I am nothing"
+        ],
+        "personality_tags": [
+          "reliable",
+          "determined",
+          "brave"
+        ]
+      },
+      {
+        "id": "003",
+        "name": "javi",
+        "role": "supporting",
+        "beliefs": [
+          "I want to be the face of the revolution",
+          "I cannot trust anyone but myself"
+        ],
+        "personality_tags": [
+          "hot-headed",
+          "ambitious",
+          "competitive"
+        ]
+      }
+    ],
+    "arc": {
+      "acts": [
+        {
+          "act_id": "act_1",
+          "act_purpose": "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it.",
+          "required_scenes": [
+            "scene_1"
+          ]
+        }
+      ],
+      "scenes": [
+        {
+          "scene_id": "scene_1",
+          "scene_type": "inciting_incident",
+          "summary": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels",
+          "involved_characters": [
+            "001",
+            "002"
+          ]
+        }
+      ]
+    }
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "tragic",
+      "secondary_tone": "hopeful",
+      "excluded_tones": [
+        "whimsical"
+      ],
+      "style_tokens": [
+        "foreshadowing",
+        "gallows_humor_guardrails",
+        "secrets",
+        "warmth",
+        "contrast_tension",
+        "high_stakes",
+        "forward_motion",
+        "unreliable_info",
+        "bittersweet",
+        "moments_of_relief",
+        "cost_and_consequence",
+        "restraint",
+        "banter_allowed",
+        "resilience"
+      ],
+      "constraints": {
+        "env_destructible": false,
+        "death_allowed": true
+      },
+      "theme_weights": {
+        "responsibility without being the chosen one": 0.25,
+        "friends vs the world": 0.25,
+        "the ends do not justify the means": 0.25,
+        "the power of choice": 0.25
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [
+        "class_stratification",
+        "verticality",
+        "open_vistas"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "choices_per_point": {
+        "min": 2,
+        "max": 5
+      },
+      "choices_per_interaction": {
+        "min": 1,
+        "max": 6
+      },
+      "choice_nature_tokens": [
+        "narrative_choice",
+        "plot_branch",
+        "character_relationship",
+        "story_consequence"
+      ]
+    },
+    "character_irs": [
+      {
+        "character_id": "002",
+        "role": "supporting",
+        "voice_tokens": [
+          "elliptical",
+          "forward",
+          "focused",
+          "low_reactivity",
+          "minimal_excuses",
+          "calm",
+          "withholds_info",
+          "measured",
+          "implicature"
+        ],
+        "belief_weights": {
+          "I am the only one who can save the world": 0.3333333333333333,
+          "I am shouldering the dark secrets of this city": 0.3333333333333333,
+          "I am not afraid to die for what I believe in": 0.3333333333333333
+        }
+      },
+      {
+        "character_id": "001",
+        "role": "protagonist",
+        "voice_tokens": [
+          "grounded",
+          "forward",
+          "action_oriented",
+          "plainspoken",
+          "focused",
+          "minimal_excuses",
+          "steady",
+          "direct",
+          "resolute"
+        ],
+        "belief_weights": {
+          "I have nothing to go back to": 0.5,
+          "Without my friends, I am nothing": 0.5
+        }
+      },
+      {
+        "character_id": "003",
+        "role": "supporting",
+        "voice_tokens": [
+          "scorekeeping",
+          "emotion_forward",
+          "challenging",
+          "blunt",
+          "assertive",
+          "status_sensitive",
+          "provocative",
+          "future_oriented",
+          "fast_escalation"
+        ],
+        "belief_weights": {
+          "I want to be the face of the revolution": 0.5,
+          "I cannot trust anyone but myself": 0.5
+        }
+      }
+    ],
+    "arc_ir": {
+      "scene_order": [
+        "scene_1"
+      ],
+      "scene_types": {
+        "scene_1": "inciting_incident"
+      },
+      "scene_participants": {
+        "scene_1": [
+          "001",
+          "002"
+        ]
+      },
+      "act_structure": [
+        {
+          "act_id": "act_1",
+          "required_scenes": [
+            "scene_1"
+          ]
+        }
+      ]
+    }
+  },
+  "proposed": {
+    "unknown_player_fantasy": null,
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [],
+    "unknown_invariants": []
+  },
+  "generation_context": {
+    "setting": " The world consists of nine distinct floating sky cities, or 'clouds,' each representing a different socioeconomic district. Players begin their journey at the very bottom of this celestial hierarchy in the slums of the first cloud. As they navigate this precarious world, they must rise from obscurity, navigating complex social stratifications and dangerous environments",
+    "act_purposes": [
+      "Key beats in Act 1 will be making a life in the slums, being granted an opportunity to work a job in Clouds 2 or 3, and being able to join the resistance or the report to the police. At the end of Act 1, a state of emergency is declared in the first 3 clouds and the character is locked out of them. Based on their choices, in Act 2 they either continue to sow the seeds of rebellion in the new clouds, or they try and contain it."
+    ],
+    "scene_summaries": {
+      "scene_1": "The character is a refugee from the post apocalyptic wasteland below. They are separated from their friends at a processing facility, who will presumably be killed as they have radiation sickness. The rebels attack the facility and the player is a bystander to it, but notices their friends disappear with one of the rebels"
+    },
+    "invariants_text": [
+      "Environments are not destructible",
+      "Characters can be killed, but some only downed for a short time"
+    ]
+  },
+  "lint": {
+    "warnings": [],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "88ac5a2e30f64977",
+    "narrative_ir": "d284b26301a2949f",
+    "character_irs": {
+      "002": "215a8beb4ac0da39",
+      "001": "62853365f0dcd71c",
+      "003": "7e03aee6f6bddc2c"
+    },
+    "arc_ir": "6131a757d0122c1c"
+  }
+}

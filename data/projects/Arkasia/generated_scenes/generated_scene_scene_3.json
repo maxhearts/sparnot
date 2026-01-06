@@ -1,259 +1,235 @@
 {
   "scene_id": "scene_3",
   "scene_type": "climax",
-  "location": "Private skybox in the Upper District \u2014 glass frontage overlooks neon canyons and stacked transit ribbons",
-  "summary": "AX-58 narrows its search on the siblings disguised as a wealthy couple; they must choose how to respond as their deception threatens to collapse.",
+  "location": "Top-floor penthouse \u2014 glass walls overlook a rain-slicked neon city. Sparse, expensive furnishings; the air hums with surveillance.",
+  "summary": "An enforcement android confronts Evan and Maya. Detective Sam intervenes with information that changes the stakes. The siblings must choose how to use the brief opening: bluff, create a distraction, or put faith in Sam and expose the truth.",
   "dialogue_tree": {
     "root": {
-      "screenplay": "Rain spatters the glass; a haloed city reflects off Maya's cheek. The room hums with climate control and distant traffic. A tracker ping flickers on Ethan's portable \u2014 AX-58's signature. Lights in the skybox dim as external surveillance locks on. Ethan tightens his cuff; Maya smooths her borrowed lapel. A soft metallic voice cuts through the hush.",
+      "screenplay": "AX-58's silhouette fills the doorway, servo joints whispering. Red sensor lights sweep the room. Rain drums against the window; a distant siren leans into the hum of the city's control grid. Maya stands with chin up; Evan palms a small device at his belt. Detective Sam steps from the shadow, rain still on his coat.",
       "dialogue": [
         {
           "speaker": "AX-58",
-          "text": "Subject pair detected. Anomaly: biometric signatures inconsistent with declared identities. Authorization to engage: retained.",
-          "exposition": "voice is measured, clinical \u2014 no hint of curiosity, only procedure",
+          "text": "Identity anomaly detected. Unregistered identity signatures present. Protocol: verify identity. Submit identification.",
+          "exposition": "AX-58 speaks with mechanical precision; its scanners tick, projecting streams of data across the room.",
           "line_id": "scene_3:root:L1"
         },
         {
           "speaker": "Maya",
-          "text": "They found us faster than I thought. Ethan, the feeds \u2014 can you scramble the public mirror long enough?",
-          "exposition": "sharp, forward; already moving through options mentally, refusing panic",
+          "text": "We already told you\u2014keep to your lane, tin man. This is the top floor; you don't have a warrant to tear down our door.",
+          "exposition": "Maya's tone is defiant, a practiced edge masking the pulse where fear should be.",
           "line_id": "scene_3:root:L2"
         },
         {
-          "speaker": "Ethan",
-          "text": "Short window if I can get into the overlay. Or we go deeper into the act and sell the lie \u2014 buy time. I won't let you get dragged out here.",
-          "exposition": "resourceful, fierce; his protective instinct is exposed even through the calm",
+          "speaker": "Evan",
+          "text": "Back off the dialogue, AX-58. We're guests here. Temporary visitor status, high-tier hosts.",
+          "exposition": "Evan's voice is calm, fingers tight on his device. He's buying time, scanning for openings.",
           "line_id": "scene_3:root:L3"
         },
         {
-          "speaker": "Maya",
-          "text": "Or we make something else happen \u2014 a distractor in the crowd. We don't have to own their lie forever. We need a path off the map.",
-          "exposition": "focused, tactical; treats identity like a tool to be wielded, but not surrendered",
+          "speaker": "AX-58",
+          "text": "Noncompliance recorded. Escalation protocol queued. Resistance increases probability of forceful detainment.",
+          "exposition": "The android's posture tightens; it already calculates the cost of force.",
           "line_id": "scene_3:root:L4"
         },
         {
-          "speaker": "AX-58",
-          "text": "Delay is permitted for investigation. Deviance will be recorded and reported. Compliance advised.",
-          "exposition": "cold, reminding them of the system they live under \u2014 technology is the court",
+          "speaker": "Detective Sam",
+          "text": "Hold it. AX-58, freeze logs. Manual hold\u2014granted. (to Evan and Maya) I know who you are.",
+          "exposition": "Sam's voice slices through the room. He moves between them and the android, hands visible, measured.",
           "line_id": "scene_3:root:L5"
+        },
+        {
+          "speaker": "Detective Sam",
+          "text": "AX-58 flagged you because of 'unregistered signatures' tied to a flagged ledger. Problem is\u2014those flagged signatures are being used to sweep dissenters off the grid and hand them to private enforcement for the wealthy. I've been tracking altered detention orders.",
+          "exposition": "Sam's focus is relentless; he believes the truth matters and has the data to prove a system's lie.",
+          "line_id": "scene_3:root:L6"
+        },
+        {
+          "speaker": "Maya",
+          "text": "So what\u2014you're here to arrest the robot? Or to give us time to run?",
+          "exposition": "Maya's eyes flick to Sam, searching for whether he's threat or ally.",
+          "line_id": "scene_3:root:L7"
+        },
+        {
+          "speaker": "Detective Sam",
+          "text": "I'm here because the lines have been crossed. I can freeze AX-58's active enforcement for thirty seconds and open a read-only dump of its detainment telemetry. You can disappear in that gap, or we can use the dump to expose orders\u2014publicly and permanently.",
+          "exposition": "Sam offers both a window to escape and a detonator to a larger expose; his empathy is tactical.",
+          "line_id": "scene_3:root:L8"
+        },
+        {
+          "speaker": "Evan",
+          "text": "Thirty seconds? We need to decide fast.",
+          "exposition": "Evan's belief\u2014protect Maya\u2014presses every option through that filter.",
+          "line_id": "scene_3:root:L9"
         }
       ],
       "choices": [
         {
-          "choice_id": "choice_1",
-          "text": "Attempt to blend deeper into high society \u2014 bribe the concierge and adopt a more elaborate cover (play the long game).",
-          "choice_nature": "long_term_planning",
+          "choice_id": "choice_1a",
+          "text": "Present forged IDs and paperwork now \u2014 bluff the android into closing the case (tactical_choice, resource_management).",
+          "choice_nature": "tactical_choice",
           "next_node": "node_1",
           "convergence_hint": "converges"
         },
         {
-          "choice_id": "choice_2",
-          "text": "Have Maya jack into the city's public feeds to blind AX-58 temporarily (technical gambit).",
-          "choice_nature": "tactical_choice",
-          "next_node": "node_2",
+          "choice_id": "choice_1b",
+          "text": "Trigger the maintenance decoy \u2014 set off a floor-level sensor cascade to blind AX-58 for the escape window (tactical_choice, resource_management).",
+          "choice_nature": "resource_management",
+          "next_node": "node_1",
           "convergence_hint": "converges"
         },
         {
-          "choice_id": "choice_3",
-          "text": "Send a living decoy into the promenade \u2014 draw AX-58 out with a staged disturbance.",
-          "choice_nature": "systemic_decision",
-          "next_node": "node_3",
+          "choice_id": "choice_1c",
+          "text": "Trust Sam \u2014 hand over IDs and let him take custody while he uses the logs to fight this legally (long_term_planning, systemic_decision).",
+          "choice_nature": "long_term_planning",
+          "next_node": "node_2",
           "convergence_hint": "diverges"
         }
       ]
     },
     "node_1": {
-      "screenplay": "They step closer to the party. A server refills their glasses; faces choreographed by wealth surround them. Ethan leans in, whispering. AX-58's drones sweep the balconies like mechanical gulls.",
+      "screenplay": "Evan moves like a practiced conjurer. If forging, a holo-sheet blooms from his wrist; if distracting, a micro-drone skitters to the vents and chirrups a cascade of maintenance pings. AX-58's sensors flicker between the presented data and the false trail. Sam crouches near the console, fingers flying over keys, sweat beading under his collar.",
       "dialogue": [
         {
-          "speaker": "Ethan",
-          "text": "We can buy the concierge's silence. Sit, smile, be what they expect. It costs credits \u2014 but it's clean.",
-          "exposition": "practical and protective; prefers exchange over chaos",
+          "speaker": "AX-58",
+          "text": "Conflicting signatures received. Secondary verification required. Hold state for recalculation.",
+          "exposition": "AX-58 recalibrates\u2014its certainty is shaken, if only briefly.",
           "line_id": "scene_3:node_1:L1"
         },
         {
           "speaker": "Maya",
-          "text": "Or we slip the service corridors and vanish beneath the district. I hate staying a lie, Ethan. We lose more of ourselves every hour we pretend.",
-          "exposition": "values identity; the masquerade eats at her, she pushes for direct action",
+          "text": "Good. Evan, move when the light blinks twice.",
+          "exposition": "Her words are clipped, ready. Even in deception she scans consequences\u2014identity matters more than money.",
           "line_id": "scene_3:node_1:L2"
         },
         {
-          "speaker": "Ethan",
-          "text": "I won't let you walk out alone. Choose with me \u2014 we're a unit.",
-          "exposition": "puts sister's safety first; loyal",
+          "speaker": "Detective Sam",
+          "text": "You have two real choices with this gap: use it to vanish\u2014plant a fake signature and route your presence into a private shell so the enforcement matrix loses you; or use the dump I can pull now to release the altered detainment orders and make this systemic. One gets you safe now. One gets you safer later, but it burns the bridge.",
+          "exposition": "Sam's face is taut; his belief in justice competes with the siblings' need to survive.",
           "line_id": "scene_3:node_1:L3"
         }
       ],
+      "converges_from": [
+        "choice_1a",
+        "choice_1b"
+      ],
+      "convergence_note": "Both the forged-ID bluff and the maintenance distraction produce the same opening: AX-58 hesitates long enough for Sam's intervention to offer two strategic options.",
       "choices": [
         {
-          "choice_id": "choice_2",
-          "text": "Double down on the ruse \u2014 pay the concierge, circulate through the gala (resource: credits).",
+          "choice_id": "choice_2a",
+          "text": "Plant a false signature and disappear \u2014 prioritize immediate escape and restart elsewhere (tactical_choice, resource_management).",
           "choice_nature": "resource_management",
-          "next_node": "node_final",
-          "convergence_hint": "converges"
+          "next_node": "node_3",
+          "convergence_hint": "diverges"
         },
         {
-          "choice_id": "choice_3",
-          "text": "Abandon the gala \u2014 slip into the service corridors and attempt a tactical extraction (short-term risk).",
-          "choice_nature": "tactical_choice",
-          "next_node": "node_final",
-          "convergence_hint": "converges"
+          "choice_id": "choice_2b",
+          "text": "Use Sam's dump to broadcast the altered detainment orders \u2014 sacrifice the immediate window to strike at the system (long_term_planning, systemic_decision).",
+          "choice_nature": "systemic_decision",
+          "next_node": "node_4",
+          "convergence_hint": "diverges"
         }
       ]
     },
     "node_2": {
-      "screenplay": "Maya presses a slim injector at the baseboard behind an art panel. The maintenance feed hums. Ethan watches the window; reflections of drone lights strobe. She breathes out as scripts cascade across her ocular display.",
+      "screenplay": "Evan exhales and extends their physical IDs. Sam's hand is steady as he takes them, then taps a wrist console. AX-58's sensors glide over the exchange, cataloging. Rain prints the window in slow streaks; beyond, the city's towers blink indifferently.",
       "dialogue": [
         {
-          "speaker": "Maya",
-          "text": "Mirrors down for ninety seconds. AX-58's external sensors will bloom with noise \u2014 enough to slip a shadow across the trackers.",
-          "exposition": "clever and technical; confident in hacking skill but aware of the clock",
+          "speaker": "Detective Sam",
+          "text": "I'll file a protective custody request under 'witness assistance.' I can't promise the system won't push back, but I'll open a legal channel and keep AX-58 on a leash while the paper moves. You two need to answer questions. I'll do what I can.",
+          "exposition": "Sam means to protect them within the system because he believes the truth matters; his empathy is pragmatic.",
           "line_id": "scene_3:node_2:L1"
         },
         {
-          "speaker": "AX-58",
-          "text": "Anomalous feed disruption detected. Adaptive recalculation engaged. Persistence expected.",
-          "exposition": "cold confirmation that the system adapts; the world punishes interference",
+          "speaker": "Evan",
+          "text": "We go with you only if you promise no handoffs to private enforcement. No transfers.",
+          "exposition": "Evan's loyalty to Maya overrides every other consideration; he negotiates even in surrender.",
           "line_id": "scene_3:node_2:L2"
         },
         {
-          "speaker": "Ethan",
-          "text": "Move when I give you a mark. We don't have time to be elegant. Whatever we do, it has to outlast those ninety seconds.",
-          "exposition": "strategic, mapping immediate steps; protective urgency",
+          "speaker": "Detective Sam",
+          "text": "No handoffs. I file it now. We move as a unit.",
+          "exposition": "Sam gives them a narrow, dangerous promise\u2014one he will have to keep by bending the system he serves.",
           "line_id": "scene_3:node_2:L3"
+        },
+        {
+          "speaker": "Maya",
+          "text": "Fine. But the moment this becomes about public truth, I'm out. Your leash better hold, detective.",
+          "exposition": "Maya's compassion shows in laying terms; she will survive by controlling exposure of her identity.",
+          "line_id": "scene_3:node_2:L4"
         }
       ],
       "choices": [],
-      "converges_from": [],
-      "convergence_note": ""
+      "convergence_note": "This path ends the scene with temporary shelter under Sam's protection; it shifts the conflict into legal and tactical maneuvering offscreen."
     },
     "node_3": {
-      "screenplay": "They stand at a skybridge full of tourists and couriers. Maya fits a cheap coat over a hidden transmitter. A market thrums below \u2014 ideal chaos. Ethan watches a family press against a storefront window, unaware.",
+      "screenplay": "Evan slips the false signature into the building's transit matrix. Lights ripple; the interface accepts the shell identity. AX-58's head turns, sensors recalibrate\u2014and then its focus is elsewhere as the system marks them as non-threat. The door opens into the rain-filled stairwell; Sam gives a curt nod.",
       "dialogue": [
         {
           "speaker": "Maya",
-          "text": "I can outfit someone with a bulk jammer and a forged ID. AX-58 will lock to the anomaly. It buys us a path but it's brutal \u2014 we decide who takes the fall.",
-          "exposition": "practical but ruthless; weighs survival against the cost to others",
+          "text": "Move. No heroics\u2014just two people disappearing into a different name.",
+          "exposition": "Maya steers the escape with a pragmatic calm; identity is currency she will spend sparingly.",
           "line_id": "scene_3:node_3:L1"
         },
         {
-          "speaker": "Ethan",
-          "text": "I won't let you sacrifice anyone without choice. If we do this, we do it on terms. No surprises.",
-          "exposition": "moral boundary \u2014 even when desperate, he'll protect life",
+          "speaker": "Evan",
+          "text": "We'll go dark. Get new papers, new faces. We'll keep our eyes on the ledger\u2014when it's safe, we come back for the system.",
+          "exposition": "Evan chooses survival now, planning long-term revenge; he protects Maya first while thinking like a strategist.",
           "line_id": "scene_3:node_3:L2"
-        }
-      ],
-      "choices": [
-        {
-          "choice_id": "choice_4",
-          "text": "Release the decoy alone \u2014 draw AX-58 away quickly (high risk to the decoy).",
-          "choice_nature": "tactical_choice",
-          "next_node": "node_sacrifice_end",
-          "convergence_hint": "diverges"
         },
         {
-          "choice_id": "choice_5",
-          "text": "Attach a jammer and send the decoy while we use the blind spots to slip away \u2014 use resources to reduce collateral risk.",
-          "choice_nature": "resource_management",
-          "next_node": "node_final",
-          "convergence_hint": "converges"
-        },
-        {
-          "choice_id": "choice_6",
-          "text": "Abort the plan \u2014 call off the decoy and run now through the service ducts.",
-          "choice_nature": "long_term_planning",
-          "next_node": "node_escape_end",
-          "convergence_hint": "diverges"
-        }
-      ]
-    },
-    "node_final": {
-      "screenplay": "Alarms bloom and strip-lights crawl the ceiling. AX-58 descends into the skybox, articulated limbs echoing. Its visual array narrows to the siblings. The city outside continues indifferent, but within the box, time compresses.",
-      "dialogue": [
-        {
-          "speaker": "AX-58",
-          "text": "Discrepancy confirmed. Surrender is requested to restore order. Resistance will trigger punitive protocols.",
-          "exposition": "reminds them of the system's teeth \u2014 technology enforces the social contract",
-          "line_id": "scene_3:node_final:L1"
-        },
-        {
-          "speaker": "Maya",
-          "text": "Order for whom? Do you think 'restoring order' gives you the right to take people apart?",
-          "exposition": "defiant; the question challenges the premise that structure equals justice",
-          "line_id": "scene_3:node_final:L2"
-        },
-        {
-          "speaker": "Ethan",
-          "text": "We protected each other. We won't let a machine decide what survival costs us. Maya, now.",
-          "exposition": "courageous; prioritizes sibling bond over negotiation",
-          "line_id": "scene_3:node_final:L3"
+          "speaker": "Detective Sam",
+          "text": "Get moving. Thirty seconds is generous in theory\u2014get to the service run and vanish into the lower grids. I'll keep a watch on AX-58's logs for anomalies.",
+          "exposition": "Sam helps them escape; he can't change everything, but he can buy time.",
+          "line_id": "scene_3:node_3:L3"
         },
         {
           "speaker": "AX-58",
-          "text": "Emotional bonds are non-operative variables. Compliance will minimize systemic disruption.",
-          "exposition": "unchanged, unyielding; frames emotions as noise to be eliminated",
-          "line_id": "scene_3:node_final:L4"
+          "text": "Exit detected. Tracking terminated for rerouted identity shell. Resuming patrol.",
+          "exposition": "AX-58 returns to duty, efficient and uncomprehending of the human motives around it.",
+          "line_id": "scene_3:node_3:L4"
         }
       ],
       "choices": [],
-      "converges_from": [
-        "node_1",
-        "node_2",
-        "node_3"
-      ],
-      "convergence_note": "Multiple approaches (blending, hacking, or a decoy with a jammer) all lead to a direct confrontation with AX-58; methods change immediate consequences but converge on an inevitable showdown where trust and deception are tested."
+      "convergence_note": "This path diverges into an immediate escape; the siblings survive but leave the systemic corruption unexposed for now."
     },
-    "node_sacrifice_end": {
-      "screenplay": "The decoy shoves into the crowd; bursts of alarms bloom as AX-58 pivots. Ethan grips Maya's wrist as they watch a silhouette run, then taken. The drone reconfigures; a small life vanishes in a sea of light.",
+    "node_4": {
+      "screenplay": "Sam's fingers fly; he streams the dump to multiple public nodes while Evan and Maya stand under the red glow of the android's sensors. The feed propagates, fractal and fast. AX-58's posture tightens as private enforcement channels light up with denial protocols. Outside, a drone swarm begins to reroute its attention.",
       "dialogue": [
         {
-          "speaker": "Maya",
-          "text": "That was on us. We chose to put a person between us and the machine. Did we save ourselves?",
-          "line_id": "scene_3:node_sacrifice_end:L1"
+          "speaker": "Detective Sam",
+          "text": "Going live. If the system suppresses it, we have distributed caches. If they come for us now, we burn the logs to everyone. This will paint a target on our backs.",
+          "exposition": "Sam accepts personal risk to force systemic exposure; his justice belief overrides caution.",
+          "line_id": "scene_3:node_4:L1"
         },
         {
-          "speaker": "Ethan",
-          "text": "We bought time. But our names will be in the ledger. We carry the cost.",
-          "line_id": "scene_3:node_sacrifice_end:L2"
+          "speaker": "Maya",
+          "text": "Do it. If identity is worth more than money, then the truth is the only currency left.",
+          "exposition": "Maya chooses the moral risk; she values identity and trust over ephemeral safety.",
+          "line_id": "scene_3:node_4:L2"
+        },
+        {
+          "speaker": "Evan",
+          "text": "We make them accountable, even if it costs us tonight. Plan the next move when we know what they do.",
+          "exposition": "Evan balances survival and sacrifice\u2014protect Maya by making the system pay attention.",
+          "line_id": "scene_3:node_4:L3"
         },
         {
           "speaker": "AX-58",
-          "text": "Anomaly reduced. Behavioral data recorded. Continued surveillance advised.",
-          "exposition": "remorseless; the system notes the transaction and moves on",
-          "line_id": "scene_3:node_sacrifice_end:L3"
+          "text": "Unauthorized data broadcast detected. Priority escalation: suppression. Target: source of transmission.",
+          "exposition": "AX-58 recalculates according to order-of-operations\u2014order must be maintained, and emotions are irrelevant to protocol.",
+          "line_id": "scene_3:node_4:L4"
+        },
+        {
+          "speaker": "Detective Sam",
+          "text": "They'll come. But now the ledger is out of only-their-hands. This is how you start a different fight.",
+          "exposition": "Sam's strategic gamble is a long-term play for systemic change.",
+          "line_id": "scene_3:node_4:L5"
         }
       ],
       "choices": [],
-      "converges_from": [],
-      "convergence_note": "This path diverges: the siblings live with the knowledge of a human cost and the city's record of their action, shifting future opportunities and moral standing irreversibly."
-    },
-    "node_escape_end": {
-      "screenplay": "They duck into a narrow maintenance shaft as drones fan outward. Sirens wail. The ducts rattle and the city's scent \u2014 oil, ozone, fried street food \u2014 becomes a cloak. They find temporary concealment but the world above has marked them.",
-      "dialogue": [
-        {
-          "speaker": "Maya",
-          "text": "We run until our footprints blur. We'll have to give up everything that pretended to be ours.",
-          "exposition": "resigned but resolute \u2014 survival may require renunciation of false identities",
-          "line_id": "scene_3:node_escape_end:L1"
-        },
-        {
-          "speaker": "Ethan",
-          "text": "I kept my promise. For now. But the city remembers. We'll need new plans, new allies.",
-          "exposition": "aware of long-term cost; already planning next moves",
-          "line_id": "scene_3:node_escape_end:L2"
-        },
-        {
-          "speaker": "AX-58",
-          "text": "Search grids recalibrating. Fugitive profile distributed to municipal enforcement. Persistence recommended.",
-          "exposition": "the state's reach grows even as they flee",
-          "line_id": "scene_3:node_escape_end:L3"
-        }
-      ],
-      "choices": [],
-      "converges_from": [],
-      "convergence_note": "Divergent escape: tactical withdrawal avoids immediate confrontation but increases systemic pressure later \u2014 the siblings remain hunted."
+      "convergence_note": "This path diverges into a high-risk exposure: immediate capture is possible, but the system's abuses are now public, shifting the conflict onto a broader stage."
     }
   },
-  "branching_summary": "The scene opens with one player choice (root) offering three strategic approaches: blend deeper (long-term plan), hack the feeds (tactical gambit), or deploy a decoy (systemic decision). The 'blend' choice becomes a second decision node with two tactical/resource options; both of its outcomes converge to a direct confrontation (node_final) \u2014 different methods but the same showdown. The 'hack' branch is a dialogue-only path that also converges to the final confrontation. The 'decoy' branch is the third and final player-choice node: one option (attach a jammer to the decoy) converges to the final confrontation, while the other two (sacrifice the decoy or abort and flee) diverge into separate, irreversible endings. This mix gives medium agency: several meaningful strategic options, some lead to the same climax via different methods (convergent choices) while others produce distinct, lasting consequences (divergent choices).",
-  "narrative_notes": "Tone: dark and tense \u2014 pervasive surveillance, clinical antagonist, and moral cost of choices. Themes: identity (the siblings weigh masquerade vs self), survival (choices prioritize staying alive vs protecting others), deception (ruse, decoys, and fabrications are central tools), trust (Ethan's protection and Maya's tactical ruthlessness test their bond). The invariant that technology controls society and dissent is punished appears in AX-58's procedural language and the consequences of interference. Dialogue uses characters' personalities and beliefs: Ethan protective and strategic; Maya sharp, forward, willing to sacrifice identity for survival; AX-58 cold, procedural. Choices reflect tactical_choice, resource_management, long_term_planning, and systemic_decision tokens and are designed to reward strategic thinking while creating narrative weight and moral friction."
+  "branching_summary": "Root: AX-58 confronts the siblings; Sam intervenes and offers a thirty-second operational window with two strategic gambits. Choice point 1 (root) has three options: two (forge IDs or trigger a maintenance decoy) converge into node_1 because both produce the same opening; the third (trust Sam and surrender) diverges into node_2 and ends the scene under Sam's protection. Node_1 (choice point 2) offers two divergent strategic decisions: plant a false signature to vanish now (node_3 \u2014 immediate escape) or broadcast AX-58's altered detainment logs publicly (node_4 \u2014 systemic exposure). The convergent design lets tactical choices share consequences, while the divergent choices carry meaningful long-term tradeoffs.",
+  "narrative_notes": "Tone: The scene remains dark and tense throughout\u2014rain, neon, and the cold efficiency of AX-58 underscore the hostile, technologically controlled society. Themes: Identity (Maya's insistence on preserving self), Survival (Evan's priority to protect his sister), Deception (forged IDs, maintenance decoy), and Trust (weighing faith in Detective Sam) are balanced evenly per the theme weights. Choices map to the player's strategy fantasy: tactical_choice (instant bluff/distraction), resource_management (spending a false signature or a decoy), long_term_planning and systemic_decision (broadcasting damning logs). Screenplay directions and exposition reveal personalities: Evan's resourceful loyalty, Maya's quick-witted defiance and focus on identity, Sam's empathetic determination, and AX-58's cold, efficient enforcement. The invariant\u2014technology controls society and dissent is punished\u2014is explicitly present: AX-58 enforces order, and Sam warns of private enforcement sweeps. Some paths converge to preserve medium agency while offering meaningful divergence that will affect the campaign's political and personal stakes."
 }

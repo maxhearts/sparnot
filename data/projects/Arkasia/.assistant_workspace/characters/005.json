@@ -1,0 +1,15 @@
+{
+  "beliefs": [
+    "Justice must be served",
+    "Humans are superior to machines",
+    "The truth is worth fighting for"
+  ],
+  "id": "005",
+  "name": "Detective Sam",
+  "personality_tags": [
+    "determined",
+    "observant",
+    "empathetic"
+  ],
+  "role": "supporting"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "001",
+  "name": "underdog",
+  "role": "protagonist",
+  "beliefs": [
+    "I have nothing to go back to",
+    "Without my friends, I am nothing"
+  ],
+  "personality_tags": [
+    "reliable",
+    "determined",
+    "brave"
+  ]
+}

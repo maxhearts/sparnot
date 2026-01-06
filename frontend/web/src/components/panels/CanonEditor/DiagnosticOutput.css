@@ -1,0 +1,63 @@
+.diagnostic-output {
+  max-height: 120px;
+  overflow-y: auto;
+  border-top: 1px solid #333;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+}
+
+.diagnostic-block {
+  padding: 0.5rem 0.75rem;
+}
+
+.diagnostic-block h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.diagnostic-errors {
+  background: #3a1f1f;
+  border-left: 3px solid #ff4444;
+}
+
+.diagnostic-errors h3 {
+  color: #ff6666;
+}
+
+.diagnostic-warnings {
+  background: #3a3a1f;
+  border-left: 3px solid #ffaa00;
+}
+
+.diagnostic-warnings h3 {
+  color: #ffcc66;
+}
+
+.diagnostic-ok {
+  background: #1f3a1f;
+  border-left: 3px solid #44ff44;
+}
+
+.diagnostic-ok h3 {
+  color: #66ff66;
+}
+
+.diagnostic-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.diagnostic-path {
+  font-family: monospace;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.diagnostic-message {
+  color: #e0e0e0;
+}
+

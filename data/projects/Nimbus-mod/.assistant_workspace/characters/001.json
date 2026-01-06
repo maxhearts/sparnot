@@ -1,0 +1,15 @@
+{
+  "id": "001",
+  "name": "Underdog",
+  "role": "protagonist",
+  "beliefs": [
+    "Freedom is worth fighting for",
+    "No taxation without representation",
+    "Unity among colonists is crucial"
+  ],
+  "personality_tags": [
+    "determined",
+    "brave",
+    "resilient"
+  ]
+}
