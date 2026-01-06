@@ -56,7 +56,7 @@ All schemas are validated with Pydantic before saving, ensuring data integrity.
 
 ### Web UI
 
-A FastAPI backend and React frontend are available for visual editing and scene playback:
+A FastAPI backend and React frontend provide a visual interface for schema editing, compilation, assistant interaction, and scene playback:
 
 1. Start the backend:
    ```bash
@@ -65,11 +65,25 @@ A FastAPI backend and React frontend are available for visual editing and scene 
 
 2. Start the frontend (in `frontend/web/`):
    ```bash
+   cd frontend/web
    npm install
    npm run dev
    ```
 
 3. Open `http://localhost:3001` in your browser
+
+**Web UI Features:**
+- **Panel 1 (Canon Editor)**: Edit canonical schemas and view/edit assistant drafts
+  - Draft files are clearly marked with "📝" and "(DRAFT)" labels
+  - Drafts save to workspace, canonical files save to project
+  - Auto-refreshes to show assistant changes
+- **Panel 2 (Diff Viewer)**: View compilation differences between versions
+- **Panel 3 (Assistant)**: Interactive AI assistant with review workflow
+  - See compilation status after each assistant suggestion
+  - View draft JSON files with selective approval
+  - Review and commit changes when ready
+- **Panel 4 (Scene Viewer)**: Static viewing of generated scenes
+- **Scene Player**: Interactive modal player with automatic text delays and clickable choices
 
 ## Interactive CLI
 
@@ -434,6 +448,11 @@ The generator creates a JSON file with:
 - OpenAI API key in `.env` file (see Installation)
 - Uses GPT-5-mini model for generation
 
+**Agency-Based Generation:**
+- **Low Agency**: Generates cutscenes with no player choices, compensated with significantly more dialogue (4-8 lines per node, 6-10+ nodes, richer exposition)
+- **Medium Agency**: 2-3 choice points with 2-3 options each
+- **High Agency**: 2-5 choice points with 2-5 options each, more divergent paths
+
 ## Scene Playback
 
 You can interactively play through generated scenes to experience the branching dialogue.
@@ -446,7 +465,11 @@ You can interactively play through generated scenes to experience the branching 
 
 **In the Web UI:**
 - Click "Play Scene" in the header and select a scene
-- Interactive modal player with automatic text delays and clickable choices
+- Interactive modal player opens with:
+  - Automatic text delays for dialogue playback
+  - Clickable choices (instead of numbered options)
+  - Screenplay and exposition displayed with proper formatting
+  - Branching summary and narrative notes at the end
 - Scene viewer panel remains available for static viewing
 
 **Command-line usage:**
@@ -537,6 +560,10 @@ The Elicitation Assistant is an AI-powered tool that helps you refine your schem
 - **Empty Project Support**: Welcomes users with new projects and guides them through initial setup
 - **In-Chat Commands**: Use `/status`, `/diff`, and `/help` during conversation
 - **Strict Schema Enforcement**: Enforces exact enum values and field formats to prevent validation errors
+- **Compilation Status Display**: See compilation errors/warnings after each assistant suggestion
+- **Draft Viewing**: View and edit draft schemas in Panel 1 (Canon Editor) with clear visual distinction
+- **Review Workflow**: When you say "done", review all changes file-by-file with selective approval
+- **Selective Commit**: Approve individual files before committing, matching CLI workflow
 
 ### Requirements
 

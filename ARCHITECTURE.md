@@ -9,7 +9,7 @@ Sparnot is a narrative design tool that helps game developers and writers create
 ### High-Level Flow
 
 ```
-User Input (CLI)
+User Input (CLI / Web UI)
     ↓
 Schema Management (Pydantic Models)
     ↓
@@ -21,7 +21,7 @@ Scene Generation (LLM)
     ↓
 Generated Scenes (JSON)
     ↓
-Scene Playback (Interactive)
+Scene Playback (Interactive CLI / Web Modal)
 ```
 
 ### Core Components
@@ -118,9 +118,15 @@ Scene Playback (Interactive)
    - Scene summary and type
    - Locked content (if any)
    - Choice constraints based on agency
+   - Dialogue compensation for low agency (more dialogue when choices are limited)
 4. Generate with OpenAI (GPT-5-mini)
 5. Post-process: Add line_ids
 6. Save to `generated_scenes/` directory
+
+**Agency-Based Generation:**
+- **Low Agency**: No player choices, compensated with 4-8 dialogue lines per node, 6-10+ nodes, richer exposition and detailed screenplay
+- **Medium Agency**: 2-3 choice points with 2-3 options each, more convergent paths
+- **High Agency**: 2-5 choice points with 2-5 options each, more divergent paths
 
 #### 5. Elicitation Assistant Layer (`sparnot/elicitation/`)
 
@@ -144,6 +150,10 @@ Scene Playback (Interactive)
 - Consistency checking (narrative_intent vs. characters/arc)
 - Empty project support with welcoming experience
 - In-chat commands (`/status`, `/diff`, `/help`)
+- Compilation status display after each update
+- Draft viewing in web UI (Panel 1)
+- Review workflow with selective approval (CLI and web)
+- File-by-file review with diff viewing
 
 **Workflow**:
 1. Initialize workspace (copy schemas or create empty)
@@ -154,7 +164,14 @@ Scene Playback (Interactive)
    - Diagnostics re-run
    - LLM response with suggestions
    - JSON updates applied to working copy
-5. End session: Review and commit changes
+   - Compilation status displayed
+   - Drafts visible in web UI (Panel 1)
+5. End session: Review workflow
+   - List all changed files
+   - View diffs for each file
+   - Approve or skip individual files
+   - View full file content if needed
+   - Commit selected changes
 
 #### 6. CLI Layer (`cli.py`, `cli_lock_helpers.py`)
 
@@ -174,6 +191,53 @@ Scene Playback (Interactive)
 - Sub-menus for schema creation/editing
 - Scene selection menus
 - Lock management menus
+
+#### 7. Web Frontend Layer (`frontend/web/`)
+
+**Purpose**: React-based web interface for visual editing and interaction.
+
+**Components**:
+- `App.tsx`: Main application orchestrator
+- `CanonEditor`: Schema editing with draft viewing
+- `DiffViewer`: Compilation diff visualization
+- `Assistant`: Interactive assistant panel with review workflow
+- `SceneViewer`: Static scene viewing
+- `ScenePlayer`: Interactive modal scene playback
+
+**Key Features**:
+- **Four-Panel Layout**: Canon Editor, Diff Viewer, Assistant, Scene Viewer
+- **Draft Management**: View and edit assistant drafts in Canon Editor with clear visual distinction
+- **Interactive Assistant**: Full review workflow with selective approval
+- **Scene Playback**: Modal player with automatic delays and clickable choices
+- **Real-time Updates**: Auto-refresh for compilation status and draft changes
+- **Compilation Status**: Display errors/warnings after assistant suggestions
+
+**Panel Functions**:
+- **Panel 1 (Canon Editor)**: Edit canonical schemas and workspace drafts
+- **Panel 2 (Diff Viewer)**: View compilation differences
+- **Panel 3 (Assistant)**: AI-powered schema refinement with review workflow
+- **Panel 4 (Scene Viewer)**: Static viewing of generated scenes
+
+#### 8. API Layer (`frontend/api/`)
+
+**Purpose**: FastAPI backend providing REST endpoints for web frontend.
+
+**Components**:
+- `main.py`: FastAPI application with CORS configuration
+- `routers/projects.py`: Project management endpoints
+- `routers/schemas.py`: Schema CRUD endpoints
+- `routers/compile.py`: Compilation and diagnostics endpoints
+- `routers/diff.py`: Diff viewing endpoints
+- `routers/scenes.py`: Scene generation and retrieval endpoints
+- `routers/locks.py`: Content locking endpoints
+- `routers/assistant.py`: Assistant interaction endpoints
+
+**Key Features**:
+- RESTful API design
+- CORS enabled for local development
+- Error handling and validation
+- Workspace management for assistant drafts
+- Selective commit workflow support
 
 ## Data Flow
 
@@ -220,7 +284,7 @@ generated_scenes/ directory
 ### Elicitation Flow
 
 ```
-User Input
+User Input (CLI / Web UI)
     ↓
 Working Copy Update
     ↓
@@ -232,11 +296,45 @@ JSON Updates
     ↓
 Working Copy Update
     ↓
+[Display Compilation Status]
+    ↓
 [Loop until satisfied]
     ↓
-Review & Commit
+Review & Commit (Selective Approval)
     ↓
 Canonical Schemas
+```
+
+### Web UI Flow
+
+```
+User Opens Web UI
+    ↓
+Load Project Schemas
+    ↓
+[Panel 1] Display Canonical + Draft Schemas
+[Panel 2] Show Latest Compilation Diff
+[Panel 3] Initialize Assistant
+[Panel 4] List Generated Scenes
+    ↓
+User Interacts:
+  - Edit schemas (canonical or drafts)
+  - Chat with assistant
+  - View diffs
+  - Generate/play scenes
+    ↓
+Assistant Suggests Changes
+    ↓
+[Panel 1] Drafts Auto-Refresh
+[Panel 3] Show Compilation Status
+    ↓
+User Says "done"
+    ↓
+Review Workflow:
+  - List all changed files
+  - View diffs
+  - Approve/Reject per file
+  - Commit selected changes
 ```
 
 ## Key Design Decisions
@@ -300,7 +398,21 @@ sparnot/
 ├── poc_compiler/      # Compiler and IR models
 ├── scene_generation/  # Scene generation and locking
 ├── elicitation/       # AI assistant
-└── utils/             # JSON editing, templates
+├── utils/             # JSON editing, templates
+└── frontend/
+    ├── api/           # FastAPI backend
+    │   ├── main.py
+    │   └── routers/   # API endpoints
+    └── web/           # React frontend
+        └── src/
+            ├── components/
+            │   └── panels/
+            │       ├── CanonEditor/
+            │       ├── DiffViewer/
+            │       ├── Assistant/
+            │       ├── SceneViewer/
+            │       └── ScenePlayer/
+            └── services/  # API client
 
 data/
 └── projects/
@@ -313,5 +425,8 @@ data/
         ├── generated_scenes/
         ├── locks.json
         └── .assistant_workspace/
+            ├── narrative_intent.json
+            ├── arc.json
+            └── characters/
 ```
 
