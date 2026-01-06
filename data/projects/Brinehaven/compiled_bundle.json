@@ -109,23 +109,23 @@
       "secondary_tone": "mysterious",
       "excluded_tones": [],
       "style_tokens": [
-        "cost_and_consequence",
-        "restraint",
-        "foreshadowing",
         "contrast_tension",
-        "unreliable_info",
-        "high_stakes",
-        "withhold_then_payoff",
-        "bittersweet",
-        "playful",
-        "lightness",
-        "moments_of_relief",
-        "surreal_edges",
-        "forward_motion",
-        "banter_allowed",
+        "resilience",
         "secrets",
+        "unreliable_info",
+        "lightness",
         "warmth",
-        "resilience"
+        "withhold_then_payoff",
+        "moments_of_relief",
+        "banter_allowed",
+        "cost_and_consequence",
+        "playful",
+        "high_stakes",
+        "surreal_edges",
+        "bittersweet",
+        "foreshadowing",
+        "forward_motion",
+        "restraint"
       ],
       "constraints": {
         "env_destructible": true,
@@ -139,15 +139,15 @@
       },
       "narrative_obligations": [],
       "setting_tokens": [
-        "daily_routine",
-        "low_violence_bias",
-        "community",
         "open_vistas",
+        "community",
+        "daily_routine",
         "verticality",
-        "class_stratification",
         "relationships",
         "social_hierarchy",
-        "rituals"
+        "class_stratification",
+        "rituals",
+        "low_violence_bias"
       ],
       "player_fantasy": "story",
       "player_agency": "high",
@@ -181,11 +181,11 @@
         "character_id": "004",
         "role": "supporting",
         "voice_tokens": [
-          "dry",
-          "skeptical",
-          "clever",
           "banter_ready",
+          "skeptical",
           "sharp",
+          "clever",
+          "dry",
           "cuts_through"
         ],
         "belief_weights": {
@@ -197,12 +197,12 @@
         "character_id": "002",
         "role": "mentor",
         "voice_tokens": [
-          "elliptical",
           "calm",
+          "elliptical",
           "withholds_info",
-          "implicature",
           "low_reactivity",
-          "measured"
+          "measured",
+          "implicature"
         ],
         "belief_weights": {
           "Stability is more moral than honesty when resources are scarce.": 0.5,
@@ -214,11 +214,11 @@
         "role": "supporting",
         "voice_tokens": [
           "overexplains",
-          "bright",
-          "self_corrects",
-          "hesitant",
           "encouraging",
-          "reframes_loss"
+          "bright",
+          "reframes_loss",
+          "self_corrects",
+          "hesitant"
         ],
         "belief_weights": {
           "I remember dying here before.": 0.5,
@@ -229,12 +229,12 @@
         "character_id": "003",
         "role": "antagonist",
         "voice_tokens": [
-          "fast_escalation",
-          "light_teasing",
+          "warm",
           "blunt",
-          "socially_fluid",
           "emotion_forward",
-          "warm"
+          "socially_fluid",
+          "light_teasing",
+          "fast_escalation"
         ],
         "belief_weights": {
           "Rationing is violence with paperwork.": 0.5,
@@ -288,14 +288,14 @@
     "errors": []
   },
   "hashes": {
-    "bundle": "fe8088d88a0aada3",
-    "narrative_ir": "70d1a2c108f7504f",
+    "bundle": "9b5296ddb84ac9ab",
+    "narrative_ir": "768bc63a280e3782",
     "character_irs": {
       "001": "0b03bf950f45ff2d",
-      "004": "bf780724407c431e",
-      "002": "45796bd1e8d35251",
-      "005": "7cf8c9f16a784879",
-      "003": "c4ae6218c7775746"
+      "004": "cf102444c6c13bf2",
+      "002": "bad04808d153179d",
+      "005": "e11e9c98d68cf712",
+      "003": "55bfeddcdaa0b2dd"
     },
     "arc_ir": null
   }

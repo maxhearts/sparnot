@@ -1,0 +1,213 @@
+{
+  "scene_id": "scene_2",
+  "scene_type": "climax",
+  "location": "Opal Terrace \u2014 a glassed penthouse over the city; neon rain slashes the skyline, surveillance drones stitch patterns in the air.",
+  "summary": "Evan and Maya, disguised as a wealthy couple, meet Leo (Liam) who offers help but doubts their risky plan. The siblings must decide whether to accept aid, go it alone, or test Leo's loyalty; their choice forces a tactical and moral split with immediate consequences.",
+  "dialogue_tree": {
+    "root": {
+      "screenplay": "Night. The terrace hums with filtered city light. Evan stands rigid near the balustrade, one hand clenched on Maya's sleeve. Maya adjusts the cuff of a borrowed jacket, eyes scanning the street level. A distant android siren folds into the rain. Footsteps approach; Leo emerges from the shadow of a service ladder, hands visible, smile cautious. He keeps his voice low.",
+      "dialogue": [
+        {
+          "speaker": "Leo",
+          "text": "\"You two look like you walked out of a holo-catalogue to bait a scanner.\"",
+          "exposition": "encouraging, bright; he tries to make light but his eyes search for cracks \u2014 he's come with information and concern.",
+          "line_id": "scene_2:root:L1"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"We need to move. Fast. Are you alone?\"",
+          "exposition": "protective and terse; Evan's priority is Maya's safety, his voice betrays readiness for action.",
+          "line_id": "scene_2:root:L2"
+        },
+        {
+          "speaker": "Leo",
+          "text": "\"I'm alone. I can help \u2014 safe routes, a contact inside Records. But your plan... it's loud. The system watches wealth like a heartbeat. One wrong pulse and they trace everything back to you.\"",
+          "exposition": "clear warning \u2014 he reframes the risk while offering a hand; he believes reframing the loss can make them choose safer options.",
+          "line_id": "scene_2:root:L3"
+        },
+        {
+          "speaker": "Maya",
+          "text": "\"We know how they watch. We counted the pulses. This disguise buys us a window. But windows come with guards \u2014 and doors you don't know how to open.\"",
+          "exposition": "clever and focused; Maya values identity and survival, willing to use deception but sensitive to cost.",
+          "line_id": "scene_2:root:L4"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"Tell us straight: do you think this will get us out, or get us marked?\"",
+          "exposition": "resourceful and loyal; wants a tactical read before risking Maya.",
+          "line_id": "scene_2:root:L5"
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_1",
+          "text": "Accept Leo's help \u2014 let him see parts of the plan and coordinate quietly.",
+          "choice_nature": "resource_management",
+          "next_node": "node_1",
+          "convergence_hint": "converges",
+          "explanation": "Brings in outside resources and opens options for longer-term fixes; risks increased exposure but may reduce immediate danger."
+        },
+        {
+          "choice_id": "choice_2",
+          "text": "Refuse help \u2014 go alone with the original impersonation plan; keep control and minimize new liabilities.",
+          "choice_nature": "tactical_choice",
+          "next_node": "node_2",
+          "convergence_hint": "diverges",
+          "explanation": "Immediate, high-risk tactic that preserves secrecy from outside parties but increases chance of a direct clash with the system."
+        },
+        {
+          "choice_id": "choice_3",
+          "text": "Test Leo \u2014 ask a probing question to gauge loyalty before committing.",
+          "choice_nature": "systemic_decision",
+          "next_node": "node_1",
+          "convergence_hint": "converges",
+          "explanation": "A defensive systemic read that can reveal Leo's true stake, but wastes time and may alert watchers."
+        }
+      ]
+    },
+    "node_1": {
+      "screenplay": "Leo steps closer under a pool of amber light from an external heater. A service drone blips across the building wall; its sensors skim the terrace, then pass. Leo's face hardens as he lays out tradeoffs on his glove-screen. Evan watches every flicker. Maya leans in, jaw set, weighing the math of trust.",
+      "dialogue": [
+        {
+          "speaker": "Leo",
+          "text": "\"I have a route that scrubs live traces for twenty minutes \u2014 enough to change clothes, slip inside the gala servers. But to rewrite your records? That costs access and a safe house for a week. Credits, favors. It also draws heat: Records retaliate when you touch their ledger.\"",
+          "exposition": "practical and honest; he's offering both a short tactical window and a longer fix, warning about the systemic backlash.",
+          "line_id": "scene_2:node_1:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "\"If identity is a ledger entry, we burn the ledger and make a new one. But burning leaves smoke. How loud will the fire be?\"",
+          "exposition": "sharp and calculated; she values creating a true identity even if the cost is high.",
+          "line_id": "scene_2:node_1:L2"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"We only have one priority: get her out intact. What do you actually have \u2014 and what will it cost?\"",
+          "exposition": "focused on survival; Evan frames choices in protection terms, weighing resource cost vs. safety.",
+          "line_id": "scene_2:node_1:L3"
+        },
+        {
+          "speaker": "Leo",
+          "text": "\"I can: 1) open a twenty-minute scrub window and pull you through the gala network; or 2) trade a contact in Exchange for a forged file \u2014 safer long-term but you'll owe them. Either choice will pin us if Records decides to retaliate \u2014 and they do, brutally.\"",
+          "exposition": "lays out concrete options; his voice grows sober when naming consequences tied to the city's tech-enforced punishments.",
+          "line_id": "scene_2:node_1:L4"
+        }
+      ],
+      "choices": [
+        {
+          "choice_id": "choice_4",
+          "text": "Take the longer fix \u2014 use Leo's contact to rewrite your records. Pay the cost to remove traces.",
+          "choice_nature": "long_term_planning",
+          "next_node": "node_3",
+          "convergence_hint": "diverges",
+          "explanation": "This is a systemic, long-term strategy: more secure later, more exposure now."
+        },
+        {
+          "choice_id": "choice_5",
+          "text": "Use the twenty-minute scrub \u2014 execute the impersonation immediately and move through the gala while the window is open.",
+          "choice_nature": "tactical_choice",
+          "next_node": "node_4",
+          "convergence_hint": "diverges",
+          "explanation": "Short-term tactical play that risks immediate detection but preserves secrecy from outside parties."
+        }
+      ],
+      "converges_from": [
+        "root"
+      ],
+      "convergence_note": "Both agreeing to talk with Leo (Accept help or Test him first) lead here. The siblings either trust Leo immediately or gate him \u2014 both result in a decision between a long-term rewrite or a short tactical window."
+    },
+    "node_2": {
+      "screenplay": "Evan straightens, moving between Leo and Maya like a shield. The rain picks up, drumming impatient rhythm against the glass. Leo's shoulders slump; his smile thins into a hard line. He opens his palm, then closes it again.",
+      "dialogue": [
+        {
+          "speaker": "Evan",
+          "text": "\"We keep control. No new hands. We move on our terms.\"",
+          "exposition": "resolute; Evan refuses outside entanglement to protect Maya from debts or betrayals.",
+          "line_id": "scene_2:node_2:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "\"We'll be ghosts, then. Quiet, and fast. If we fail, at least it was ours to own.\"",
+          "exposition": "accepts risk over compromised identity; determined and minimal_excuses.",
+          "line_id": "scene_2:node_2:L2"
+        },
+        {
+          "speaker": "Leo",
+          "text": "\"I won't slow you. But if Records finds you \u2014 they do worse than silence. They carve out the part of you that fought back. If you need a door later, look me up. Not tonight.\"",
+          "exposition": "sombre encouragement \u2014 he leaves an open line but steps back to avoid immediate liability.",
+          "line_id": "scene_2:node_2:L3"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"Then don't look for us.\"",
+          "exposition": "protective finality as the siblings melt into the terrace shadows and step toward the service lift, the gala lights pulsing distant and the first patrol drone tilting its optics their way.",
+          "internal_action": "They proceed alone; scene ends with distant drone focusing \u2014 cliffhanger.",
+          "line_id": "scene_2:node_2:L4"
+        }
+      ],
+      "choices": [],
+      "converges_from": [],
+      "convergence_note": "This path diverges immediately: refusing help isolates the siblings and precludes the long-term options offered by Leo."
+    },
+    "node_3": {
+      "screenplay": "Leo closes the glove-screen and looks at Evan, then at Maya. Rain sketches cold lines on their cheeks. He speaks quietly, as if talking around listening devices.",
+      "dialogue": [
+        {
+          "speaker": "Leo",
+          "text": "\"I'll put you on the ledger's blind spot for the rewrite. It'll take a week in a safe house, and Records will ping anomalies. They'll come looking \u2014 but not right away. You get clean identities, a chance to vanish properly. The Exchange wants a favor in return. It's political; it could change what you owe.\"",
+          "exposition": "detailed and frank; Leo negotiates the trade, making clear the systemic risks and debts that will alter the siblings' future.",
+          "line_id": "scene_2:node_3:L1"
+        },
+        {
+          "speaker": "Maya",
+          "text": "\"We trade a week of waiting for a lifetime that isn't the ledger's ghost. I'll take debts over chains.\"",
+          "exposition": "focused on identity's value over immediate comfort; willing to accept long-term consequences for true survival.",
+          "line_id": "scene_2:node_3:L2"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"Make the call. If this is a trap, I'll end it. But I won't let her face the ledger unclean.\"",
+          "exposition": "protective courage; Evan commits to the plan, framing a future with obligations but safety from immediate trace.",
+          "internal_action": "They accept Leo's arrangement. Scene closes on them moving toward the service entry as a Records ping ripples the net \u2014 distant, delayed, menacing.",
+          "line_id": "scene_2:node_3:L3"
+        }
+      ],
+      "choices": [],
+      "converges_from": [
+        "node_1"
+      ],
+      "convergence_note": "This end follows the long-term planning choice. It diverges narratively from the immediate tactical route and sets up future obligations and systemic consequences."
+    },
+    "node_4": {
+      "screenplay": "Maya slides a borrowed invitation into her clutch; Evan checks the micro-scrub Leo activated on his sleeve. Outside, gala lights throb like a distant heartbeat. The scrub timer blinks: 00:19:47. Leo fades back into shadow with a terse nod. The terrace is suddenly smaller.",
+      "dialogue": [
+        {
+          "speaker": "Maya",
+          "text": "\"Perfectly timed. We steal a moment and run with it.\"",
+          "exposition": "bold and immediate; Maya trusts the deception's tactical window and the family's ability to improvise.",
+          "line_id": "scene_2:node_4:L1"
+        },
+        {
+          "speaker": "Evan",
+          "text": "\"We move as a unit. If anything goes sideways, we disappear into the crowd. No heroics.\"",
+          "exposition": "tactical, protective; Evan's plan prioritizes controlled movement and contingency over long-term security.",
+          "line_id": "scene_2:node_4:L2"
+        },
+        {
+          "speaker": "Leo",
+          "text": "\"You have twenty minutes before the scrub collapses. After that, Records will see the hole and they'll dig. Good luck. And be careful \u2014 the androids don't sleep.\"",
+          "exposition": "stern, warning of systemic retaliation; he retreats as the siblings step toward the service lift, the gala's monitored doors yawning ahead.",
+          "internal_action": "They enter the gala; scene ends on the scrub timer counting down and a patrol drone reorienting toward the building \u2014 immediate tension.",
+          "line_id": "scene_2:node_4:L3"
+        }
+      ],
+      "choices": [],
+      "converges_from": [
+        "node_1"
+      ],
+      "convergence_note": "This end follows the tactical immediate-action choice. It diverges from the long-term rewrite, offering immediate agency with high risk."
+    }
+  },
+  "branching_summary": "Root choice (choice_1) presents three options: accept Leo's help, refuse help, or test him. Accepting help and testing his loyalty both converge to node_1, where the siblings choose between two diverging strategies (choice_2): a long-term record rewrite (node_3) or an immediate twenty-minute scrub to execute the impersonation (node_4). Refusing help at the root diverges immediately to node_2 and does not reconnect. Convergence is used where different interpersonal approaches (trust now vs. test) logically lead to the same tactical decision; divergence is used for morally and practically distinct strategies (isolate and move vs. take outside aid and its costs).",
+  "narrative_notes": "Tone: The scene stays dark and tense \u2014 rain, surveillance, and the constant threat of systemic punishment are present in stage directions and dialogue. Themes: identity (Maya's insistence on real identity over a borrowed life), survival (Evan's protective choices), deception (the masquerade and choices to rewrite or use a scrub), and trust (whether to accept Leo) are balanced evenly as required. Choices reflect strategic play: resource_management (accept help), tactical_choice (go alone or use the scrub), long_term_planning (rewrite records), and systemic_decision (testing Leo). Character voices and beliefs are respected: Evan prioritizes Maya's safety and shows courage/resourcefulness; Maya is sharp, focused, and willing to gamble on identity; Leo reframes risk optimistically but soberly, offering help with clear costs. The invariant that technology controls society and dissent is severely punished is explicitly stated by Leo and embedded in the consequences of each choice. The structure mixes convergent and divergent branches to provide medium player agency: choices change immediate tactics and long-term obligations without breaking core narrative beats."
+}

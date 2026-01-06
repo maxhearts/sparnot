@@ -8,15 +8,106 @@
       },
       "locks": [
         {
-          "lock_id": "lock_44401fc1",
+          "lock_id": "lock_d712587e",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L1"
+          },
+          "must_preserve": {
+            "speaker": "Maya",
+            "text": "We don't just take names. We become a package \u2014 a matched pair with estate, lineage credits, the whole credit-thread. They bow to assets; the machines read paper and privilege like scripture."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_b0f7fad1",
           "scope": "line",
           "target": {
             "node_id": "root",
             "line_id": "scene_1:root:L2"
           },
           "must_preserve": {
+            "speaker": "Ethan",
+            "text": "If we do this, I shield you. No solo runs. The android's circling records: any slip and dissent gets stamped and burned. We need a route that keeps us off its trail."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_3933f313",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L3"
+          },
+          "must_preserve": {
             "speaker": "Maya",
-            "text": "So we become someone else. Not just fake names \u2014 a full pair: elite couple, estate, credit lineage. They trust money. The machines worship paper and privilege."
+            "text": "Good. Strategy then: slow, clean, or fast and messy. Slow is fake lineage \u2014 deep forgeries. Clean is a broker who sells a story. Fast is slipping into a gala with live IDs and forcing the script."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_7acbc0bf",
+          "scope": "line",
+          "target": {
+            "node_id": "node_forge",
+            "line_id": "scene_1:node_forge:L1"
+          },
+          "must_preserve": {
+            "speaker": "Ethan",
+            "text": "We can splice a family ledger from three collapsed accounts and route it through shell trusts. It buys time \u2014 months \u2014 but we need clean microcredits to keep the profile alive."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_2897a3f2",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L3"
+          },
+          "must_preserve": {
+            "speaker": "Maya",
+            "text": "Good. Strategy then: slow, clean, or fast and messy. Slow is fake lineage \u2014 deep forgeries. Clean is a broker who sells a story. Fast is slipping into a gala with live IDs and forcing the script."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_66e722bb",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L3"
+          },
+          "must_preserve": {
+            "speaker": "Maya",
+            "text": "Good. Strategy then: slow, clean, or fast and messy. Slow is fake lineage \u2014 deep forgeries. Clean is a broker who sells a story. Fast is slipping into a gala with live IDs and forcing the script."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_cb8b209b",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L1"
+          },
+          "must_preserve": {
+            "speaker": "Maya",
+            "text": "We don't just take names. We become a package \u2014 a matched pair with estate, lineage credits, the whole credit-thread. They bow to assets; the machines read paper and privilege like scripture."
+          },
+          "notes": null
+        },
+        {
+          "lock_id": "lock_d4ccf29a",
+          "scope": "line",
+          "target": {
+            "node_id": "root",
+            "line_id": "scene_1:root:L2"
+          },
+          "must_preserve": {
+            "speaker": "Ethan",
+            "text": "If we do this, I shield you. No solo runs. The android's circling records: any slip and dissent gets stamped and burned. We need a route that keeps us off its trail."
           },
           "notes": null
         }

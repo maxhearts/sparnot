@@ -1,0 +1,55 @@
+{
+  "acts": [
+    {
+      "act_id": "act_1",
+      "act_purpose": "Establish the tension between the colonies and the British Empire.",
+      "required_scenes": [
+        "scene_1",
+        "scene_2"
+      ]
+    },
+    {
+      "act_id": "act_2",
+      "act_purpose": "Introduce the conflicts among the rebels and their strategies.",
+      "required_scenes": [
+        "scene_3"
+      ]
+    },
+    {
+      "act_id": "act_3",
+      "act_purpose": "Conclude the story with a fight for liberation and the consequences of choice.",
+      "required_scenes": []
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "scene_1",
+      "scene_type": "inciting_incident",
+      "summary": "The protagonist witnesses a British patrol brutally suppressing a peaceful demonstration, igniting their desire to rebel.",
+      "involved_characters": [
+        "001",
+        "002"
+      ]
+    },
+    {
+      "scene_id": "scene_2",
+      "scene_type": "first_plot_point",
+      "summary": "A secret meeting of patriots is held, where they agree to unite against the oppression of the British crown.",
+      "involved_characters": [
+        "001",
+        "002",
+        "003",
+        "004"
+      ]
+    },
+    {
+      "scene_id": "scene_3",
+      "scene_type": "midpoint",
+      "summary": "The rebels engage in a fierce battle against British forces, resulting in significant loss but strengthening their resolve.",
+      "involved_characters": [
+        "001",
+        "003"
+      ]
+    }
+  ]
+}

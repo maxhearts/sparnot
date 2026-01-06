@@ -1,0 +1,12 @@
+{
+    "id": "001",
+    "name": "Mara Venn",
+    "role": "protagonist",
+    "beliefs": [
+      "If I tell the whole truth, people will panic and more will die.",
+      "I owe the city a debt I can never repay.",
+      "Every system can be repaired if you find the real leak."
+    ],
+    "personality_tags": ["methodical", "dry-humor", "guilt-ridden", "empathetic"]
+  }
+  

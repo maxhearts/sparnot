@@ -1,0 +1,342 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "A group of patriots fight for their freedom against a powerful empire during the tumultuous American Revolution.",
+      "tone_weights": {
+        "tragic": 0.36363636363636365,
+        "hopeful": 0.45454545454545453,
+        "humor": 0.09090909090909091,
+        "mysterious": 0.09090909090909091,
+        "whimsical": 0.0
+      },
+      "themes": [
+        "sacrifice for freedom",
+        "loyalty to comrades",
+        "the cost of rebellion",
+        "personal choice in turbulent times"
+      ],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "setting": "Colonial America, during the strife of the American Revolution with battles, politics, and espionage.",
+      "invariants": [
+        "Environments are not destructible",
+        "Characters can be killed, but some only downed for a short time"
+      ]
+    },
+    "characters": [
+      {
+        "id": "001",
+        "name": "Underdog",
+        "role": "protagonist",
+        "beliefs": [
+          "Freedom is worth fighting for",
+          "Every person has a right to choose their destiny"
+        ],
+        "personality_tags": [
+          "brave",
+          "resourceful",
+          "determined"
+        ]
+      },
+      {
+        "id": "003",
+        "name": "Javi",
+        "role": "supporting",
+        "beliefs": [
+          "Knowledge is power",
+          "Sometimes, deception is necessary for victory"
+        ],
+        "personality_tags": [
+          "clever",
+          "stealthy",
+          "alert"
+        ]
+      },
+      {
+        "id": "002",
+        "name": "Eli",
+        "role": "mentor",
+        "beliefs": [
+          "Leadership comes with a heavy burden",
+          "We must unite for the greater good"
+        ],
+        "personality_tags": [
+          "courageous",
+          "strategic",
+          "inspiring"
+        ]
+      },
+      {
+        "id": "004",
+        "name": "Sophie",
+        "role": "supporting",
+        "beliefs": [
+          "Women must fight for their place in society",
+          "Equality is a fight worth taking"
+        ],
+        "personality_tags": [
+          "determined",
+          "passionate",
+          "empathetic"
+        ]
+      }
+    ],
+    "arc": {
+      "acts": [
+        {
+          "act_id": "act_1",
+          "act_purpose": "Establish the tension between the colonies and the British Empire.",
+          "required_scenes": [
+            "scene_1",
+            "scene_2"
+          ]
+        },
+        {
+          "act_id": "act_2",
+          "act_purpose": "Introduce the conflicts among the rebels and their strategies.",
+          "required_scenes": [
+            "scene_3"
+          ]
+        },
+        {
+          "act_id": "act_3",
+          "act_purpose": "Conclude the story with a fight for liberation and the consequences of choice.",
+          "required_scenes": []
+        }
+      ],
+      "scenes": [
+        {
+          "scene_id": "scene_1",
+          "scene_type": "inciting_incident",
+          "summary": "The protagonist witnesses a British patrol brutally suppressing a peaceful demonstration, igniting their desire to rebel.",
+          "involved_characters": [
+            "001",
+            "002"
+          ]
+        },
+        {
+          "scene_id": "scene_2",
+          "scene_type": "first_plot_point",
+          "summary": "A secret meeting of patriots is held, where they agree to unite against the oppression of the British crown.",
+          "involved_characters": [
+            "001",
+            "002",
+            "003",
+            "004"
+          ]
+        },
+        {
+          "scene_id": "scene_3",
+          "scene_type": "midpoint",
+          "summary": "The rebels engage in a fierce battle against British forces, resulting in significant loss but strengthening their resolve.",
+          "involved_characters": [
+            "001",
+            "003"
+          ]
+        }
+      ]
+    }
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "hopeful",
+      "secondary_tone": "tragic",
+      "excluded_tones": [
+        "whimsical"
+      ],
+      "style_tokens": [
+        "forward_motion",
+        "gallows_humor_guardrails",
+        "cost_and_consequence",
+        "bittersweet",
+        "secrets",
+        "restraint",
+        "high_stakes",
+        "banter_allowed",
+        "unreliable_info",
+        "contrast_tension",
+        "foreshadowing",
+        "moments_of_relief",
+        "warmth",
+        "resilience"
+      ],
+      "constraints": {
+        "env_destructible": false,
+        "death_allowed": true
+      },
+      "theme_weights": {
+        "sacrifice for freedom": 0.25,
+        "loyalty to comrades": 0.25,
+        "the cost of rebellion": 0.25,
+        "personal choice in turbulent times": 0.25
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [],
+      "player_fantasy": "story",
+      "player_agency": "high",
+      "choices_per_point": {
+        "min": 2,
+        "max": 5
+      },
+      "choices_per_interaction": {
+        "min": 1,
+        "max": 6
+      },
+      "choice_nature_tokens": [
+        "narrative_choice",
+        "plot_branch",
+        "character_relationship",
+        "story_consequence"
+      ]
+    },
+    "character_irs": [
+      {
+        "character_id": "001",
+        "role": "protagonist",
+        "voice_tokens": [
+          "minimal_excuses",
+          "resolute",
+          "action_oriented",
+          "forward",
+          "focused",
+          "direct"
+        ],
+        "belief_weights": {
+          "Freedom is worth fighting for": 0.5,
+          "Every person has a right to choose their destiny": 0.5
+        }
+      },
+      {
+        "character_id": "003",
+        "role": "supporting",
+        "voice_tokens": [],
+        "belief_weights": {
+          "Knowledge is power": 0.5,
+          "Sometimes, deception is necessary for victory": 0.5
+        }
+      },
+      {
+        "character_id": "002",
+        "role": "mentor",
+        "voice_tokens": [],
+        "belief_weights": {
+          "Leadership comes with a heavy burden": 0.5,
+          "We must unite for the greater good": 0.5
+        }
+      },
+      {
+        "character_id": "004",
+        "role": "supporting",
+        "voice_tokens": [
+          "focused",
+          "minimal_excuses",
+          "forward"
+        ],
+        "belief_weights": {
+          "Women must fight for their place in society": 0.5,
+          "Equality is a fight worth taking": 0.5
+        }
+      }
+    ],
+    "arc_ir": {
+      "scene_order": [
+        "scene_1",
+        "scene_2",
+        "scene_3"
+      ],
+      "scene_types": {
+        "scene_1": "inciting_incident",
+        "scene_2": "first_plot_point",
+        "scene_3": "midpoint"
+      },
+      "scene_participants": {
+        "scene_1": [
+          "001",
+          "002"
+        ],
+        "scene_2": [
+          "001",
+          "002",
+          "003",
+          "004"
+        ],
+        "scene_3": [
+          "001",
+          "003"
+        ]
+      },
+      "act_structure": [
+        {
+          "act_id": "act_1",
+          "required_scenes": [
+            "scene_1",
+            "scene_2"
+          ]
+        },
+        {
+          "act_id": "act_2",
+          "required_scenes": [
+            "scene_3"
+          ]
+        },
+        {
+          "act_id": "act_3",
+          "required_scenes": []
+        }
+      ]
+    }
+  },
+  "proposed": {
+    "unknown_player_fantasy": null,
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [
+      "resourceful",
+      "clever",
+      "stealthy",
+      "alert",
+      "courageous",
+      "strategic",
+      "inspiring",
+      "passionate",
+      "empathetic"
+    ],
+    "unknown_invariants": []
+  },
+  "generation_context": {
+    "setting": "Colonial America, during the strife of the American Revolution with battles, politics, and espionage.",
+    "act_purposes": [
+      "Establish the tension between the colonies and the British Empire.",
+      "Introduce the conflicts among the rebels and their strategies.",
+      "Conclude the story with a fight for liberation and the consequences of choice."
+    ],
+    "scene_summaries": {
+      "scene_1": "The protagonist witnesses a British patrol brutally suppressing a peaceful demonstration, igniting their desire to rebel.",
+      "scene_2": "A secret meeting of patriots is held, where they agree to unite against the oppression of the British crown.",
+      "scene_3": "The rebels engage in a fierce battle against British forces, resulting in significant loss but strengthening their resolve."
+    },
+    "invariants_text": [
+      "Environments are not destructible",
+      "Characters can be killed, but some only downed for a short time"
+    ]
+  },
+  "lint": {
+    "warnings": [
+      "Unknown personality tags for 001: ['resourceful']",
+      "Unknown personality tags for 003: ['clever', 'stealthy', 'alert']",
+      "Unknown personality tags for 002: ['courageous', 'strategic', 'inspiring']",
+      "Unknown personality tags for 004: ['passionate', 'empathetic']"
+    ],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "c1777face730c3ee",
+    "narrative_ir": "efd53ff8931b51a4",
+    "character_irs": {
+      "001": "534fdd488e303d5f",
+      "003": "d21d94eb264ada58",
+      "002": "0c7029bd689ffce5",
+      "004": "598f7a0ac970e3b3"
+    },
+    "arc_ir": "de3c9d971b671fed"
+  }
+}

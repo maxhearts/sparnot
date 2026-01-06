@@ -53,12 +53,24 @@ def create_line_lock(
 ) -> Optional[LineLock]:
     """Create a line lock from scene data."""
     scene_id = scene_data.get("scene_id", "generated_scene_1")
-    dialogue_tree = scene_data.get("dialogue_tree", {})
     
-    if node_id not in dialogue_tree:
+    # Handle both dialogue_tree (dict) and dialogue_nodes (array) formats
+    dialogue_tree = scene_data.get("dialogue_tree", {})
+    dialogue_nodes = scene_data.get("dialogue_nodes", [])
+    
+    node = None
+    if node_id in dialogue_tree:
+        node = dialogue_tree[node_id]
+    else:
+        # Try to find node in dialogue_nodes array
+        for n in dialogue_nodes:
+            if n.get("node_id") == node_id:
+                node = n
+                break
+    
+    if not node:
         return None
     
-    node = dialogue_tree[node_id]
     dialogue = node.get("dialogue", [])
     
     if line_number < 1 or line_number > len(dialogue):

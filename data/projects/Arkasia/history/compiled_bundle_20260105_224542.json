@@ -1,0 +1,332 @@
+{
+  "canonical_schemas": {
+    "narrative_intent": {
+      "logline": "In a dystopian world, a brother and sister disguise themselves as a wealthy couple to evade an investigating android, uncovering secrets about their society along the way.",
+      "tone_weights": {
+        "dark": 0.5,
+        "tense": 0.3,
+        "suspenseful": 0.2
+      },
+      "themes": [
+        "identity",
+        "survival",
+        "deception",
+        "trust"
+      ],
+      "player_fantasy": "strategy",
+      "player_agency": "medium",
+      "setting": "A technologically advanced but socially fragmented city, where wealth and power are starkly divided.",
+      "invariants": [
+        "Technology controls society, and dissent is met with severe punishment."
+      ]
+    },
+    "characters": [
+      {
+        "id": "001",
+        "name": "Evan",
+        "role": "protagonist",
+        "beliefs": [
+          "I must protect my sister",
+          "Wealth cannot buy happiness"
+        ],
+        "personality_tags": [
+          "resourceful",
+          "loyal",
+          "courageous"
+        ]
+      },
+      {
+        "id": "003",
+        "name": "Leo",
+        "role": "supporting",
+        "beliefs": [
+          "Trust is everything",
+          "We must fight against the system"
+        ],
+        "personality_tags": [
+          "optimistic",
+          "caring"
+        ]
+      },
+      {
+        "id": "002",
+        "name": "Maya",
+        "role": "protagonist",
+        "beliefs": [
+          "Identity is worth more than money",
+          "I will do anything to survive"
+        ],
+        "personality_tags": [
+          "determined",
+          "quick-witted",
+          "compassionate"
+        ]
+      },
+      {
+        "id": "005",
+        "name": "Detective Sam",
+        "role": "supporting",
+        "beliefs": [
+          "Justice must be served",
+          "Humans are superior to machines",
+          "The truth is worth fighting for"
+        ],
+        "personality_tags": [
+          "determined",
+          "observant",
+          "empathetic"
+        ]
+      },
+      {
+        "id": "004",
+        "name": "AX-58",
+        "role": "antagonist",
+        "beliefs": [
+          "Order must be maintained",
+          "Emotions are a hindrance"
+        ],
+        "personality_tags": [
+          "cold",
+          "calculating",
+          "efficient"
+        ]
+      }
+    ],
+    "arc": {
+      "acts": [
+        {
+          "act_id": "act_1",
+          "act_purpose": "Introduce the characters, establish the societal structure, and set the stakes of the brother and sister's deception.",
+          "required_scenes": [
+            "scene_1",
+            "scene_2",
+            "scene_3"
+          ]
+        }
+      ],
+      "scenes": [
+        {
+          "scene_id": "scene_1",
+          "scene_type": "first_plot_point",
+          "summary": "Ethan and Maya navigate their grim reality, discussing their plan to assume new identities.",
+          "involved_characters": [
+            "001",
+            "002"
+          ]
+        },
+        {
+          "scene_id": "scene_2",
+          "scene_type": "climax",
+          "summary": "The siblings encounter Liam, who offers support but questions their risky plan.",
+          "involved_characters": [
+            "001",
+            "002",
+            "003"
+          ]
+        },
+        {
+          "scene_id": "scene_3",
+          "scene_type": "climax",
+          "summary": "The android confronts Evan and Maya, but Detective Sam intervenes, revealing information that tilts the balance.",
+          "involved_characters": [
+            "001",
+            "002",
+            "004",
+            "005"
+          ]
+        }
+      ]
+    }
+  },
+  "ir": {
+    "narrative_ir": {
+      "dominant_tone": "dark",
+      "secondary_tone": "tense",
+      "excluded_tones": [],
+      "style_tokens": [],
+      "constraints": {},
+      "theme_weights": {
+        "identity": 0.25,
+        "survival": 0.25,
+        "deception": 0.25,
+        "trust": 0.25
+      },
+      "narrative_obligations": [],
+      "setting_tokens": [],
+      "player_fantasy": "strategy",
+      "player_agency": "medium",
+      "choices_per_point": {
+        "min": 2,
+        "max": 3
+      },
+      "choices_per_interaction": {
+        "min": 1,
+        "max": 3
+      },
+      "choice_nature_tokens": [
+        "tactical_choice",
+        "resource_management",
+        "long_term_planning",
+        "systemic_decision"
+      ]
+    },
+    "character_irs": [
+      {
+        "character_id": "001",
+        "role": "protagonist",
+        "voice_tokens": [],
+        "belief_weights": {
+          "I must protect my sister": 0.5,
+          "Wealth cannot buy happiness": 0.5
+        }
+      },
+      {
+        "character_id": "003",
+        "role": "supporting",
+        "voice_tokens": [
+          "bright",
+          "encouraging",
+          "reframes_loss"
+        ],
+        "belief_weights": {
+          "Trust is everything": 0.5,
+          "We must fight against the system": 0.5
+        }
+      },
+      {
+        "character_id": "002",
+        "role": "protagonist",
+        "voice_tokens": [
+          "minimal_excuses",
+          "focused",
+          "banter_ready",
+          "sharp",
+          "forward",
+          "clever"
+        ],
+        "belief_weights": {
+          "Identity is worth more than money": 0.5,
+          "I will do anything to survive": 0.5
+        }
+      },
+      {
+        "character_id": "005",
+        "role": "supporting",
+        "voice_tokens": [
+          "focused",
+          "forward",
+          "minimal_excuses"
+        ],
+        "belief_weights": {
+          "Justice must be served": 0.3333333333333333,
+          "Humans are superior to machines": 0.3333333333333333,
+          "The truth is worth fighting for": 0.3333333333333333
+        }
+      },
+      {
+        "character_id": "004",
+        "role": "antagonist",
+        "voice_tokens": [],
+        "belief_weights": {
+          "Order must be maintained": 0.5,
+          "Emotions are a hindrance": 0.5
+        }
+      }
+    ],
+    "arc_ir": {
+      "scene_order": [
+        "scene_1",
+        "scene_2",
+        "scene_3"
+      ],
+      "scene_types": {
+        "scene_1": "first_plot_point",
+        "scene_2": "climax",
+        "scene_3": "climax"
+      },
+      "scene_participants": {
+        "scene_1": [
+          "001",
+          "002"
+        ],
+        "scene_2": [
+          "001",
+          "002",
+          "003"
+        ],
+        "scene_3": [
+          "001",
+          "002",
+          "004",
+          "005"
+        ]
+      },
+      "act_structure": [
+        {
+          "act_id": "act_1",
+          "required_scenes": [
+            "scene_1",
+            "scene_2",
+            "scene_3"
+          ]
+        }
+      ]
+    }
+  },
+  "proposed": {
+    "unknown_player_fantasy": null,
+    "unknown_scene_types": [],
+    "unknown_personality_tags": [
+      "resourceful",
+      "loyal",
+      "courageous",
+      "caring",
+      "compassionate",
+      "observant",
+      "empathetic",
+      "cold",
+      "calculating",
+      "efficient"
+    ],
+    "unknown_invariants": [
+      "Technology controls society, and dissent is met with severe punishment."
+    ]
+  },
+  "generation_context": {
+    "setting": "A technologically advanced but socially fragmented city, where wealth and power are starkly divided.",
+    "act_purposes": [
+      "Introduce the characters, establish the societal structure, and set the stakes of the brother and sister's deception."
+    ],
+    "scene_summaries": {
+      "scene_1": "Ethan and Maya navigate their grim reality, discussing their plan to assume new identities.",
+      "scene_2": "The siblings encounter Liam, who offers support but questions their risky plan.",
+      "scene_3": "The android confronts Evan and Maya, but Detective Sam intervenes, revealing information that tilts the balance."
+    },
+    "invariants_text": [
+      "Technology controls society, and dissent is met with severe punishment."
+    ]
+  },
+  "lint": {
+    "warnings": [
+      "Unmatched invariants: ['Technology controls society, and dissent is met with severe punishment.']",
+      "Unknown personality tags for 001: ['resourceful', 'loyal', 'courageous']",
+      "Unknown personality tags for 003: ['caring']",
+      "Unknown personality tags for 002: ['compassionate']",
+      "Unknown personality tags for 005: ['observant', 'empathetic']",
+      "Unknown personality tags for 004: ['cold', 'calculating', 'efficient']"
+    ],
+    "errors": []
+  },
+  "hashes": {
+    "bundle": "13188abc781aef9f",
+    "narrative_ir": "0f1bb5c3eb06ab19",
+    "character_irs": {
+      "001": "770c1dfcd9cbab06",
+      "003": "371367cca830d0b3",
+      "002": "4a11769f0b35baba",
+      "005": "cfaaa8fe39e5f0fd",
+      "004": "ba40abb5ccac3256"
+    },
+    "arc_ir": "743a2d28d1e96651"
+  }
+}
